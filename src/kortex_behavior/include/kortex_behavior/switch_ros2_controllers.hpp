@@ -7,26 +7,28 @@
 #pragma once
 
 #include <moveit_studio_behavior_interface/service_client_behavior_base.hpp>
-#include <moveit_studio_behavior_interface/shared_resources_node.hpp>
-#include <moveit_studio_agent_msgs/srv/set_string_array.hpp>
+#include <controller_manager_msgs/srv/switch_controller.hpp>
 
-namespace moveit_studio::behaviors
+namespace kortex_behavior
 {
-using SetStringArray = moveit_studio_agent_msgs::srv::SetStringArray;
+using SwitchController = controller_manager_msgs::srv::SwitchController;
 
 /**
- * @brief Deactivate controllers, whose names are set by the "controller_names" parameter.
+ * @brief Call the /controller_manager/switch_controller service to deactivate and activate controllers.
  *
+ * Ingests a list of controllers to deactivate, and a list of controllers to activate.
+ * 
  * @details
- * | Data Port Name   | Port Type | Object Type |
- * | ---------------- | --------- | ----------- |
- * | controller_names | input     | std::string |
+ * | Data Port Name         | Port Type | Object Type |
+ * | ---------------------- | --------- | ----------- |
+ * | deactivate_controllers | input     | std::string |
+ * | activate_controllers   | input     | std::string |
  */
-class DeactivateControllers final : public ServiceClientBehaviorBase<SetStringArray>
+class SwitchROS2Controllers final : public ServiceClientBehaviorBase<SwitchController>
 {
 public:
-  DeactivateControllers(const std::string& name, const BT::NodeConfiguration& config,
-                      const std::shared_ptr<BehaviorContext>& shared_resources);
+  SwitchROS2Controllers(const std::string& name, const BT::NodeConfiguration& config,
+                        const std::shared_ptr<BehaviorContext>& shared_resources);
 
   /**
    * @brief Required implementation of the static providedPorts function.
@@ -37,13 +39,13 @@ public:
 private:
   /**
    * @brief Get the name of the service.
-   * @details For this behavior the service name is always "/ensure_controller_is_active".
+   * @details For this behavior the service name is always "/controller_manager/switch_controller".
    * @return Returns the service name. Since the service name is set to a constant value, this always succeeds.
    */
   fp::Result<std::string> getServiceName() override;
 
   /**
-   * @brief Create the service request message for the "/ensure_controller_is_active" service.
+   * @brief Create the service request message for the "/controller_manager/switch_controller" service.
    * @details This reads the controller names from the controller_names input data port.
    * @return a SetStringArray request message containing the controller names.
    */
@@ -65,4 +67,4 @@ private:
   /** @brief Holds the result of calling the service asynchronously. */
   std::shared_future<fp::Result<bool>> response_future_;
 };
-}  // namespace moveit_studio::behaviors
+}  // namespace kortex_behavior
