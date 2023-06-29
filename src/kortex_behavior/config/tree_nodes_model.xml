@@ -12,5 +12,13 @@
             <input_port name="deactivate_controllers" default="">The controllers to deactivate.</input_port>
             <input_port name="activate_controllers" default="">The controllers to activate.</input_port>
         </Action>
+        <Action ID="TeleoperateNonServo">
+            <description>
+                <p>
+                    Non-MoveIt Servo implementation of the Teleoperate behavior.
+                </p>
+            </description>
+            <input_port name="controller_name" default="">The controllers to use.</input_port>
+        </Action>
     </TreeNodesModel>
 </root>
