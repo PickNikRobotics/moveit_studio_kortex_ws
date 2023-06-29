@@ -1,0 +1,224 @@
+
+# # Left
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 3.2
+#   - -0.2
+#   - -0.2
+#   - -2.5
+#   - -0.1
+#   - -0.8
+#   - 1.6
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 3.2
+#   - -0.2
+#   - -0.2
+#   - -2.5
+#   - -0.1
+#   - -1.0
+#   - 1.6
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 0.0
+#   - -0.2
+#   - -0.2
+#   - -2.5
+#   - -0.1
+#   - -0.6
+#   - 1.6
+
+# # Center
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   -  0.0
+#   - -0.4
+#   - 0.0
+#   - -2.2
+#   - 0.0
+#   - -0.8
+#   - 1.6
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 0.0
+#   - -0.4
+#   - 0.0
+#   - -2.2
+#   - 0.0
+#   - -0.6
+#   - 1.6
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 0.0
+#   - -0.4
+#   - -2.7
+#   - -2.2
+#   - 0.0
+#   - -1.0
+#   - 1.6
+
+# # Right
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 0.0
+#   - -0.2
+#   - 0.2
+#   - -2.5
+#   - 0.1
+#   - -0.8
+#   - 1.6
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 0.0
+#   - -0.2
+#   - 0.2
+#   - -2.5
+#   - 0.1
+#   - -1.0
+#   - 1.6
+# - features:
+#   - checkerboard_finder
+#   joints:
+#   - joint_1
+#   - joint_2
+#   - joint_3
+#   - joint_4
+#   - joint_5
+#   - joint_6
+#   - joint_7
+#   positions:
+#   - 0.0
+#   - -0.2
+#   - 0.2
+#   - -2.5
+#   - 0.1
+#   - -0.6
+#   - 1.6
+
+#  Left
+- features:
+  - checkerboard_finder
+  joints:
+  - joint_1
+  - joint_2
+  - joint_3
+  - joint_4
+  - joint_5
+  - joint_6
+  - joint_7
+  positions:
+  - 0.0
+  - 0.006
+  - -3.12501203
+  - -2.50542014
+  - 0.0
+  - -0.1642355
+  - 1.4720107
+- features:
+  - checkerboard_finder
+  joints:
+  - joint_1
+  - joint_2
+  - joint_3
+  - joint_4
+  - joint_5
+  - joint_6
+  - joint_7
+  positions:
+  - 0.0
+  - 0.006
+  - -2.576106
+  - -2.50542014
+  - 0.0
+  - -0.1642355
+  - 1.4720107
+- features:
+  - checkerboard_finder
+  joints:
+  - joint_1
+  - joint_2
+  - joint_3
+  - joint_4
+  - joint_5
+  - joint_6
+  - joint_7
+  positions:
+  - 0.0
+  - 0.006
+  - -3.68857884
+  - -2.50542014
+  - 0.0
+  - -0.1642355
+  - 1.4720107

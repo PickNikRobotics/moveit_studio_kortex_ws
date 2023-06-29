@@ -1,0 +1,10 @@
+<root>
+    <TreeNodesModel>
+        <Action ID="DeactivateControllers">
+            <description>
+                <p> Deactivates a controller whose name is given by the "controller_name" input port. </p>
+            </description>
+            <input_port name="controller_names" default="">The controllers to deactivate.</input_port>
+        </Action>
+    </TreeNodesModel>
+</root>

@@ -1,0 +1,54 @@
+#
+#  This contains information for a unique instance of a robot.
+#
+
+# Name of the package to specialize
+based_on_package: "picknik_kinova_gen3_base_config"
+
+hardware:
+  ip: 192.168.13.11
+  simulated: ${MOCK_HARDWARE:-true}
+  camera_config_file:
+    package: "picknik_kinova_gen3_config"
+    path: "config/cameras.yaml"
+  robot_description:
+    urdf:
+      package: "picknik_kinova_gen3_config"
+      path: "description/kinova_gen3_calibration.xacro"
+    urdf_params:
+      - arm: "gen3"
+      - dof: "7"
+      - vision: "false"
+      - robot_ip: "%>> hardware.ip"
+      - gripper: "robotiq_2f_85"
+      # - gripper_joint_name: "finger_joint"
+      # - gripper_max_velocity: "10.0"
+      # - gripper_max_force: "10.0"
+      - username: "admin"
+      - password: "admin"
+      - port: "10000"
+      - port_realtime: "10001"
+      - session_inactivity_timeout_ms: "60000"
+      - connection_inactivity_timeout_ms: "2000"
+      - use_fake_hardware: "%>> hardware.simulated"
+      - fake_sensor_commands: "false"
+      - use_internal_bus_gripper_comm: "true"
+      - wrist_realsense: "false"
+      - scene_camera_calibration_file:
+          package: "picknik_kinova_gen3_config"
+          path: "calibration/scene_camera_calibration.yaml"
+  hardware_launch_file:
+    package: "picknik_kinova_gen3_config"
+    path: "launch/hardware.launch.py"
+
+objectives:
+  # behavior_loader_plugins:
+  #   kinova:
+  #     - "moveit_studio::behaviors::CoreBehaviorsLoader"
+  waypoints_file:
+    package_name: "picknik_kinova_gen3_config"
+    relative_path: "waypoints/waypoints.yaml"
+  objective_library_paths:
+    005:
+      package_name: "picknik_kinova_gen3_config"
+      relative_path: "objectives"

@@ -1,0 +1,30 @@
+robot_calibration:
+  ros__parameters:
+    chains:
+    - arm
+    arm:
+      topic: /joint_trajectory_controller/follow_joint_trajectory
+      joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+      #planning_group: arm TODO: revert when moveit is setup
+    features:
+    - checkerboard_finder
+    checkerboard_finder:
+      type: robot_calibration::CheckerboardFinder
+      topic: /scene_camera/depth/color/points
+      camera_info_topic: /scene_camera/depth/camera_info
+      camera_sensor_name: camera
+      chain_sensor_name: arm
+      frame_id: checkerboard # Name of checkerboard frame (if not specified it defaults to: checkerboard)
+      debug: true
+      # Number of inner corners per a checkerboard row and column
+      points_x: 5
+      points_y: 4
+      size: 0.025
+      
