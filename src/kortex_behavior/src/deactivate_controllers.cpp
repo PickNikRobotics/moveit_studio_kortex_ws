@@ -4,7 +4,7 @@
 // Unauthorized copying of this code base via any medium is strictly prohibited.
 // Proprietary and confidential.
 
-#include <moveit_studio_behavior/behaviors/generic/activate_controllers.hpp>
+#include <kortex_behavior/deactivate_controllers.hpp>
 
 #include <moveit_studio_behavior_interface/check_for_error.hpp>
 #include <moveit_studio_behavior_interface/service_client_behavior_base.hpp>

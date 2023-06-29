@@ -16,7 +16,9 @@ find_package(fp REQUIRED)
 find_package(moveit_studio_behavior_interface REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(control_msgs REQUIRED)
+find_package(controller_manager_msgs REQUIRED)
 
 # Set includes
 set(THIS_PACKAGE_INCLUDE_DEPENDS
@@ -25,7 +27,9 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
     moveit_studio_behavior_interface
     pluginlib
     rclcpp
-    std_msgs
+    geometry_msgs
+    control_msgs
+    controller_manager_msgs
 )
 
 ###########
@@ -59,20 +63,10 @@ install(
 )
 install(DIRECTORY include/ DESTINATION include)
 
-# Install Executables
-install(TARGETS
-  kortex_action_client
-  DESTINATION lib/${PROJECT_NAME})
-
 ###########
-# Testing #
+# Testing(TODO) #
 ###########
 
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  add_subdirectory(test)
-  #ament_lint_auto_find_test_dependencies()
-endif()
 
 ##########
 # Export #
