@@ -42,9 +42,9 @@ hardware:
     path: "launch/hardware.launch.py"
 
 objectives:
-  # behavior_loader_plugins:
-  #   kinova:
-  #     - "moveit_studio::behaviors::CoreBehaviorsLoader"
+  behavior_loader_plugins:
+    kinova:
+      - "kortex_behavior::KortexBehaviorsLoader"
   waypoints_file:
     package_name: "picknik_kinova_gen3_config"
     relative_path: "waypoints/waypoints.yaml"
