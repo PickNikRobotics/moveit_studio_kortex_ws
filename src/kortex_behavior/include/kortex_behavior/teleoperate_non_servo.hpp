@@ -25,7 +25,7 @@ using TwistStamped = geometry_msgs::msg::TwistStamped;
 using JointJog = control_msgs::msg::JointJog;
 
 /**
- * @brief This is a special Behavior to enable human-in-the-loop teleoperation using MoveIt Servo through the Objective
+ * @brief This is a special Behavior to enable human-in-the-loop teleoperation by forwarding commands through the Objective
  * Server.
  *
  * @details When started, this Behavior will run INDEFINITELY until it is halted. This will happen either when the root
@@ -78,15 +78,14 @@ public:
 
 private:
   /**
-   * @brief Validate service clients, start the MoveIt Servo server, and create subscribers for Servo commands.
-   * @details Run asynchronously in @ref servo_setup_thread_
+   * @brief create subscribers for teleop commands.
+   * @details Run asynchronously in @ref setup_teleop_thread_
    */
   void doTeleoperation();
 
   /**
-   * @brief Subscription callback for MoveIt Servo JointJog command messages.
-   * @details Publishes the received command messages through @ref servo_joint_jog_publisher_ if the publisher exists
-   * @param msg Servo command
+   * @brief Currently does nothing as JointJogging is not supported by Kinova drivers at the moment
+   * @param msg JointJog command
    */
   void onJointJog(const JointJog::SharedPtr msg);
 
@@ -109,21 +108,14 @@ private:
   std::atomic<BT::NodeStatus> process_status_;
 
   /**
-   * @brief Subscriber for MoveIt Servo JointJog command messages.
-   * @details Messages will be published to this topic by the part of the system responsible for handling user input,
-   * such as the MoveIt Studio Web UI.
-   */
-  rclcpp::Subscription<JointJog>::SharedPtr joint_jog_subscriber_;
-
-  /**
-   * @brief Subscriber for MoveIt Servo TwistStamped command messages.
+   * @brief Subscriber for TwistStamped command messages.
    * @details Messages will be published to this topic by the part of the system responsible for handling user input,
    * such as the MoveIt Studio Web UI.
    */
   rclcpp::Subscription<TwistStamped>::SharedPtr move_end_effector_subscriber_;
 
   /**
-   * @brief Controls access to @ref servo_joint_jog_publisher_ and @ref servo_twist_publisher_.
+   * @brief Controls access to @ref twist_publisher_.
    * @details Locked within the following scopes:
    * - In @ref doTeleoperation while the publishers are being initialized
    * - In @ref onJointJog and onCartesianJog while command messages are being published
@@ -134,29 +126,13 @@ private:
   /**
    * @brief Thread to handle executing @ref doTeleoperation asynchronously.
    */
-  std::thread setup_servo_thread_;
-
-  /**
-   * @brief Publisher for MoveIt Servo JointJog command messages.
-   * @details The subscriber for the advertised topic is part of the MoveIt Servo server node.
-   */
-  rclcpp::Publisher<JointJog>::SharedPtr servo_joint_jog_publisher_;
+  std::thread setup_teleop_thread_;
 
   /**
    * @brief Publisher for MoveIt Servo TwistStamped command messages.
    * @details The subscriber for the advertised topic is part of the MoveIt Servo server node.
    */
-  rclcpp::Publisher<TwistStamped>::SharedPtr servo_twist_publisher_;
-
-  /**
-   * @brief Service client to start the MoveIt Servo server.
-   */
-  std::shared_ptr<rclcpp::Client<std_srvs::srv::Trigger>> start_servo_client_;
-
-  /**
-   * @brief Service client to stop the MoveIt Servo server.
-   */
-  std::shared_ptr<rclcpp::Client<std_srvs::srv::Trigger>> stop_servo_client_;
+  rclcpp::Publisher<TwistStamped>::SharedPtr twist_publisher_;
 
   /**
    * @brief Service client to activate a set of ros2_control controllers.

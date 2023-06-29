@@ -4,7 +4,7 @@
 // Unauthorized copying of this code base via any medium is strictly prohibited.
 // Proprietary and confidential.
 
-#include <moveit_studio_behavior/behaviors/servo/teleoperate.hpp>
+#include <kortex_behavior/teleoperate_non_servo.hpp>
 
 #include <behaviortree_cpp/action_node.h>
 #include <behaviortree_cpp/bt_factory.h>
@@ -115,12 +115,8 @@ namespace moveit_studio::behaviors
 TeleoperateNonServo::TeleoperateNonServo(const std::string& name, const BT::NodeConfiguration& config,
                          const std::shared_ptr<BehaviorContext>& shared_resources)
   : SharedResourcesNode<BT::StatefulActionNode>(name, config, shared_resources)
-  , joint_jog_subscriber_{ shared_resources_->node->create_subscription<JointJog>(
-        kMoveJointSubTopic, 1, [this](const JointJog::SharedPtr msg) { onJointJog(msg); }) }
   , move_end_effector_subscriber_{ shared_resources_->node->create_subscription<TwistStamped>(
         kMoveTwistSubTopic, 1, [this](const TwistStamped::SharedPtr msg) { onCartesianJog(msg); }) }
-  , start_servo_client_{ shared_resources_->node->create_client<std_srvs::srv::Trigger>(kStartServoService) }
-  , stop_servo_client_{ shared_resources_->node->create_client<std_srvs::srv::Trigger>(kStopServoService) }
   , switch_controller_client_{ shared_resources_->node->create_client<moveit_studio_agent_msgs::srv::SetStringArray>(
         kActivateControllerService) }
 {
@@ -129,9 +125,9 @@ TeleoperateNonServo::TeleoperateNonServo(const std::string& name, const BT::Node
 TeleoperateNonServo::~TeleoperateNonServo()
 {
   // If this thread is joinable, join it here.
-  if (setup_servo_thread_.joinable())
+  if (setup_teleop_thread_.joinable())
   {
-    setup_servo_thread_.join();
+    setup_teleop_thread_.join();
   }
 }
 
@@ -145,14 +141,14 @@ BT::PortsList TeleoperateNonServo::providedPorts()
 BT::NodeStatus TeleoperateNonServo::onStart()
 {
   // If the thread is joinable, join it here before we replace it with a new thread.
-  if (setup_servo_thread_.joinable())
+  if (setup_teleop_thread_.joinable())
   {
-    setup_servo_thread_.join();
+    setup_teleop_thread_.join();
   }
 
   process_status_ = BT::NodeStatus::RUNNING;
 
-  setup_servo_thread_ = std::thread{ [this]() { doTeleoperation(); } };
+  setup_teleop_thread_ = std::thread{ [this]() { doTeleoperation(); } };
 
   return BT::NodeStatus::RUNNING;
 }
@@ -166,11 +162,8 @@ void TeleoperateNonServo::onHalted()
 {
   {
     std::scoped_lock lock(publisher_mutex_);
-    servo_joint_jog_publisher_.reset();
-    servo_twist_publisher_.reset();
+    twist_publisher_.reset();
   }
-
-  sendTriggerRequestBlocking(stop_servo_client_);  // Doesn't matter if this fails when halting the Objective.
 }
 
 void TeleoperateNonServo::doTeleoperation()
@@ -185,8 +178,7 @@ void TeleoperateNonServo::doTeleoperation()
   }
 
   // Get required inputs from Behavior data ports
-  const auto required_controller_name = getInput<std::string>(kPortIDControllerName);
-  const auto inactive_controller_name = getInput<std::string>(kPortIDDisabledControllerName);
+  const auto controller_name = getInput<std::string>(kPortIDControllerName);
 
   if (const auto error = maybe_error(controller_name); error)
   {
@@ -196,46 +188,45 @@ void TeleoperateNonServo::doTeleoperation()
     return;
   }
 
-  // Make sure that the controllers required by MoveIt Servo are active before performing servo motion
-  auto req = std::make_shared<moveit_studio_agent_msgs::srv::SetStringArray::Request>();
-  req->data.push_back(controller_name.value());
+  // TODO(abake48): Once Support for ros2_control::SwitchControllers has been implemented, manage that here.
 
-  if (const auto result = requestSwitchController(switch_controller_client_, req); !result)
-  {
-    shared_resources_->logger->publishFailureMessage(name(), "Failed to enable required controller " +
-                                                                 controller_name.value() + ". " + result.error().what);
-    process_status_ = BT::NodeStatus::FAILURE;
-    return;
-  }
+  // Make sure that the controllers required by MoveIt Servo are active before performing servo motion
+  // auto req = std::make_shared<moveit_studio_agent_msgs::srv::SetStringArray::Request>();
+  // req->data.push_back(controller_name.value());
+  
+  // if (const auto result = requestSwitchController(switch_controller_client_, req); !result)
+  // {
+  //   shared_resources_->logger->publishFailureMessage(name(), "Failed to enable required controller " +
+  //                                                                controller_name.value() + ". " + result.error().what);
+  //   process_status_ = BT::NodeStatus::FAILURE;
+  //   return;
+  // }
 
   // Initialize the publishers to begin forwarding command messages to necessary topics.
   {
     std::scoped_lock lock(publisher_mutex_);
-    // servo_joint_jog_publisher_ = shared_resources_->node->create_publisher<JointJog>(kMoveJointPubTopic, 1);
-    servo_twist_publisher_ = shared_resources_->node->create_publisher<TwistStamped>(kMoveTwistPubTopic, 1);
+
+    // TODO(abake48): Add Joint Jog Support for Kinova
+    twist_publisher_ = shared_resources_->node->create_publisher<TwistStamped>(kMoveTwistPubTopic, 1);
   }
 }
 
 void TeleoperateNonServo::onJointJog(const JointJog::SharedPtr msg)
 {
-  std::scoped_lock lock(publisher_mutex_);
-  if (servo_joint_jog_publisher_ == nullptr)
-  {
-    return;
-  }
-
-  servo_joint_jog_publisher_->publish(*msg);
+  // TODO(abake48): add Joint Jog support for Kinova.
+  return;
+  
 }
 
 void TeleoperateNonServo::onCartesianJog(const TwistStamped::SharedPtr msg)
 {
   std::scoped_lock lock(publisher_mutex_);
-  if (servo_twist_publisher_ == nullptr)
+  if (twist_publisher_ == nullptr)
   {
     return;
   }
 
-  servo_twist_publisher_->publish(*msg);
+  twist_publisher_->publish(*msg);
 }
 
 fp::Result<void> TeleoperateNonServo::validateClients() const
