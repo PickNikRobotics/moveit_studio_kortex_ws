@@ -33,24 +33,16 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
 ###########
 
 # Add libraries
-add_library(gibson_behavior SHARED
-  src/detect_objects.cpp
-  src/get_object_3d_from_detections.cpp
-  src/get_cabinet_door_from_detections.cpp
-  src/get_cuboid_from_detections.cpp
-  src/get_lever_handle_from_detections.cpp
-  src/get_button_from_detections.cpp
-  src/register_behaviors.cpp)
-target_include_directories(gibson_behavior
+add_library(kortex_behavior SHARED
+  src/deactivate_controllers.cpp
+  src/teleoperate_non_servo.cpp)
+
+target_include_directories(kortex_behavior
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   PUBLIC $<INSTALL_INTERFACE:include>
   PUBLIC ${PCL_INCLUDE_DIRS})
-target_link_libraries(gibson_behavior ${PCL_LIBRARIES})
-ament_target_dependencies(gibson_behavior ${THIS_PACKAGE_INCLUDE_DEPENDS})
-
-# Add executables
-add_executable(kortex_action_client src/kortex_action_client.cpp)
-ament_target_dependencies(kortex_action_client ${THIS_PACKAGE_INCLUDE_DEPENDS})
+target_link_libraries(kortex_behavior ${PCL_LIBRARIES})
+ament_target_dependencies(kortex_behavior ${THIS_PACKAGE_INCLUDE_DEPENDS})
 
 ###########
 # Install #
@@ -58,7 +50,7 @@ ament_target_dependencies(kortex_action_client ${THIS_PACKAGE_INCLUDE_DEPENDS})
 
 # Install Libraries
 install(
-  TARGETS gibson_behavior
+  TARGETS kortex_behavior
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
