@@ -7,11 +7,11 @@
 #pragma once
 
 #include <moveit_studio_behavior_interface/service_client_behavior_base.hpp>
+
 #include <controller_manager_msgs/srv/switch_controller.hpp>
 
 namespace kortex_behavior
 {
-using SwitchController = controller_manager_msgs::srv::SwitchController;
 
 /**
  * @brief Call the /controller_manager/switch_controller service to deactivate and activate controllers.
@@ -24,11 +24,11 @@ using SwitchController = controller_manager_msgs::srv::SwitchController;
  * | deactivate_controllers | input     | std::string |
  * | activate_controllers   | input     | std::string |
  */
-class SwitchROS2Controllers final : public ServiceClientBehaviorBase<SwitchController>
+class SwitchROS2Controllers final : public ServiceClientBehaviorBase<controller_manager_msgs::srv::SwitchController>
 {
 public:
-  SwitchROS2Controllers(const std::string& name, const BT::NodeConfiguration& config,
-                        const std::shared_ptr<BehaviorContext>& shared_resources);
+  explicit SwitchROS2Controllers(const std::string& name, const BT::NodeConfiguration& config,
+                                 const std::shared_ptr<moveit_studio::behaviors::BehaviorContext>& shared_resources);
 
   /**
    * @brief Required implementation of the static providedPorts function.
@@ -47,16 +47,16 @@ private:
   /**
    * @brief Create the service request message for the "/controller_manager/switch_controller" service.
    * @details This reads the controller names from the controller_names input data port.
-   * @return a SetStringArray request message containing the controller names.
+   * @return a SwitchController request message containing the controller names.
    */
-  fp::Result<SetStringArray::Request> createRequest() override;
+  fp::Result<controller_manager_msgs::srv::SwitchController::Request> createRequest() override;
 
   /**
    * @brief Handles the service response message once the service finishes.
    * @return Returns an error result if the service finished but did not succeed, since this is treated as an unexpected
    * error state. Otherwise, returns true.
    */
-  fp::Result<bool> processResponse(const SetStringArray::Response& response) override;
+  fp::Result<bool> processResponse(const controller_manager_msgs::srv::SwitchController::Response& response) override;
 
   /** @brief Classes derived from AsyncBehaviorBase must implement getFuture() so that it returns a shared_future class member */
   std::shared_future<fp::Result<bool>>& getFuture() override
@@ -67,4 +67,5 @@ private:
   /** @brief Holds the result of calling the service asynchronously. */
   std::shared_future<fp::Result<bool>> response_future_;
 };
+
 }  // namespace kortex_behavior

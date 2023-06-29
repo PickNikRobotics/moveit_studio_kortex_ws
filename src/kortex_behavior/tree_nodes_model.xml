@@ -1,10 +1,14 @@
 <root>
     <TreeNodesModel>
-        <Action ID="DeactivateControllers">
+        <Action ID="SwitchROS2Controllers">
             <description>
-                <p> Deactivates a controller whose name is given by the "controller_name" input port. </p>
+                <p>
+                    Given a list of controllers to deactivate and controllers to activate, calls the
+                    controller manager's switch_controllers service.
+                </p>
             </description>
-            <input_port name="controller_names" default="">The controllers to deactivate.</input_port>
+            <input_port name="deactivate_controllers" default="">The controllers to deactivate.</input_port>
+            <input_port name="activate_controllers" default="">The controllers to activate.</input_port>
         </Action>
     </TreeNodesModel>
 </root>
