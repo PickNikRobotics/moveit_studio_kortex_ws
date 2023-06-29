@@ -1,0 +1,4 @@
+[submodule "dependencies/ros2_kortex"]
+	path = dependencies/ros2_kortex
+	url = git@github.com:PickNikRobotics/ros2_kortex.git
+	branch = main
