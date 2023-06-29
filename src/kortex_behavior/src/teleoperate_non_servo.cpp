@@ -191,16 +191,16 @@ void TeleoperateNonServo::doTeleoperation()
   // TODO(abake48): Once Support for ros2_control::SwitchControllers has been implemented, manage that here.
 
   // Make sure that the controllers required by MoveIt Servo are active before performing servo motion
-  // auto req = std::make_shared<moveit_studio_agent_msgs::srv::SetStringArray::Request>();
-  // req->data.push_back(controller_name.value());
+  auto req = std::make_shared<moveit_studio_agent_msgs::srv::SetStringArray::Request>();
+  req->data.push_back(controller_name.value());
   
-  // if (const auto result = requestSwitchController(switch_controller_client_, req); !result)
-  // {
-  //   shared_resources_->logger->publishFailureMessage(name(), "Failed to enable required controller " +
-  //                                                                controller_name.value() + ". " + result.error().what);
-  //   process_status_ = BT::NodeStatus::FAILURE;
-  //   return;
-  // }
+  if (const auto result = requestSwitchController(switch_controller_client_, req); !result)
+  {
+    shared_resources_->logger->publishFailureMessage(name(), "Failed to enable required controller " +
+                                                                 controller_name.value() + ". " + result.error().what);
+    process_status_ = BT::NodeStatus::FAILURE;
+    return;
+  }
 
   // Initialize the publishers to begin forwarding command messages to necessary topics.
   {

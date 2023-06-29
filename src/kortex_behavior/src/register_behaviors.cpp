@@ -17,7 +17,7 @@ public:
     using namespace moveit_studio::behaviors;
 
     registerBehavior<DeactivateControllers>(factory, "DeactivateControllers", shared_resources);
-    registerBehavior<DeactivateControllers>(factory, "TeleoperateNonServo", shared_resources);
+    registerBehavior<TeleoperateNonServo>(factory, "TeleoperateNonServo", shared_resources);
   }
 };
 }  // namespace kortex_behavior
