@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+
+<robot name="gen3" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Arguments for Kinova -->
+    <xacro:arg name="arm" default="gen3" />
+    <xacro:arg name="dof" default="7" />
+    <xacro:arg name="vision" default="false" />
+    <xacro:arg name="robot_ip" default="192.168.13.11" />
+    <xacro:arg name="gripper" default="robotiq_2f_85" />
+    <!-- <xacro:arg name="gripper_joint_name" default="finger_joint" /> -->
+    <!-- <xacro:arg name="gripper_max_velocity" default="10.0" /> -->
+    <!-- <xacro:arg name="gripper_max_force" default="10.0" /> -->
+    <xacro:arg name="username" default="admin" />
+    <xacro:arg name="password" default="admin" />
+    <xacro:arg name="port" default="10000" />
+    <xacro:arg name="port_realtime" default="10001" />
+    <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
+    <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
+    <xacro:arg name="use_internal_bus_gripper_comm" default="true" />
+    <xacro:arg name="sim_ignition" default="false" />
+    <xacro:arg name="prefix" default="" />
+    <xacro:arg name="use_fake_hardware" default="true" />
+    <xacro:arg name="fake_sensor_commands" default="true" />
+    <xacro:arg name="wrist_realsense" default="false" />
+    <xacro:arg name="scene_camera_calibration_file" default="$(find picknik_kinova_gen3_config)/calibration/scene_camera_calibration.yaml"/>
+
+    <!-- Import macros for main hardware components -->
+    <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
+    <xacro:include filename="$(find picknik_accessories)/descriptions/sensors/extrinsic_calibrated_realsense.urdf.xacro"/>
+
+    <!-- Import environment macros -->
+    <xacro:include filename="$(find picknik_accessories)/descriptions/geometry/cube.urdf.xacro"/>
+
+    <!-- World is centered under base_link of the robot, on the ground -->
+    <link name="world"/>
+
+    <!-- Load the robot -->
+    <xacro:load_robot
+      parent="world"
+      arm="$(arg arm)"
+      gripper="$(arg gripper)"
+      dof="$(arg dof)"
+      vision="$(arg vision)"
+      robot_ip="$(arg robot_ip)"
+      username="$(arg username)"
+      password="$(arg password)"
+      port="$(arg port)"
+      port_realtime="$(arg port_realtime)"
+      session_inactivity_timeout_ms="$(arg session_inactivity_timeout_ms)"
+      connection_inactivity_timeout_ms="$(arg connection_inactivity_timeout_ms)"
+      use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
+      sim_ignition="$(arg sim_ignition)"
+      prefix="$(arg prefix)"
+      use_fake_hardware="$(arg use_fake_hardware)"
+      fake_sensor_commands="$(arg fake_sensor_commands)" >
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:load_robot>
+
+    <link name="checkerboard"/>
+    <joint name="checkerboard_joint" type="fixed">
+      <parent link="end_effector_link"/>
+      <child link="checkerboard"/>
+      <origin xyz="-0.04 0.185 0.18" rpy="3.142 0.0 -1.57" />
+    </joint>
+
+    <!-- Robot mount -->
+    <link name="mount_link">
+      <visual> <!-- visual reach -->
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="0.2" length="0.02"/>
+        </geometry>
+        <material name="Blue">
+          <color rgba="0 0 1.0 0.3"/>
+        </material>
+      </visual>
+      <collision><!-- table collision -->
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.02"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="mount_joint" type="fixed">
+      <parent link="world"/>
+      <child link = "mount_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Environment -->
+    <!-- <xacro:cube link_name="table" connected_to="world" length="2.00" width="2.00" height="0.25" alpha="0.3">
+      <origin xyz="0 0 ${-0.25/2}" rpy="0 0 0"/>
+    </xacro:cube> -->
+
+    <!-- wrist realsense -->
+    <!-- <xacro:if value="$(arg wrist_realsense)"> -->
+      <!-- Use this macro to load the wrist_mounted camera to prevent duplication. -->
+      <!-- <link name="wrist_camera_link"/> -->
+
+      <!-- <joint name="wrist_camera_joint" type="fixed">
+        <parent link="$(arg prefix)bracelet_link"/>
+        <child link = "wrist_camera_link"/>
+        <origin xyz="0 -0.06841 -0.05044" rpy="0 ${3.14 / 180.0 * 100} -1.5708"/>
+      </joint>
+
+      <xacro:realsense_d415 parent="wrist_camera_link" name="wrist_mounted_camera">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:realsense_d415> -->
+      <!-- Bracket -->
+      <!-- <link name="wrist_camera_link_visual">
+        <inertial>
+          <origin xyz="0.000281 0.011402 -0.029798" rpy="0 0 0" />
+          <mass value="0.5" />
+          <inertia ixx="0.000587" ixy="3E-06" ixz="3E-06" iyy="0.000369" iyz="-0.000118" izz="0.000609" />
+        </inertial>
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" />
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" />
+          </geometry>
+        </collision>
+      </link>
+      <joint name="$(arg prefix)wrist_camera_link_visual_joint" type="fixed">
+        <origin xyz="0 0 0.0" rpy="0 0 0" />
+        <parent link="$(arg prefix)bracelet_link" />
+        <child link="$(arg prefix)wrist_camera_link_visual" />
+      </joint>
+    </xacro:if> -->
+
+      <!-- Moveit Studio requires a link name called manual_grasp_link to perform quick tasks such as inspect surface -->
+      <!-- we add this link here and make it coincident with the tool_frame but rotate it to put the camera normal to the surface -->
+      <link name="manual_grasp_link"/>
+
+      <joint name="manual_grasp_joint" type="fixed">
+        <parent link="$(arg prefix)tool_frame"/>
+        <child link = "manual_grasp_link"/>
+        <origin xyz="0 0 0" rpy="${3.14 / 180.0 * 10} 0 0"/>
+      </joint>
+
+
+    <xacro:load_extrinsic_calibrated_realsense
+      name="scene_camera"
+      parent="base_link"
+      model="d415"
+      extrinsic_calibration_parameter_file="$(arg scene_camera_calibration_file)"/>
+
+    <link name="camera_wall_link">
+      <visual>
+        <origin xyz="-0.5 0 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder radius="0.02" length="1.0"/>
+        </geometry>
+        <material name="Blue">
+          <color rgba="0 0 1.0 0.3"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="-0.48 0 0" rpy="0 ${pi/2} 0"/>
+        <geometry>
+          <cylinder radius="0.1" length="1.0"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="camera_wall_joint" type="fixed">
+      <parent link="scene_camera_mount_link"/>
+      <child link = "camera_wall_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+</robot>
