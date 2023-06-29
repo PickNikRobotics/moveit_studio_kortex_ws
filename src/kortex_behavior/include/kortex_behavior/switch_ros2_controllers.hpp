@@ -7,6 +7,7 @@
 #pragma once
 
 #include <moveit_studio_behavior_interface/service_client_behavior_base.hpp>
+#include <moveit_studio_behavior_interface/shared_resources_node.hpp>
 
 #include <controller_manager_msgs/srv/switch_controller.hpp>
 
@@ -21,10 +22,12 @@ namespace kortex_behavior
  * @details
  * | Data Port Name         | Port Type | Object Type |
  * | ---------------------- | --------- | ----------- |
+ * | start_controllers      | input     | std::string |
+ * | stop_controllers       | input     | std::string |
  * | deactivate_controllers | input     | std::string |
  * | activate_controllers   | input     | std::string |
  */
-class SwitchROS2Controllers final : public ServiceClientBehaviorBase<controller_manager_msgs::srv::SwitchController>
+class SwitchROS2Controllers final : public moveit_studio::behaviors::ServiceClientBehaviorBase<controller_manager_msgs::srv::SwitchController>
 {
 public:
   explicit SwitchROS2Controllers(const std::string& name, const BT::NodeConfiguration& config,

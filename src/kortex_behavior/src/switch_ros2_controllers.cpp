@@ -7,14 +7,27 @@
 #include <kortex_behavior/switch_ros2_controllers.hpp>
 
 #include <moveit_studio_behavior_interface/check_for_error.hpp>
+#include <moveit_studio_behavior_interface/service_client_behavior_base.hpp>
 
 namespace
 {
+constexpr auto kPortStartControllerNames = "start_controllers";
+constexpr auto kPortStopControllerNames = "stop_controllers";
 constexpr auto kPortDeactivateControllerNames = "deactivate_controllers";
 constexpr auto kPortActivateControllerNames = "activate_controllers";
 // Service name is hardcoded for now
 constexpr auto kServiceName = "/controller_manager/switch_controllers";
 }  // namespace
+
+void add_controllers_to_list(const std::string& controllers, std::vector<std::string> list)
+{
+    std::stringstream ss(controllers);
+    std::string nm;
+    while (ss >> nm)
+    {
+      list.push_back(nm);
+    }
+}
 
 namespace kortex_behavior
 {
@@ -28,6 +41,8 @@ BT::PortsList SwitchROS2Controllers::providedPorts()
 {
   return { BT::InputPort<std::string>(kPortDeactivateControllerNames) };
   return { BT::InputPort<std::string>(kPortActivateControllerNames) };
+  return { BT::InputPort<std::string>(kPortStopControllerNames) };
+  return { BT::InputPort<std::string>(kPortStartControllerNames) };
 }
 
 fp::Result<std::string> SwitchROS2Controllers::getServiceName()
@@ -38,27 +53,32 @@ fp::Result<std::string> SwitchROS2Controllers::getServiceName()
 fp::Result<controller_manager_msgs::srv::SwitchController::Request> SwitchROS2Controllers::createRequest()
 {
   // Get required values from input ports.
+  const auto start_controller_names = getInput<std::string>(kPortStartControllerNames);
+  const auto stop_controller_names = getInput<std::string>(kPortStopControllerNames);
   const auto deactivate_controller_names = getInput<std::string>(kPortDeactivateControllerNames);
   const auto activate_controller_names = getInput<std::string>(kPortActivateControllerNames);
 
-  if (const auto error = maybe_error(deactivate_controller_names, activate_controller_names); error)
+  if (const auto error = moveit_studio::behaviors::maybe_error(start_controller_names, stop_controller_names, deactivate_controller_names, activate_controller_names); error)
   {
     return tl::make_unexpected(fp::Internal("Failed to get required value from input data port: " + error.value()));
   }
 
-  SwitchCcontroller_manager_msgs::srv::SwitchControllerontroller::Request request;
-  {
-  }
+  controller_manager_msgs::srv::SwitchController::Request request;
+  request.strictness = controller_manager_msgs::srv::SwitchController::Request::STRICT;
+
+  add_controllers_to_list(start_controller_names.value(), request.start_controllers);
+  add_controllers_to_list(stop_controller_names.value(), request.stop_controllers);
+  add_controllers_to_list(deactivate_controller_names.value(), request.deactivate_controllers);
+  add_controllers_to_list(activate_controller_names.value(), request.activate_controllers);
 
   return request;
 }
 
 fp::Result<bool> SwitchROS2Controllers::processResponse(const controller_manager_msgs::srv::SwitchController::Response& response)
 {
-  if (!response.status.success)
+  if (!response.ok)
   {
-    return tl::make_unexpected(
-        fp::Internal(std::string("Service request failed: ").append(response.status.error_message)));
+    return tl::make_unexpected(fp::Internal("Service request failed!"));
   }
 
   return true;
