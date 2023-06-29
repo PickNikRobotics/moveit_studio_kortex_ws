@@ -38,7 +38,8 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
 
 # Add libraries
 add_library(kortex_behavior SHARED
-  src/deactivate_controllers.cpp
+  src/register_behaviors.cpp
+  src/switch_ros2_controllers.cpp
   src/teleoperate_non_servo.cpp)
 
 target_include_directories(kortex_behavior

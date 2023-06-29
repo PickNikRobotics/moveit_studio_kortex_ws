@@ -1,5 +1,5 @@
 #include <behaviortree_cpp/bt_factory.h>
-#include <kortex_behavior/deactivate_controllers.hpp>
+#include <kortex_behavior/switch_ros2_controllers.hpp>
 #include <kortex_behavior/teleoperate_non_servo.hpp>
 #include <pluginlib/class_list_macros.hpp>
 
@@ -16,8 +16,8 @@ public:
   {
     using namespace moveit_studio::behaviors;
 
-    registerBehavior<DeactivateControllers>(factory, "DeactivateControllers", shared_resources);
-    registerBehavior<DeactivateControllers>(factory, "TeleoperateNonServo", shared_resources);
+    registerBehavior<SwitchROS2Controllers>(factory, "SwitchROS2Controllers", shared_resources);
+    registerBehavior<TeleoperateNonServo>(factory, "TeleoperateNonServo", shared_resources);
   }
 };
 }  // namespace kortex_behavior
