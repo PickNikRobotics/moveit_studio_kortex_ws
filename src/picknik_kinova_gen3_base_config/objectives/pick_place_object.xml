@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<root BTCPP_format="4" main_tree_to_execute="Pick and Place Object">
+    <BehaviorTree ID="Pick and Place Object" _description="Detects and picks an object on a large flat surface.">
+        <Control ID="Sequence">
+            <Fallback>
+                <!-- Primary sequence -->
+                <Control ID="Sequence">
+                    <Action ID="LoadObjectiveParameters" config_file_name="pick_place_object_config.yaml" parameters="{parameters}"/>
+
+                    <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0"/>
+
+                    <Action ID="ClearSnapshot"/>
+
+                    <!-- Remove any objects which might remain in the planning scene from previous pick attempts -->
+                    <Action ID="ResetPlanningSceneObjects" apply_planning_scene_service="/apply_planning_scene" />
+
+                    <Action ID="GetPointCloud" topic_name="/wrist_mounted_camera/depth/color/points" message_out="{point_cloud}" />
+
+                    <Action ID="FindSingularCuboids" point_cloud="{point_cloud}" parameters="{parameters}" detected_shapes="{cuboids}"/>
+
+                    <Action ID="RetrieveWaypoint" waypoint_joint_state="{target_joint_state}" waypoint_name="Place"/>
+
+                    <Action ID="GetPoseFromUser" parameter_name="pick_place_object.grasp_pose" parameter_value="{grasp_pose}" />
+                    <Action ID="GetClosestObjectToPose" objects="{cuboids}" pose="{grasp_pose}" distance_threshold="0.3" closest_object="{cuboid_object}" />
+
+                    <!-- Add this cuboid to the planning scene. We do this before updating the planning scene so the collision octree will exclude voxels close to the cuboid. -->
+                    <Action ID="ModifyObjectInPlanningScene" object="{cuboid_object}" apply_planning_scene_service="/apply_planning_scene" />
+
+                    <!-- Update the planning scene collision octree with the point cloud. -->
+                    <Action ID="UpdatePlanningSceneService" point_cloud="{point_cloud}" point_cloud_service="/point_cloud_service"/>
+
+                    <Action ID="InitializeMTCTask" task_id="pick_place_object" controller_names="/joint_trajectory_controller /robotiq_gripper_controller" task="{task}"/>
+                    <Action ID="SetupMTCCurrentState" task="{task}"/>
+                    <Action ID="SetupMTCPickCuboid" cuboid_object="{cuboid_object}" task="{task}" parameters="{parameters}"/>
+                    <Action ID="SetupMTCMoveToJointState" joint_state="{target_joint_state}" planning_group_name="manipulator" task="{task}"/>
+                    <Action ID="PlanMTCTask" solution="{solution}" task="{task}"/>
+
+                    <Fallback name="wait_for_approval_if_user_available">
+                        <Inverter>
+                            <Action ID="IsUserAvailable"/>
+                        </Inverter>
+                        <Action ID="WaitForUserTrajectoryApproval" solution="{solution}"/>
+                    </Fallback>
+
+                    <Action ID="ExecuteMTCTask" solution="{solution}"/>
+                    <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0"/>
+                </Control>
+
+                <!-- Fallback block. Triggers if the primary sequence fails. -->
+                <Control ID="Sequence">
+                    <!-- Remove any objects which might remain in the planning scene from a failed pick attempt -->
+                    <Action ID="ResetPlanningSceneObjects" apply_planning_scene_service="/apply_planning_scene" />
+                    <Action ID="AlwaysFailure" />
+                </Control>
+            </Fallback>
+        </Control>
+    </BehaviorTree>
+</root>

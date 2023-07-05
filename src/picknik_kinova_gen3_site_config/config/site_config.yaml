@@ -1,0 +1,26 @@
+#
+#  This contains information for a unique instance of a robot.
+#
+
+# Name of the package to specialize
+based_on_package: "picknik_kinova_gen3_base_config"
+
+hardware:
+  ip: 192.168.11.11
+  simulated: ${MOCK_HARDWARE:-true}
+  camera_config_file:
+    package: "picknik_kinova_gen3_site_config"
+    path: "config/cameras.yaml"
+  robot_description:
+    urdf:
+      package: "picknik_kinova_gen3_site_config"
+      path: "description/picknik_kinova_gen3.xacro"
+
+objectives:
+  waypoints_file:
+    package_name: "picknik_kinova_gen3_site_config"
+    relative_path: "waypoints/waypoints.yaml"
+  objective_library_paths:
+    004:
+      package_name: "picknik_kinova_gen3_site_config"
+      relative_path: "objectives"
