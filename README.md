@@ -1,6 +1,6 @@
 # MoveIt Studio Kortex Workspace
 
-This is a sample user workspace for running MoveIt Studio with Kinova's family of arms
+This is a sample user workspace for running MoveIt Studio with Kinova's family of arms.
 For more information, refer to the [MoveIt Studio Documentation](https://docs.picknik.ai/).
 
 Instructions for building your own MoveIt Studio configuration can be found [here.](https://docs.picknik.ai/en/stable/concepts/config_package/config_package.html)
