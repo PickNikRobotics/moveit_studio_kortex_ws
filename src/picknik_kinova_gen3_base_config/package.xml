@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>picknik_kinova_gen3_base_config</name>
-  <version>2.3.0</version>
+  <version>1.0.0</version>
 
-  <description>Base config package for a Kinova Gen3 system similar to the one in the Boulder
-    office.</description>
+  <description>Base config package for a Kinova Gen3 system</description>
 
   <maintainer email="joseph.schornak@picknik.ai">Joseph Schornak</maintainer>
+  <maintainer email="anthony.baker@picknik.ai">Anthony Baker</maintainer>
 
-  <license>Proprietary</license>
+  <license>BSD-3</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
