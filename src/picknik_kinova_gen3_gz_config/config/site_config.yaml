@@ -18,21 +18,21 @@ hardware:
   ip: "0.0.0.0"
 
   simulated_robot_driver_persist_launch_file:
-    package: "picknik_kinova_gen3_temp_sim_config"
+    package: "picknik_kinova_gen3_sim_config"
     path: "launch/sim/robot_drivers_to_persist_sim.launch.py"
   simulated_hardware_launch_file:
-    package: "picknik_kinova_gen3_temp_sim_config"
+    package: "picknik_kinova_gen3_sim_config"
     path: "launch/sim/hardware.launch.py"
 
   camera_config_file:
-    package: "picknik_kinova_gen3_temp_sim_config"
+    package: "picknik_kinova_gen3_sim_config"
     path: "config/cameras.yaml"
   robot_description:
     srdf:
-      package: "picknik_kinova_gen3_temp_sim_config"
+      package: "picknik_kinova_gen3_sim_config"
       path: "config/moveit/picknik_kinova_gen3_temp_sim.srdf"
     urdf:
-      package: "picknik_kinova_gen3_temp_sim_config"
+      package: "picknik_kinova_gen3_sim_config"
       path: "description/picknik_kinova_gen3.xacro"
     urdf_params:
       - sim_ignition: "%>> hardware.simulated"
@@ -44,7 +44,7 @@ ros_global_params:
 
 moveit_params:
   sensors_3d:
-    package: "picknik_kinova_gen3_temp_sim_config"
+    package: "picknik_kinova_gen3_sim_config"
     path: "config/moveit/sensors_3d.yaml"
 
 # This configures what controllers gets run at startup

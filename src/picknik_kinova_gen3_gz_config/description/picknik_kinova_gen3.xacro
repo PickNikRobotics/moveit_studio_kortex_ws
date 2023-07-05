@@ -144,7 +144,7 @@
   <!-- Ignition Gazebo Plugins -->
   <gazebo>
     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
-      <parameters>$(find picknik_kinova_gen3_temp_sim_config)/config/control/picknik_kinova_gen3.ros2_control.yaml</parameters>
+      <parameters>$(find picknik_kinova_gen3_sim_config)/config/control/picknik_kinova_gen3.ros2_control.yaml</parameters>
       <ros>
         <remapping>/streaming_controller/commands:=/robot_controllers/commands</remapping>
         <remapping>/joint_trajectory_controller/joint_trajectory:=/robot_controllers/joint_trajectory</remapping>
