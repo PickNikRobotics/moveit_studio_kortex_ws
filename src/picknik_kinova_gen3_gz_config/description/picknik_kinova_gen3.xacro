@@ -15,7 +15,6 @@
   <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
   <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
   <xacro:arg name="use_internal_bus_gripper_comm" default="true" />
-  <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="fake_sensor_commands" default="false" />
@@ -48,7 +47,6 @@
     session_inactivity_timeout_ms="$(arg session_inactivity_timeout_ms)"
     connection_inactivity_timeout_ms="$(arg connection_inactivity_timeout_ms)"
     use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
-    sim_ignition="$(arg sim_ignition)"
     prefix="$(arg prefix)"
     use_fake_hardware="$(arg use_fake_hardware)"
     fake_sensor_commands="$(arg fake_sensor_commands)">
