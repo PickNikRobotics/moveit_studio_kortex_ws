@@ -2,3 +2,6 @@
 	path = dependencies/ros2_kortex
 	url = https://github.com/PickNikRobotics/ros2_kortex.git
 	branch = 04-24-2023-freeze
+[submodule "dependencies/picknik_controllers"]
+	path = dependencies/picknik_controllers
+	url = git@github.com:PickNikRobotics/picknik_controllers.git
