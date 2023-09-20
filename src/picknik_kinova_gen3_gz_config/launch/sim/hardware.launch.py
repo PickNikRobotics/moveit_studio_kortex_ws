@@ -55,7 +55,7 @@ def generate_simulation_description(context, *args, **settings):
         world_name_key = "gazebo_test_world_name"
     else:
         world_name_key = "gazebo_world_name"
-    world_name = settings.get(world_name_key, "studio_simple.sdf")
+    world_name = settings.get(world_name_key, "empty.sdf")
 
     use_gui = settings.get("gazebo_gui", False)
     is_verbose = settings.get("gazebo_verbose", False)
