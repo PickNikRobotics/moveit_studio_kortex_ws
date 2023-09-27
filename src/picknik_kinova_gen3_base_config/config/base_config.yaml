@@ -93,7 +93,7 @@ moveit_params:
     allowed_start_tolerance: 0.01
 
 ui_params:
-  servo_endpoint_frame_id: "tool_frame"
+  servo_endpoint_frame_id: "manual_grasp_link"
 
 # This configures what controllers gets run at startup
 ros2_control:

@@ -128,7 +128,7 @@
     </joint>
 
     <!-- Moveit Studio requires a link name called manual_grasp_link to perform quick tasks such as inspect surface -->
-    <!-- we add this link here and make it coincident with the tool_frame but rotate it to put the camera normal to the surface -->
+    <!-- we add this link here and make it coincident with the manual_grasp_link but rotate it to put the camera normal to the surface -->
     <link name="manual_grasp_link"/>
 
     <joint name="manual_grasp_joint" type="fixed">
