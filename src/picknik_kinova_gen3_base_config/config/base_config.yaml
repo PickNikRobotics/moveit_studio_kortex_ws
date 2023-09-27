@@ -47,7 +47,7 @@ hardware:
       - fake_sensor_commands: "false"
       - external_camera: "true"
       - wrist_realsense: "true"
-      - use_internal_bus_gripper_comm: "true"
+      - use_internal_bus_gripper_comm: "false"
 
 optional_feature_params:
   use_joystick: False
