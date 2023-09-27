@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-
 <robot name="gen3" xmlns:xacro="http://ros.org/wiki/xacro">
-
     <!-- Arguments for Kinova -->
     <xacro:arg name="arm" default="gen3" />
     <xacro:arg name="dof" default="7" />
     <xacro:arg name="vision" default="false" />
     <xacro:arg name="robot_ip" default="yyy.yyy.yyy.yyy" />
     <xacro:arg name="gripper" default="" />
+    <xacro:arg name="gripper_joint_name" default="robotiq_85_left_knuckle_joint" />
     <xacro:arg name="username" default="admin" />
     <xacro:arg name="password" default="admin" />
     <xacro:arg name="port" default="10000" />
@@ -18,6 +17,12 @@
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="use_fake_hardware" default="false" />
     <xacro:arg name="fake_sensor_commands" default="false" />
+    <xacro:arg name="sim_gazebo" default="false" />
+    <xacro:arg name="sim_ignition" default="false" />
+    <xacro:arg name="sim_isaac" default="false" />
+    <xacro:arg name="use_external_cable" default="false" />
+    <xacro:arg name="gripper_max_velocity" default="100.0" />
+    <xacro:arg name="gripper_max_force" default="100.0" />
     <xacro:arg name="wrist_realsense" default="true" />
 
     <!-- Import macros for main hardware components -->
@@ -33,8 +38,10 @@
     <!-- Load the robot -->
     <xacro:load_robot
       parent="world"
+      prefix="$(arg prefix)"
       arm="$(arg arm)"
       gripper="$(arg gripper)"
+      gripper_joint_name="$(arg gripper_joint_name)"
       dof="$(arg dof)"
       vision="$(arg vision)"
       robot_ip="$(arg robot_ip)"
@@ -45,15 +52,20 @@
       session_inactivity_timeout_ms="$(arg session_inactivity_timeout_ms)"
       connection_inactivity_timeout_ms="$(arg connection_inactivity_timeout_ms)"
       use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
-      prefix="$(arg prefix)"
       use_fake_hardware="$(arg use_fake_hardware)"
-      fake_sensor_commands="$(arg fake_sensor_commands)" >
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      fake_sensor_commands="$(arg fake_sensor_commands)"
+      sim_gazebo="$(arg sim_gazebo)"
+      sim_ignition="$(arg sim_ignition)"
+      sim_isaac="$(arg sim_isaac)"
+      use_external_cable="$(arg use_external_cable)"
+      gripper_max_velocity="$(arg gripper_joint_name)"
+      gripper_max_force="$(arg gripper_max_force)" >
+      <origin xyz="0 0 0.0" rpy="0 0 0" />
     </xacro:load_robot>
 
     <!-- Environment -->
     <xacro:cube link_name="table" connected_to="world" length="2.00" width="2.00" height="0.25" alpha="0.3">
-      <origin xyz="0 0 ${-0.25/2}" rpy="0 0 0"/>
+      <origin xyz="0 0 -0.145" rpy="0 0 0"/>
     </xacro:cube>
 
     <!-- wrist realsense -->
@@ -95,17 +107,35 @@
         <parent link="$(arg prefix)bracelet_link" />
         <child link="$(arg prefix)wrist_camera_link_visual" />
       </joint>
-
-      <!-- Moveit Studio requires a link name called manual_grasp_link to perform quick tasks such as inspect surface -->
-      <!-- we add this link here and make it coincident with the tool_frame but rotate it to put the camera normal to the surface -->
-      <link name="manual_grasp_link"/>
-
-      <joint name="manual_grasp_joint" type="fixed">
-        <parent link="$(arg prefix)tool_frame"/>
-        <child link = "manual_grasp_link"/>
-        <origin xyz="0 0 0" rpy="${3.14 / 180.0 * 10} 0 0"/>
-      </joint>
     </xacro:if>
+
+    <!-- Visual aids for grasping -->
+    <link name="finger_tip_closed_point">
+      <visual>
+        <geometry>
+          <sphere radius="0.007"/>
+        </geometry>
+        <material name="">
+              <color rgba="0 1.0 0 0.7"/>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="finger_tip_closed_point_joint" type="fixed">
+      <parent link="robotiq_85_base_link"/>
+      <child link = "finger_tip_closed_point"/>
+      <origin xyz="0 0 0.16" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Moveit Studio requires a link name called manual_grasp_link to perform quick tasks such as inspect surface -->
+    <!-- we add this link here and make it coincident with the manual_grasp_link but rotate it to put the camera normal to the surface -->
+    <link name="manual_grasp_link"/>
+
+    <joint name="manual_grasp_joint" type="fixed">
+      <parent link="$(arg prefix)end_effector_link"/>
+      <child link = "manual_grasp_link"/>
+      <origin xyz="0 0 0.15" rpy="${3.14 / 180.0 * 10} 0 0"/>
+    </joint>
 
     <!-- Camera External -->
     <link name="external_camera_link" />
