@@ -61,6 +61,9 @@ moveit_params:
   ompl_planning:
     package: "picknik_kinova_gen3_base_config"
     path: "config/moveit/ompl_planning.yaml"
+  stomp_planning:
+    package: "picknik_kinova_gen3_base_config"
+    path: "config/moveit/stomp_planning.yaml"
   kinematics:
     package: "picknik_kinova_gen3_base_config"
     path: "config/moveit/kinematics.yaml"
@@ -73,6 +76,9 @@ moveit_params:
   joint_limits:
     package: "picknik_kinova_gen3_base_config"
     path: "config/moveit/joint_limits.yaml"
+  pilz_cartesian_limits:
+    package: "picknik_kinova_gen3_base_config"
+    path: "config/moveit/pilz_cartesian_limits.yaml"
 
   publish:
     planning_scene: True
