@@ -7,7 +7,7 @@ GetDoorHandle:
 SetupMTCOpenLeverHandleDoor:
   arm_group_name: "manipulator"
   end_effector_group_name: "gripper"
-  ik_frame_name: "tool_frame"
+  ik_frame_name: "manual_grasp_link"
 
   # The hand should be placed 75% of the way down the handle length when
   # manipulating the handle. Valid value range [0, 1.0].

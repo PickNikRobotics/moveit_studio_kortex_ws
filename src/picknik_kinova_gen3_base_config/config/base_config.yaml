@@ -47,7 +47,7 @@ hardware:
       - fake_sensor_commands: "false"
       - external_camera: "true"
       - wrist_realsense: "true"
-      - use_internal_bus_gripper_comm: "true"
+      - use_internal_bus_gripper_comm: "false"
 
 optional_feature_params:
   use_joystick: False
@@ -61,6 +61,9 @@ moveit_params:
   ompl_planning:
     package: "picknik_kinova_gen3_base_config"
     path: "config/moveit/ompl_planning.yaml"
+  stomp_planning:
+    package: "picknik_kinova_gen3_base_config"
+    path: "config/moveit/stomp_planning.yaml"
   kinematics:
     package: "picknik_kinova_gen3_base_config"
     path: "config/moveit/kinematics.yaml"
@@ -73,6 +76,9 @@ moveit_params:
   joint_limits:
     package: "picknik_kinova_gen3_base_config"
     path: "config/moveit/joint_limits.yaml"
+  pilz_cartesian_limits:
+    package: "picknik_kinova_gen3_base_config"
+    path: "config/moveit/pilz_cartesian_limits.yaml"
 
   publish:
     planning_scene: True
@@ -87,7 +93,7 @@ moveit_params:
     allowed_start_tolerance: 0.01
 
 ui_params:
-  servo_endpoint_frame_id: "tool_frame"
+  servo_endpoint_frame_id: "manual_grasp_link"
 
 # This configures what controllers gets run at startup
 ros2_control:
