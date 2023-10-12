@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<root BTCPP_format="4" main_tree_to_execute="Teleoperate">
-    <BehaviorTree ID="Teleoperate" _description="Teleoperate the robot from the Web UI">
-        <Control ID="Sequence" name="root">
-            <!-- The Studio UI assumes that there is a Teleoperate objective, so even though the Kinova does not currently support teleoperation we add this placeholder Objective to prevent the UI from showing an error. -->
-            <Action ID="AlwaysSuccess"/>
-        </Control>
-    </BehaviorTree>
-</root>
