@@ -21,7 +21,7 @@ This workspace contains several MoveIt Studio configuration packages for Kinova 
 
 ```mermaid
 graph TB
-Base[picknik_kinova_gen3_base_config] --> Site[picknik_ur_site_config]
+Base[picknik_kinova_gen3_base_config] --> Site[picknik_kinova_gen3_site_config]
 Base --> Gazebo[picknik_kinova_gen3_gz_config]
 Site --> Picknik[Other PickNik configs]
 ```
