@@ -1,4 +1,4 @@
 [submodule "dependencies/ros2_kortex"]
-	path = dependencies/ros2_kortex
+	path = src/external_dependencies/ros2_kortex
 	url = https://github.com/Kinovarobotics/ros2_kortex.git
 	branch = main
