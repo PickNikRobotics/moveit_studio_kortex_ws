@@ -2,3 +2,6 @@
 	path = src/external_dependencies/ros2_kortex
 	url = https://github.com/Kinovarobotics/ros2_kortex.git
 	branch = main
+[submodule "src/external_dependencies/ros2_robotiq_gripper"]
+	path = src/external_dependencies/ros2_robotiq_gripper
+	url = git@github.com:PickNikRobotics/ros2_robotiq_gripper.git
