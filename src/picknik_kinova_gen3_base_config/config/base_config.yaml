@@ -66,7 +66,7 @@ moveit_params:
     path: "config/moveit/stomp_planning.yaml"
   kinematics:
     package: "picknik_kinova_gen3_base_config"
-    path: "config/moveit/kinematics.yaml"
+    path: "config/moveit/trak_ik_kinematics_distance.yaml"
   servo:
     package: "picknik_kinova_gen3_base_config"
     path: "config/moveit/kinova_gen3_servo.yaml"
