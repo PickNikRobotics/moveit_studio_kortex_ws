@@ -6,19 +6,52 @@
 
 hardware:
   type: "kortex2_gen3"
-  ip: "0.0.0.0"
-  gripper_gear_ratio: 125.0 # Used to convert joint angles to desired position
+
+  # Set simulated to false if you are using this as a configuration for real hardware.
+  # Override-able by setting the $MOCK_HARDWARE environment variable to 'True'.
+  # This allows users to switch between mock and real hardware using the same configuration.
+  # [Required]
   simulated: ${MOCK_HARDWARE:-true}
+
+  # If the MoveIt Studio Agent should launch the ros2 controller node.
+  # [Optional, default=True]
+  launch_control_node: True
+
+  # If the MoveIt Studio Agent should launch the robot state publisher.
+  # This should be false if you are launching the robot state publisher as part of drivers.
+  # [Optional, default=True]
+  launch_robot_state_publisher: True
+
+  # If the MoveIt Studio Agent should launch cameras when simulated.
+  # This must be False when using mock hardware, since there are no cameras simulated.
+  # [Optional, default=True]
   launch_cameras_when_simulated: False
 
+  # The robot's IP address.
+  # [Required]
+  ip: "0.0.0.0"
+
+  # Specify additional launch files for running the robot with real hardware.
+  # [Optional, defaults to a blank launch file if not specified]
   robot_driver_persist_launch_file:
     package: "picknik_kinova_gen3_base_config"
     path: "launch/robot_drivers_to_persist.launch.py"
+  hardware_launch_file:
+    package: "moveit_studio_agent"
+    path: "launch/blank.launch.py"
 
+  # Specify any additional launch files for running the robot in simulation mode.
+  # Used when hardware.simulated is True.
+  # [Optional, defaults to a blank launch file if not specified]
   simulated_robot_driver_persist_launch_file:
     package: "picknik_kinova_gen3_base_config"
     path: "launch/sim/robot_drivers_to_persist_sim.launch.py"
+  simulated_hardware_launch_file:
+    package: "moveit_studio_agent"
+    path: "launch/blank.launch.py"
 
+  # Configuration details for cameras and scene planning.
+  # [Required]
   camera_config_file:
     package: "picknik_kinova_gen3_base_config"
     path: "config/cameras.yaml"
@@ -91,9 +124,6 @@ moveit_params:
     allowed_execution_duration_scaling: 2.0
     allowed_goal_duration_margin: 5.0
     allowed_start_tolerance: 0.01
-
-ui_params:
-  servo_endpoint_frame_id: "manual_grasp_link"
 
 # This configures what controllers gets run at startup
 ros2_control:
