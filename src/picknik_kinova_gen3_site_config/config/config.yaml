@@ -3,7 +3,7 @@
 #
 
 # Name of the package to specialize
-based_on_package: "picknik_kinova_gen3_base_config"
+based_on_package: "kinova_gen3_base_config"
 
 hardware:
   ip: 192.168.11.11

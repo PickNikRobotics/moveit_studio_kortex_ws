@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16.3)
-project(picknik_kinova_gen3_base_config)
+project(kinova_gen3_base_config)
 
 find_package(ament_cmake REQUIRED)
 

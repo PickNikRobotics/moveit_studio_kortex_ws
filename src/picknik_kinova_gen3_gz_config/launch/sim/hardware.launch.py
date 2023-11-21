@@ -106,7 +106,7 @@ def generate_launch_description():
 
     # Include URDF
     scene_xacro_path = get_ros_path(
-        "picknik_kinova_gen3_base_config", "description/simulation_scene.urdf.xacro"
+        "kinova_gen3_base_config", "description/simulation_scene.urdf.xacro"
     )
     scene_urdf = xacro_to_urdf(scene_xacro_path, None)
     scene_urdf_ignition = path_pattern_change_for_ignition(scene_urdf)
