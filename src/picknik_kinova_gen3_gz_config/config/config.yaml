@@ -3,48 +3,62 @@
 #
 
 # Name of the package to specialize
-based_on_package: "picknik_kinova_gen3_base_config"
+based_on_package: "picknik_kinova_gen3_site_config"
 
+# Optional parameters that can be read in your launch files for specific functionality
 optional_feature_params:
+  gazebo_world_name: "space_station_blocks_world.sdf"
   gazebo_gui: False
   gazebo_verbose: True
 
+# Enable simulation time so nodes are synced with the Gazebo block.
+ros_global_params:
+  use_sim_time: True
+
 hardware:
-  simulated: True # this is the only option for this site_config
-  # If the MoveIt Studio Agent should launch the ros2 controller node
+  type: "gen3"
+
+  # This is the only option for this site_config
+  simulated: True
+
+  # Gazebo starts its own controller manager through the ros2_control plugin, so set this to False
   launch_control_node: False
+
   # If the MoveIt Studio Agent should launch the robot state publisher
+  # This should be false if you are launching the robot state publisher as part of drivers.
   launch_robot_state_publisher: True
+
+  # If the MoveIt Studio Agent should launch cameras when simulated.
+  launch_cameras_when_simulated: True
+
+  # The robot's IP address
   ip: "0.0.0.0"
 
   simulated_robot_driver_persist_launch_file:
-    package: "picknik_kinova_gen3_sim_config"
+    package: "picknik_kinova_gen3_gz_config"
     path: "launch/sim/robot_drivers_to_persist_sim.launch.py"
   simulated_hardware_launch_file:
-    package: "picknik_kinova_gen3_sim_config"
+    package: "picknik_kinova_gen3_gz_config"
     path: "launch/sim/hardware.launch.py"
 
   camera_config_file:
-    package: "picknik_kinova_gen3_sim_config"
+    package: "picknik_kinova_gen3_gz_config"
     path: "config/cameras.yaml"
   robot_description:
     srdf:
-      package: "picknik_kinova_gen3_sim_config"
+      package: "picknik_kinova_gen3_gz_config"
       path: "config/moveit/picknik_kinova_gen3_temp_sim.srdf"
     urdf:
-      package: "picknik_kinova_gen3_sim_config"
+      package: "picknik_kinova_gen3_gz_config"
       path: "description/picknik_kinova_gen3.xacro"
     urdf_params:
       - sim_ignition: "%>> hardware.simulated"
       - use_fake_hardware: "false"
       - gazebo_renderer: ${GAZEBO_RENDERER:-ogre}
 
-ros_global_params:
-  use_sim_time: True
-
 moveit_params:
   sensors_3d:
-    package: "picknik_kinova_gen3_sim_config"
+    package: "picknik_kinova_gen3_gz_config"
     path: "config/moveit/sensors_3d.yaml"
 
 # This configures what controllers gets run at startup

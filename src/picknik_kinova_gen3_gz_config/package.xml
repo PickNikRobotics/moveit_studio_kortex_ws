@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>picknik_kinova_gen3_sim_config</name>
+  <name>picknik_kinova_gen3_gz_config</name>
   <version>1.0.0</version>
 
   <description>Template config package for a Kinova Gen3 system in simulation.</description>
