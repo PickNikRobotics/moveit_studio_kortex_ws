@@ -35,6 +35,11 @@
     <!-- World is centered under base_link of the robot, on the ground -->
     <link name="world"/>
 
+    <!-- initial position for simulations (Mock Hardware, Gazebo, Ignition) -->
+    <xacro:arg name="initial_positions_file" default="$(find picknik_kinova_gen3_site_config)/config/initial_positions.yaml"/>
+    <!-- convert to property to use substitution in function -->
+    <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
+
     <!-- Load the robot -->
     <xacro:load_robot
       parent="world"
@@ -59,7 +64,8 @@
       sim_isaac="$(arg sim_isaac)"
       use_external_cable="$(arg use_external_cable)"
       gripper_max_velocity="$(arg gripper_joint_name)"
-      gripper_max_force="$(arg gripper_max_force)" >
+      gripper_max_force="$(arg gripper_max_force)"
+      initial_positions="${xacro.load_yaml(initial_positions_file)}" >
       <origin xyz="0 0 0.0" rpy="0 0 0" />
     </xacro:load_robot>
 
