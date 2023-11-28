@@ -11,10 +11,6 @@ hardware:
   camera_config_file:
     package: "picknik_kinova_gen3_site_config"
     path: "config/cameras.yaml"
-  robot_description:
-    urdf:
-      package: "picknik_kinova_gen3_site_config"
-      path: "description/picknik_kinova_gen3.xacro"
 
 objectives:
   waypoints_file:
