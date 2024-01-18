@@ -112,6 +112,9 @@ moveit_params:
   joint_limits:
     package: "kinova_gen3_base_config"
     path: "config/moveit/joint_limits.yaml"
+  servo_joint_limits:
+    package: "kinova_gen3_base_config"
+    path: "config/moveit/servo_joint_limits.yaml"
   pilz_cartesian_limits:
     package: "kinova_gen3_base_config"
     path: "config/moveit/pilz_cartesian_limits.yaml"
