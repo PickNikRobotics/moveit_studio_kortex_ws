@@ -4,7 +4,7 @@ FindSingularCuboids:
   # Distance threshold used when fitting a plane to the supporting surface.
   #   Increasing this value lets us fit to an uneven or noisy surface at the cost of preventing segmentation of short objects.
   #   Reducing this value allows detecting small objects on a very flat surface, but this will produce bad results for uneven or noisy surfaces.
-  plane_model_threshold: 0.05
+  plane_model_threshold: 0.01
 
   # Distance threshold used when identifying clusters of points corresponding to distinct objects.
   #   Increasing this value makes the algorithm combine nearby discontinuous points into the same object, which lets the algorithm tolerate noisy data without introducing false positives at the cost of reduced accuracy.
@@ -12,28 +12,26 @@ FindSingularCuboids:
   cluster_distance_threshold: 0.01
 
   # These define a rectangular region of interest relative to base_frame.
-  #   The settings here define a 2m x 2m x 1m box just below the XY plane of the world frame.
+  #   The settings here define a box that encloses the shelf in the space station booth just below the XY plane of the world frame.
   # Origin of the region:
-  crop_box_origin_x: -1.0
-  crop_box_origin_y: -1.0
-  crop_box_origin_z: -0.1
+  crop_box_origin_x: -0.8
+  crop_box_origin_y: 0.0
+  crop_box_origin_z: -0.03
   # Extent of the region:
-  crop_box_size_x: 2.0
-  crop_box_size_y: 2.0
-  crop_box_size_z: 0.3
+  crop_box_size_x: 0.5
+  crop_box_size_y: 0.75
+  crop_box_size_z: 0.5
 
-SetupMTCPickCuboid:
-  # The lift vector points to the direction of the positive z-axis of the frame marked as the world frame.
+SetupMTCApproachGrasp:
   world_frame_name: "world"
   arm_group_name: "manipulator"
   end_effector_group_name: "gripper"
-  end_effector_name: "gripper"
-  hand_frame_name: "manual_grasp_link"
+  end_effector_name: "moveit_ee"
+  hand_frame_name: "grasp_link"
   end_effector_closed_pose_name: "close"
-  ui_grasp_link: "manual_grasp_link" # manual_grasp_link
+  ui_grasp_link: "grasp_link"
 
-  approach_distance: 0.1
-  lift_distance: 0.1
+  approach_distance: 0.15
 
   # Set to true to make the robot keep the object within view of its camera while reaching to grasp it
   enforce_visibility_constraint: true
@@ -46,10 +44,17 @@ SetupMTCPickCuboid:
   grasp_candidate_config:
     generate_x_axis_grasps: true
     generate_y_axis_grasps: true
-    generate_z_axis_grasps: false
+    generate_z_axis_grasps: true
 
     # Number of samples to generate for each quadrant of the cuboid.
     samples_per_quadrant: 3
+
+SetupMTCGenerateCuboidGrasps:
+  end_effector_group_name: "gripper"
+  end_effector_name: "moveit_ee"
+  hand_frame_name: "grasp_link"
+  end_effector_closed_pose_name: "close"
+  ui_grasp_link: "grasp_link"
 
   # Grasp data configs
   grasp_data:
@@ -77,3 +82,20 @@ SetupMTCPickCuboid:
       roll: 0.0
       pitch: 0.0
       yaw: 1.57
+
+SetupMTCRetractFromGrasp:
+  world_frame_name: "world"
+  arm_group_name: "manipulator"
+  end_effector_group_name: "gripper"
+  hand_frame_name: "grasp_link"
+  end_effector_closed_pose_name: "close"
+
+  # The lift vector points to the direction of the positive z-axis of the frame marked as the world frame.
+  approach_distance: 0.15
+  lift_distance: 0.1
+
+IsConstraintSatisfied:
+  camera_optical_frame_id: "wrist_mounted_camera_color_optical_frame"
+  camera_field_of_view_angle: 1.0472  # radians: approx. 60 degrees, which is narrower than the 70 degree diagonal FOV of the D415 camera
+  sensor_z_offset: 0.02
+  target_diameter: 0.0
