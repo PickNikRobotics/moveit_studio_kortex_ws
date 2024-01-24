@@ -11,15 +11,15 @@
   <xacro:include filename="$(find picknik_accessories)/descriptions/sensors/realsense_d415.urdf.xacro"/>
 
   <!-- Create parent link -->
-  <!-- Moveit Studio requires a link name called manual_grasp_link to perform quick tasks such as inspect surface -->
-  <link name="manual_grasp_link" />
+  <!-- We use a link name called grasp_link to perform built-in Objectives such as inspect surface without modification. -->
+  <link name="grasp_link" />
 
   <!-- Create bracelet link -->
   <link name="bracelet_link" />
 
   <joint name="bracelet_joint" type="fixed">
-    <origin xyz="0 -0.031521 -0.1787672" rpy="${pi / 180.0 * 170} 0 0" />
-    <parent link="manual_grasp_link" />
+    <origin xyz="0 -0.031521 -0.1787672" rpy="0 0 0" />
+    <parent link="grasp_link" />
     <child link="bracelet_link" />
   </joint>
 

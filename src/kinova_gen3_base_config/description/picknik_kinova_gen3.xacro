@@ -133,14 +133,13 @@
       <origin xyz="0 0 0.16" rpy="0 0 0"/>
     </joint>
 
-    <!-- Moveit Studio requires a link name called manual_grasp_link to perform quick tasks such as inspect surface -->
-    <!-- we add this link here and make it coincident with the manual_grasp_link but rotate it to put the camera normal to the surface -->
-    <link name="manual_grasp_link"/>
+    <!-- This link aligns the axes of the grasp frame to our required convention for motion planning tasks. -->
+    <link name="grasp_link"/>
 
-    <joint name="manual_grasp_joint" type="fixed">
+    <joint name="grasp_link_joint" type="fixed">
       <parent link="$(arg prefix)end_effector_link"/>
-      <child link = "manual_grasp_link"/>
-      <origin xyz="0 0 0.15" rpy="${3.14 / 180.0 * 10} 0 0"/>
+      <child link = "grasp_link"/>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
     </joint>
 
     <!-- Camera External -->
