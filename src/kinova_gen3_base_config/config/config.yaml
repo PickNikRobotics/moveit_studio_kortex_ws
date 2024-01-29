@@ -1,6 +1,6 @@
 ###############################################################
 #
-#  This configures the robot to work with moveit studio
+#  This configures the robot to work with moveit pro
 #
 ###############################################################
 
@@ -13,16 +13,16 @@ hardware:
   # [Required]
   simulated: ${MOCK_HARDWARE:-true}
 
-  # If the MoveIt Studio Agent should launch the ros2 controller node.
+  # If the MoveIt Pro Agent should launch the ros2 controller node.
   # [Optional, default=True]
   launch_control_node: True
 
-  # If the MoveIt Studio Agent should launch the robot state publisher.
+  # If the MoveIt Pro Agent should launch the robot state publisher.
   # This should be false if you are launching the robot state publisher as part of drivers.
   # [Optional, default=True]
   launch_robot_state_publisher: True
 
-  # If the MoveIt Studio Agent should launch cameras when simulated.
+  # If the MoveIt Pro Agent should launch cameras when simulated.
   # This must be False when using mock hardware, since there are no cameras simulated.
   # [Optional, default=True]
   launch_cameras_when_simulated: False
@@ -152,6 +152,8 @@ octomap_manager:
 
 objectives:
   behavior_loader_plugins:
+    # This plugin will load the core MoveIt Pro behaviors.
+    # Add additional plugin loaders as needed.
     core:
       - "moveit_studio::behaviors::CoreBehaviorsLoader"
   objective_library_paths:

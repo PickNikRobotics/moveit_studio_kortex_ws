@@ -1,3 +1,3 @@
 # Kinova_Gen3_base_config
 
-Base Config for using the Kinova Gen3 manipulator with MoveIt Studio.
+Base Config for using the Kinova Gen3 manipulator with MoveIt Pro.
