@@ -6,7 +6,7 @@
 based_on_package: "kinova_gen3_base_config"
 
 hardware:
-  ip: 192.168.11.11
+  ip: 192.168.1.10
   simulated: ${MOCK_HARDWARE:-true}
   camera_config_file:
     package: "picknik_kinova_gen3_site_config"

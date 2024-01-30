@@ -24,6 +24,6 @@
         </Control>
     </BehaviorTree>
     <BehaviorTree ID="OpenGripper">
-        <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0"/>
+        <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0" target_velocity="0.5" max_effort="20.0" />
     </BehaviorTree>
 </root>
