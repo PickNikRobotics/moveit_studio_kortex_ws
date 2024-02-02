@@ -118,4 +118,4 @@ robotiq_gripper_controller:
     joint: robotiq_85_left_knuckle_joint
     allow_stalling: true
     use_effort_interface: true
-    use_speed_interface: true
+    use_velocity_interface: true
