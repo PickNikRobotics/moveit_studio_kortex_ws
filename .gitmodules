@@ -9,3 +9,6 @@
 	path = src/external_dependencies/picknik_accessories
 	url = git@github.com:PickNikRobotics/picknik_accessories.git
 	branch = kinova-main
+[submodule "src/external_dependencies/serial"]
+	path = src/external_dependencies/serial
+	url = git@github.com:PickNikRobotics/serial.git
