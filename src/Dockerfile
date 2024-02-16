@@ -51,12 +51,12 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 
 # Install additional Kortex Vision dependencies
 # NOTE: The /opt/overlay_ws folder contains MoveIt Pro binary packages and the source file.
-# hadolint ignore=SC1091
+# hadolint ignore=DL3008, SC1091
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     . /opt/overlay_ws/install/setup.sh && \
     apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
       gstreamer1.0-tools \
       gstreamer1.0-libav \
       libgstreamer1.0-dev \
@@ -64,7 +64,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
       libgstreamer-plugins-good1.0-dev \
       gstreamer1.0-plugins-good \
       gstreamer1.0-plugins-base
-      
+
 # Install additional dependencies
 # You can also add any necessary apt-get install, pip install, etc. commands at this point.
 # NOTE: The /opt/overlay_ws folder contains MoveIt Pro binary packages and the source file.
