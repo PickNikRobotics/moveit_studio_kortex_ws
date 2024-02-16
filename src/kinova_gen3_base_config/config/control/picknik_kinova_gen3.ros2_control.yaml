@@ -8,9 +8,6 @@ controller_manager:
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
-    streaming_controller:
-      type: position_controllers/JointGroupPositionController
-
     twist_controller:
       type: picknik_twist_controller/PicknikTwistController
 
@@ -59,21 +56,6 @@ joint_trajectory_controller:
         goal: 0.05
       joint_7:
         goal: 0.05
-
-streaming_controller:
-  ros__parameters:
-    joints:
-      - joint_1
-      - joint_2
-      - joint_3
-      - joint_4
-      - joint_5
-      - joint_6
-      - joint_7
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
 
 twist_controller:
   ros__parameters:
