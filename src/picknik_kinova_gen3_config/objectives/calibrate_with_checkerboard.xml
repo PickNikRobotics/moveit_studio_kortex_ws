@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+  <root main_tree_to_execute="Calibrate With Checkerboard">
+    <!-- ////////// -->
+    <BehaviorTree ID="Calibrate With Checkerboard">
+        <Sequence>
+            <SubTree ID="MoveToWaypoint" waypoint_name="Home"/>
+            <Action ID="CalibratePoseAction" base_frame="base_link" calibration_frame_id="scene_camera_mount_link" calibrated_poses="{calibrated_poses}"/>
+            <Action ID="WriteCalibratedPoseToYAML" calibrated_poses="{calibrated_poses}"/>
+        </Sequence>
+    </BehaviorTree>
+    <BehaviorTree ID="MoveToWaypoint">
+        <Sequence name="move_to_waypoint_main">
+            <Action ID="RetrieveWaypoint" waypoint_joint_state="{target_joint_state}" waypoint_name="{waypoint_name}"/>
+            <Action ID="InitializeMTCTask" controller_names="/joint_trajectory_controller /robotiq_gripper_controller" task="{move_to_waypoint_task}"/>
+            <Action ID="SetupMTCCurrentState" task="{move_to_waypoint_task}"/>
+            <Action ID="SetupMTCMoveToJointState" joint_state="{target_joint_state}" name="SetupMTCMoveToJointState_First" planning_group_name="manipulator" task="{move_to_waypoint_task}"/>
+            <Action ID="PlanMTCTask" solution="{move_to_waypoint_solution}" task="{move_to_waypoint_task}"/>
+            <Action ID="ExecuteMTCTask" solution="{move_to_waypoint_solution}"/>
+        </Sequence>
+    </BehaviorTree>
+</root> 

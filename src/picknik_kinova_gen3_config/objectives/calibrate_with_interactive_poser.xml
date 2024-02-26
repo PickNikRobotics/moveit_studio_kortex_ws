@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="Calibrate With Interactive Poser">
+    <!-- ////////// -->
+    <BehaviorTree ID="Calibrate With Interactive Poser">
+        <Sequence name="root">
+            <Action ID="CalibratePoseAction" base_frame="base_link" calibration_frame_id="scene_camera_mount_link" calibrated_poses="{calibrated_poses}"/>
+            <Action ID="WriteCalibratedPoseToYAML" calibrated_poses="{calibrated_poses}"/>
+        </Sequence>
+    </BehaviorTree>
+</root>

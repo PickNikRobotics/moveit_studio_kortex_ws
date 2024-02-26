@@ -1,0 +1,48 @@
+robot_calibration:
+  ros__parameters:
+    verbose: true
+    base_link: base_link
+    calibration_steps:
+    - single_calibration_step
+    single_calibration_step:
+      models:
+      - arm
+      - camera
+      arm:
+        type: chain3d
+        frame: checkerboard # this can be 'checkerboard' but you need to remove it from the free_frames
+      camera:
+        type: camera3d
+        frame: scene_camera_mount_link
+        topic: /scene_camera/depth/color/points # is this used? See line 97-99 in params.cpp
+      free_frames:
+      - scene_camera_mount_joint
+      scene_camera_mount_joint:
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+      checkerboard:
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+      free_frames_initial_values:
+      - scene_camera_mount_joint_initial_values
+      scene_camera_mount_joint_initial_values:
+        x: 0.3
+        y: 0.2
+        z: 1.23
+        roll: -1.14
+        pitch: 1.52
+        yaw: -1.05
+      error_blocks:
+      - hand_eye
+      hand_eye:
+        type: chain3d_to_chain3d
+        model_a: camera
+        model_b: arm
