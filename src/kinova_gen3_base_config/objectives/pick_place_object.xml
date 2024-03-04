@@ -7,7 +7,7 @@
                 <Control ID="Sequence">
                     <Action ID="LoadObjectiveParameters" config_file_name="pick_place_object_config.yaml" parameters="{parameters}"/>
 
-                    <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0"/>
+                    <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0" target_velocity="0.5" max_effort="20.0" />
 
                     <Action ID="ClearSnapshot"/>
 
@@ -43,7 +43,7 @@
                     </Fallback>
 
                     <Action ID="ExecuteMTCTask" solution="{solution}"/>
-                    <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0"/>
+                    <Action ID="MoveGripperAction" gripper_command_action_name="/robotiq_gripper_controller/gripper_cmd" position="0.0" target_velocity="0.5" max_effort="20.0" />
                 </Control>
 
                 <!-- Fallback block. Triggers if the primary sequence fails. -->
