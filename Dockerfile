@@ -11,29 +11,26 @@ ARG USERNAME=studio-user
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-#####################################################
+##################################################
 # Starting from the specified MoveIt Pro release #
-#####################################################
+##################################################
 # The image tag is specified in the argument itself.
 # hadolint ignore=DL3006
 FROM ${MOVEIT_STUDIO_BASE_IMAGE} as base
-
-# hadolint ignore=DL3002
-USER root
-
-# Copy source code from the workspace's ROS 2 packages to a workspace inside the container
-ARG USER_OVERLAY_WS=/opt/user_overlay_ws
-ENV USER_OVERLAY_WS $USER_OVERLAY_WS
-RUN mkdir -p ${USER_OVERLAY_WS}/src ${USER_OVERLAY_WS}/build ${USER_OVERLAY_WS}/install ${USER_OVERLAY_WS}/log
-COPY ./src ${USER_OVERLAY_WS}/src
 
 # Create a non-root user
 ARG USERNAME
 ARG USER_UID
 ARG USER_GID
 
+# Copy source code from the workspace's ROS 2 packages to a workspace inside the container
+ARG USER_WS=/home/${USERNAME}/user_ws
+ENV USER_WS=${USER_WS}
+RUN mkdir -p ${USER_WS}/src ${USER_WS}/build ${USER_WS}/install ${USER_WS}/log
+COPY ./src ${USER_WS}/src
+
 # Also mkdir with user permission directories which will be mounted later to avoid docker creating them as root
-WORKDIR $USER_OVERLAY_WS
+WORKDIR $USER_WS
 # hadolint ignore=DL3008
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -43,12 +40,14 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get install -q -y --no-install-recommends sudo && \
     echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
     chmod 0440 /etc/sudoers.d/${USERNAME} && \
+    cp -r /etc/skel/. /home/${USERNAME} && \
     mkdir -p \
       /home/${USERNAME}/.ccache \
       /home/${USERNAME}/.config \
       /home/${USERNAME}/.ignition \
-      /home/${USERNAME}/.ros/log && \
-    chown -R $USER_UID:$USER_GID /home/${USERNAME} ${USER_OVERLAY_WS} /opt/overlay_ws/
+      /home/${USERNAME}/.colcon \
+      /home/${USERNAME}/.ros && \
+    chown -R $USER_UID:$USER_GID /home/${USERNAME} /opt/overlay_ws/
 
 # Install additional dependencies
 # You can also add any necessary apt-get install, pip install, etc. commands at this point.
@@ -62,40 +61,27 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
       --from-paths src \
       --ignore-src
 
-# Remove .bashrc from parent image and create a new one
+# Set up colcon defaults for the new user
 USER ${USERNAME}
-RUN rm /home/${USERNAME}/.bashrc && touch /home/${USERNAME}/.bashrc
+RUN colcon mixin add default \
+    https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml && \
+    colcon mixin update && \
+    colcon metadata add default \
+    https://raw.githubusercontent.com/colcon/colcon-metadata-repository/master/index.yaml && \
+    colcon metadata update
+COPY colcon-defaults.yaml /home/${USERNAME}/.colcon/defaults.yaml
 
-#########################################
-# Target for compiled, deployable image #
-#########################################
-FROM base as user-overlay
-
-ARG USERNAME
-USER ${USERNAME}
-
-# Compile the workspace
-# hadolint ignore=SC1091
-RUN --mount=type=cache,target=/home/studio-user/.ccache \
-    . /opt/overlay_ws/install/setup.sh && \
-    colcon build
-
-# Add the custom entrypoint
-COPY ./entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-RUN echo "source /entrypoint.sh && set +e" >> ~/.bashrc
-CMD ["/usr/bin/bash"]
+# hadolint ignore=DL3002
+USER root
 
 ###################################################################
 # Target for the developer build which does not compile any code. #
 ###################################################################
 FROM base as user-overlay-dev
 
-USER root
-
-# The location of the user's workspace inside the container
-ARG USER_OVERLAY_WS=/opt/user_overlay_ws
-ENV USER_OVERLAY_WS $USER_OVERLAY_WS
+ARG USERNAME
+ARG USER_WS=/home/${USERNAME}/user_ws
+ENV USER_WS=${USER_WS}
 
 # Install any additional packages for development work
 # hadolint ignore=DL3008
@@ -105,13 +91,26 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get install -y --no-install-recommends \
         less \
         gdb \
-        nano \
-        tmux
+        nano
 
-# Add the dev entrypoint
+# Set up the user's .bashrc file and shell.
+CMD ["/usr/bin/bash"]
+
+#########################################
+# Target for compiled, deployable image #
+#########################################
+FROM base as user-overlay
+
 ARG USERNAME
-USER ${USERNAME}
-COPY ./entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-RUN echo "source /entrypoint.sh && set +e" >> ~/.bashrc
+ARG USER_WS=/home/${USERNAME}/user_ws
+ENV USER_WS=${USER_WS}
+
+# Compile the workspace
+WORKDIR $USER_WS
+# hadolint ignore=SC1091
+RUN --mount=type=cache,target=/home/${USERNAME}/.ccache \
+    . /opt/overlay_ws/install/setup.sh && \
+    colcon build
+
+# Set up the user's .bashrc file and shell.
 CMD ["/usr/bin/bash"]
