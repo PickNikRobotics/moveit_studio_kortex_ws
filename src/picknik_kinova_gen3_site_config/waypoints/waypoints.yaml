@@ -1,5 +1,7 @@
 - name: Home
   favorite: true
+  joint_group_names:
+    - manipulator
   joint_state:
     header:
       frame_id: world
@@ -12,6 +14,8 @@
     effort: []
 - name: Place
   favorite: true
+  joint_group_names:
+    - manipulator
   joint_state:
     header:
       frame_id: world
@@ -24,6 +28,8 @@
     effort: []
 - name: Table
   favorite: true
+  joint_group_names:
+    - manipulator
   joint_state:
     header:
       frame_id: world
@@ -36,6 +42,8 @@
     effort: []
 - name: Retract
   favorite: true
+  joint_group_names:
+    - manipulator
   joint_state:
     header:
       frame_id: world
@@ -48,6 +56,8 @@
     effort: []
 - name: Pick
   favorite: true
+  joint_group_names:
+    - manipulator
   joint_state:
     header:
       frame_id: world
