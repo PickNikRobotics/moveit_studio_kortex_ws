@@ -166,9 +166,6 @@ objectives:
     # Add additional plugin loaders as needed.
     core:
       - "moveit_studio::behaviors::CoreBehaviorsLoader"
-      - "moveit_studio::behaviors::MTCCoreBehaviorsLoader"
-      - "moveit_studio::behaviors::ServoBehaviorsLoader"
-      - "moveit_studio::behaviors::VisionBehaviorsLoader"
   objective_library_paths:
     core:
       package_name: "kinova_gen3_base_config"
