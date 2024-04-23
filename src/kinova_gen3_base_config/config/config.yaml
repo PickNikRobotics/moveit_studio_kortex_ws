@@ -147,12 +147,10 @@ ros2_control:
   controllers_active_at_startup:
     - "robotiq_gripper_controller"
     - "joint_state_broadcaster"
-    - "joint_trajectory_controller"
+    - "servo_controller"
     - "fault_controller"
-  # TODO: Need the ability to enable empty list of inactive controllers at startup
-  # Load but do not start these controllers so they can be activated later if needed.
   controllers_inactive_at_startup:
-    - "servo_controller" # this controller is currently not able to run at the same time as joint_trajectory_controller and is currently disabled in picknik_kinova_gen3.ros2_control.yaml
+    - "joint_trajectory_controller"
 
 # Octomap manager configuration parameters
 octomap_manager:
