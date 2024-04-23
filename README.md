@@ -17,11 +17,9 @@ Packages in `src/` will be compiled and sourced by MoveIt Pro at first launch.
 
 ## Kinova Configuration Packages
 
-This workspace contains several MoveIt Pro configuration packages for Kinova arms that inherit from each other for different applications.
+This workspace contains a base MoveIt Pro configuration package for Kinova arms that other Kinova configuration packages may inherit from.
 
 ```mermaid
 graph TB
-Base[picknik_kinova_gen3_base_config] --> Site[picknik_kinova_gen3_site_config]
-Base --> Gazebo[picknik_kinova_gen3_gz_config]
-Site --> Picknik[Other PickNik configs]
+Base[kinova_gen3_base_config] --> Other[Other Kinova configs]
 ```
