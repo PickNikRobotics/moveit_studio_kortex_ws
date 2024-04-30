@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>picknik_panda_mujoco_config</name>
+  <name>kinova_gen3_mujoco_config</name>
   <version>5.0.0</version>
 
   <description>Configuration package for a UR arm that can be simulated with mock hardware</description>
@@ -11,7 +11,6 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>picknik_ur_base_config</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
