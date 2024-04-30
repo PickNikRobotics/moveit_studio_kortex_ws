@@ -12,3 +12,6 @@
 [submodule "src/external_dependencies/serial"]
 	path = src/external_dependencies/serial
 	url = git@github.com:PickNikRobotics/serial.git
+[submodule "src/external_dependencies/ros2_mujoco"]
+	path = src/external_dependencies/ros2_mujoco
+	url = git@github.com:PickNikRobotics/ros2_mujoco.git
