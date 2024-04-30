@@ -1,5 +1,5 @@
-<mujoco model="panda scene">
-  <include file="panda.xml"/>
+<mujoco model="kinova scene">
+  <include file="gen3_7dof_mujoco.xml"/>
 
   <statistic center="0.3 0 0.4" extent="1"/>
 
