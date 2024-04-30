@@ -146,7 +146,7 @@ moveit_params:
     path: "config/moveit/joint_limits.yaml"
   servo_joint_limits:
     package: "kinova_gen3_mujoco_config"
-    path: "config/moveit/hard_joint_limits.yaml"
+    path: "config/moveit/servo_joint_limits.yaml"
   pilz_cartesian_limits:
     package: "kinova_gen3_mujoco_config"
     path: "config/moveit/pilz_cartesian_limits.yaml"
@@ -181,15 +181,14 @@ ros2_control:
   # for running the application.
   # [Optional, default=[]]
   controllers_active_at_startup:
-    - "robotiq_gripper_controller"
+    # - "robotiq_gripper_controller"
     - "joint_state_broadcaster"
-    - "joint_trajectory_controller"
-    - "fault_controller"
+    # - "fault_controller"
     - "servo_controller"
   # Load but do not start these controllers so they can be activated later if needed.
   controllers_inactive_at_startup:
+    - "joint_trajectory_controller"
     - "twist_controller" # this controller is currently not able to run at the same time as joint_trajectory_controller and is currently disabled in picknik_kinova_gen3.ros2_control.yaml
-    - "streaming_controller"
   # Any controllers here will not be spawned by MoveIt Pro.
   # [Optional, default=[]]
   controllers_not_managed: []

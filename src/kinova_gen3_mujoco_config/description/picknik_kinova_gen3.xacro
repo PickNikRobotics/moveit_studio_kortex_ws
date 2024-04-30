@@ -20,13 +20,16 @@
     <xacro:arg name="sim_gazebo" default="false" />
     <xacro:arg name="sim_ignition" default="false" />
     <xacro:arg name="sim_isaac" default="false" />
+    <xacro:arg name="isaac_joint_commands" default="/isaac_joint_commands" />
+    <xacro:arg name="isaac_joint_states" default="/isaac_joint_states" />
     <xacro:arg name="use_external_cable" default="false" />
     <xacro:arg name="gripper_max_velocity" default="100.0" />
     <xacro:arg name="gripper_max_force" default="100.0" />
     <xacro:arg name="wrist_realsense" default="true" />
 
     <!-- Import macros for main hardware components -->
-    <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
+    <xacro:include filename="$(find kortex_description)/arms/$(arg arm)/$(arg dof)dof/urdf/$(arg arm)_macro.xacro" />
+    <xacro:include filename="$(find kortex_description)/grippers/$(arg gripper)/urdf/$(arg gripper)_macro.xacro" />
     <xacro:include filename="$(find picknik_accessories)/descriptions/sensors/realsense_d415.urdf.xacro"/>
 
     <!-- Import environment macros -->
@@ -37,16 +40,11 @@
 
     <!-- initial position for simulations (Mock Hardware, Gazebo, Ignition) -->
     <xacro:arg name="initial_positions_file" default="$(find kinova_gen3_base_config)/config/initial_positions.yaml"/>
-    <!-- convert to property to use substitution in function -->
     <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
 
-    <!-- Load the robot -->
-    <xacro:load_robot
+    <!-- Load the arm -->
+    <xacro:load_arm
       parent="world"
-      prefix="$(arg prefix)"
-      arm="$(arg arm)"
-      gripper="$(arg gripper)"
-      gripper_joint_name="$(arg gripper_joint_name)"
       dof="$(arg dof)"
       vision="$(arg vision)"
       robot_ip="$(arg robot_ip)"
@@ -56,18 +54,36 @@
       port_realtime="$(arg port_realtime)"
       session_inactivity_timeout_ms="$(arg session_inactivity_timeout_ms)"
       connection_inactivity_timeout_ms="$(arg connection_inactivity_timeout_ms)"
+      prefix="$(arg prefix)"
       use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
       use_fake_hardware="$(arg use_fake_hardware)"
       fake_sensor_commands="$(arg fake_sensor_commands)"
       sim_gazebo="$(arg sim_gazebo)"
       sim_ignition="$(arg sim_ignition)"
       sim_isaac="$(arg sim_isaac)"
-      use_external_cable="$(arg use_external_cable)"
+      isaac_joint_commands="$(arg isaac_joint_commands)"
+      isaac_joint_states="$(arg isaac_joint_states)"
+      gripper_joint_name="$(arg gripper_joint_name)"
       gripper_max_velocity="$(arg gripper_max_velocity)"
       gripper_max_force="$(arg gripper_max_force)"
-      initial_positions="${xacro.load_yaml(initial_positions_file)}" >
-      <origin xyz="0 0 0.0" rpy="0 0 0" />
-    </xacro:load_robot>
+      use_external_cable="$(arg use_external_cable)"
+      initial_positions="${xacro.load_yaml(initial_positions_file)}">
+      <origin xyz="0 0 0.02" rpy="0 0 0" />
+    </xacro:load_arm>
+
+    <!-- change the parent when adding in links in between the gripper and the arm (like a force torque sensor) -->
+    <!-- <xacro:load_gripper -->
+    <!--   parent="${gripper_parent_link}" -->
+    <!--   prefix="$(arg prefix)" -->
+    <!--   use_fake_hardware="$(arg use_fake_hardware)" -->
+    <!--   fake_sensor_commands="$(arg fake_sensor_commands)" -->
+    <!--   sim_ignition="$(arg sim_ignition)" -->
+    <!--   sim_isaac="$(arg sim_isaac)" -->
+    <!--   isaac_joint_commands="$(arg isaac_joint_commands)" -->
+    <!--   isaac_joint_states="$(arg isaac_joint_states)" -->
+    <!--   use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)" -->
+    <!--   com_port="$(arg gripper_com_port)"> -->
+    <!-- </xacro:load_gripper> -->
 
     <!-- Environment -->
     <xacro:cube link_name="table" connected_to="world" length="2.00" width="2.00" height="0.25" alpha="0.3">
@@ -75,69 +91,69 @@
     </xacro:cube>
 
     <!-- wrist realsense -->
-    <xacro:if value="$(arg wrist_realsense)">
-      <link name="wrist_camera_link"/>
-
-      <joint name="wrist_camera_joint" type="fixed">
-        <parent link="$(arg prefix)bracelet_link"/>
-        <child link = "wrist_camera_link"/>
-        <origin xyz="0 -0.06841 -0.05044" rpy="0 ${3.14 / 180.0 * 100} -1.5708"/>
-      </joint>
-
-      <xacro:realsense_d415 parent="wrist_camera_link" name="wrist_mounted_camera">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </xacro:realsense_d415>
+    <!-- <xacro:if value="$(arg wrist_realsense)"> -->
+    <!--   <link name="wrist_camera_link"/> -->
+    <!---->
+    <!--   <joint name="wrist_camera_joint" type="fixed"> -->
+    <!--     <parent link="$(arg prefix)bracelet_link"/> -->
+    <!--     <child link = "wrist_camera_link"/> -->
+    <!--     <origin xyz="0 -0.06841 -0.05044" rpy="0 ${3.14 / 180.0 * 100} -1.5708"/> -->
+    <!--   </joint> -->
+    <!---->
+    <!--   <xacro:realsense_d415 parent="wrist_camera_link" name="wrist_mounted_camera"> -->
+    <!--     <origin xyz="0 0 0" rpy="0 0 0"/> -->
+    <!--   </xacro:realsense_d415> -->
 
       <!-- Bracket -->
-      <link name="wrist_camera_link_visual">
-        <inertial>
-          <origin xyz="0.000281 0.011402 -0.029798" rpy="0 0 0" />
-          <mass value="0.5" />
-          <inertia ixx="0.000587" ixy="3E-06" ixz="3E-06" iyy="0.000369" iyz="-0.000118" izz="0.000609" />
-        </inertial>
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" />
-          </geometry>
-        </visual>
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" />
-          </geometry>
-        </collision>
-      </link>
-      <joint name="$(arg prefix)wrist_camera_link_visual_joint" type="fixed">
-        <origin xyz="0 0 0.0" rpy="0 0 0" />
-        <parent link="$(arg prefix)bracelet_link" />
-        <child link="$(arg prefix)wrist_camera_link_visual" />
-      </joint>
-    </xacro:if>
+    <!--   <link name="wrist_camera_link_visual"> -->
+    <!--     <inertial> -->
+    <!--       <origin xyz="0.000281 0.011402 -0.029798" rpy="0 0 0" /> -->
+    <!--       <mass value="0.5" /> -->
+    <!--       <inertia ixx="0.000587" ixy="3E-06" ixz="3E-06" iyy="0.000369" iyz="-0.000118" izz="0.000609" /> -->
+    <!--     </inertial> -->
+    <!--     <visual> -->
+    <!--       <origin xyz="0 0 0" rpy="0 0 0" /> -->
+    <!--       <geometry> -->
+    <!--         <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" /> -->
+    <!--       </geometry> -->
+    <!--     </visual> -->
+    <!--     <collision> -->
+    <!--       <origin xyz="0 0 0" rpy="0 0 0" /> -->
+    <!--       <geometry> -->
+    <!--         <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" /> -->
+    <!--       </geometry> -->
+    <!--     </collision> -->
+    <!--   </link> -->
+    <!--   <joint name="$(arg prefix)wrist_camera_link_visual_joint" type="fixed"> -->
+    <!--     <origin xyz="0 0 0.0" rpy="0 0 0" /> -->
+    <!--     <parent link="$(arg prefix)bracelet_link" /> -->
+    <!--     <child link="$(arg prefix)wrist_camera_link_visual" /> -->
+    <!--   </joint> -->
+    <!-- </xacro:if> -->
 
     <!-- Visual aids for grasping -->
-    <link name="finger_tip_closed_point">
-      <visual>
-        <geometry>
-          <sphere radius="0.007"/>
-        </geometry>
-        <material name="">
-              <color rgba="0 1.0 0 0.7"/>
-        </material>
-      </visual>
-    </link>
-
-    <joint name="finger_tip_closed_point_joint" type="fixed">
-      <parent link="robotiq_85_base_link"/>
-      <child link = "finger_tip_closed_point"/>
-      <origin xyz="0 0 0.16" rpy="0 0 0"/>
-    </joint>
-
+    <!-- <link name="finger_tip_closed_point"> -->
+    <!--   <visual> -->
+    <!--     <geometry> -->
+    <!--       <sphere radius="0.007"/> -->
+    <!--     </geometry> -->
+    <!--     <material name=""> -->
+    <!--           <color rgba="0 1.0 0 0.7"/> -->
+    <!--     </material> -->
+    <!--   </visual> -->
+    <!-- </link> -->
+    <!---->
+    <!-- <joint name="finger_tip_closed_point_joint" type="fixed"> -->
+    <!--   <parent link="robotiq_85_base_link"/> -->
+    <!--   <child link = "finger_tip_closed_point"/> -->
+    <!--   <origin xyz="0 0 0.16" rpy="0 0 0"/> -->
+    <!-- </joint> -->
+    <!---->
     <!-- This link aligns the axes of the grasp frame to our required convention for motion planning tasks. -->
     <link name="grasp_link"/>
 
     <joint name="grasp_link_joint" type="fixed">
-      <parent link="robotiq_85_base_link"/>
+      <parent link="end_effector_link"/>
       <child link = "grasp_link"/>
       <origin xyz="0 0 0.15" rpy="0 0 0"/>
     </joint>
@@ -204,54 +220,54 @@
             <state_interface name="velocity"/>
             <state_interface name="effort"/>
         </joint>
-        <joint name="robotiq_85_left_knuckle_joint">
-            <command_interface name="position"/>
-            <command_interface name="velocity"/>
-            <state_interface name="position">
-              <param name="initial_value">0.7929</param>
-            </state_interface>
-            <state_interface name="velocity"/>
-            <state_interface name="effort"/>
-        </joint>
-        <joint name="robotiq_85_right_knuckle_joint">
-            <param name="mimic">robotiq_85_left_knuckle_joint</param>
-            <param name="multiplier">-1</param>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-            <state_interface name="effort"/>
-        </joint>
-        <joint name="robotiq_85_left_inner_knuckle_joint">
-          <param name="mimic">robotiq_85_left_knuckle_joint</param>
-          <param name="multiplier">1</param>
-          <command_interface name="position"/>
-          <state_interface name="position"/>
-          <state_interface name="velocity"/>
-        </joint>
-        <joint name="robotiq_85_right_inner_knuckle_joint">
-          <param name="mimic">robotiq_85_left_knuckle_joint</param>
-          <param name="multiplier">-1</param>
-          <command_interface name="position"/>
-          <state_interface name="position"/>
-          <state_interface name="velocity"/>
-        </joint>
-        <joint name="robotiq_85_left_finger_tip_joint">
-          <param name="mimic">robotiq_85_left_knuckle_joint</param>
-          <param name="multiplier">-1</param>
-          <command_interface name="position"/>
-          <state_interface name="position"/>
-          <state_interface name="velocity"/>
-        </joint>
-        <joint name="robotiq_85_right_finger_tip_joint">
-          <param name="mimic">robotiq_85_left_knuckle_joint</param>
-          <param name="multiplier">1</param>
-          <command_interface name="position"/>
-          <state_interface name="position"/>
-          <state_interface name="velocity"/>
-        </joint>
+        <!-- <joint name="robotiq_85_left_knuckle_joint"> -->
+        <!--     <command_interface name="position"/> -->
+        <!--     <command_interface name="velocity"/> -->
+        <!--     <state_interface name="position"> -->
+        <!--       <param name="initial_value">0.7929</param> -->
+        <!--     </state_interface> -->
+        <!--     <state_interface name="velocity"/> -->
+        <!--     <state_interface name="effort"/> -->
+        <!-- </joint> -->
+        <!-- <joint name="robotiq_85_right_knuckle_joint"> -->
+        <!--     <param name="mimic">robotiq_85_left_knuckle_joint</param> -->
+        <!--     <param name="multiplier">-1</param> -->
+        <!--     <state_interface name="position"/> -->
+        <!--     <state_interface name="velocity"/> -->
+        <!--     <state_interface name="effort"/> -->
+        <!-- </joint> -->
+        <!-- <joint name="robotiq_85_left_inner_knuckle_joint"> -->
+        <!--   <param name="mimic">robotiq_85_left_knuckle_joint</param> -->
+        <!--   <param name="multiplier">1</param> -->
+        <!--   <command_interface name="position"/> -->
+        <!--   <state_interface name="position"/> -->
+        <!--   <state_interface name="velocity"/> -->
+        <!-- </joint> -->
+        <!-- <joint name="robotiq_85_right_inner_knuckle_joint"> -->
+        <!--   <param name="mimic">robotiq_85_left_knuckle_joint</param> -->
+        <!--   <param name="multiplier">-1</param> -->
+        <!--   <command_interface name="position"/> -->
+        <!--   <state_interface name="position"/> -->
+        <!--   <state_interface name="velocity"/> -->
+        <!-- </joint> -->
+        <!-- <joint name="robotiq_85_left_finger_tip_joint"> -->
+        <!--   <param name="mimic">robotiq_85_left_knuckle_joint</param> -->
+        <!--   <param name="multiplier">-1</param> -->
+        <!--   <command_interface name="position"/> -->
+        <!--   <state_interface name="position"/> -->
+        <!--   <state_interface name="velocity"/> -->
+        <!-- </joint> -->
+        <!-- <joint name="robotiq_85_right_finger_tip_joint"> -->
+        <!--   <param name="mimic">robotiq_85_left_knuckle_joint</param> -->
+        <!--   <param name="multiplier">1</param> -->
+        <!--   <command_interface name="position"/> -->
+        <!--   <state_interface name="position"/> -->
+        <!--   <state_interface name="velocity"/> -->
+        <!-- </joint> -->
         <hardware>
             <plugin>picknik_mujoco_ros/MujocoSystem</plugin>
             <param name="mujoco_model">description/mujoco/scene.xml</param>
-            <param name="mujoco_model_package">picknik_panda_mujoco_config</param>
+            <param name="mujoco_model_package">kinova_gen3_mujoco_config</param>
             <param name="publish_rate">10</param>
         </hardware>
     </ros2_control>
