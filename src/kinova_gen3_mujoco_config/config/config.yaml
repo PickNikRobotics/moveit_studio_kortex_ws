@@ -134,7 +134,7 @@ moveit_params:
     path: "config/moveit/trac_ik_kinematics_distance.yaml"
   servo:
     package: "kinova_gen3_mujoco_config"
-    path: "config/moveit/ur_servo.yaml"
+    path: "config/moveit/kinova_gen3_servo.yaml"
   sensors_3d:
     package: "kinova_gen3_mujoco_config"
     path: "config/moveit/sensors_3d.yaml"
@@ -175,19 +175,21 @@ ui_params:
 ros2_control:
   config:
     package: "kinova_gen3_mujoco_config"
-    path: "config/control/picknik_ur.ros2_control.yaml"
+    path: "config/control/picknik_kinova_gen3.ros2_control.yaml"
   # MoveIt Pro will load and activate these controllers at start up to ensure they are available.
   # If not specified, it is up to the user to ensure the appropriate controllers are active and available
   # for running the application.
   # [Optional, default=[]]
   controllers_active_at_startup:
-    - "force_torque_sensor_broadcaster"
+    - "robotiq_gripper_controller"
     - "joint_state_broadcaster"
+    - "joint_trajectory_controller"
+    - "fault_controller"
     - "servo_controller"
   # Load but do not start these controllers so they can be activated later if needed.
-  # [Optional, default=[]]
   controllers_inactive_at_startup:
-    - "joint_trajectory_controller"
+    - "twist_controller" # this controller is currently not able to run at the same time as joint_trajectory_controller and is currently disabled in picknik_kinova_gen3.ros2_control.yaml
+    - "streaming_controller"
   # Any controllers here will not be spawned by MoveIt Pro.
   # [Optional, default=[]]
   controllers_not_managed: []

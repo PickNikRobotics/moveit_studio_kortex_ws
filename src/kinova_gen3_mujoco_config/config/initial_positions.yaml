@@ -1,9 +1,7 @@
-panda_joint1: 0.0
-panda_joint2: 0.0
-panda_joint3: 0.0
-panda_joint4: 0.0
-panda_joint5: 0.0
-panda_joint6: 180.0
-panda_joint7: 0.0
-panda_finger_joint1: 0.0
-panda_finger_joint2: 0.0
+joint_1: 0.0
+joint_2: 0.0
+joint_3: -3.14
+joint_4: -2.51
+joint_5: 0.0
+joint_6: 0.96
+joint_7: 1.57
