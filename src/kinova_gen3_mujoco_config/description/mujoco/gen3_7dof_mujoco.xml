@@ -253,12 +253,12 @@
     both joints. Since both joints share the same sign, we split the force between both equally by
     setting coef=0.5
   -->
-  <tendon>
-    <fixed name="split">
-      <joint joint="robotiq_85_right_knuckle_joint" coef="0.5"/>
-      <joint joint="robotiq_85_left_knuckle_joint" coef="0.5"/>
-    </fixed>
-  </tendon>
+  <!-- <tendon> -->
+  <!--   <fixed name="split"> -->
+  <!--     <joint joint="robotiq_85_right_knuckle_joint" coef="0.5"/> -->
+  <!--     <joint joint="robotiq_85_left_knuckle_joint" coef="0.5"/> -->
+  <!--   </fixed> -->
+  <!-- </tendon> -->
   
   <equality>
     <connect anchor="0 0 0" body1="robotiq_85_right_finger_tip_link" body2="robotiq_85_right_finger_link" solimp="0.95 0.99 0.001" solref="0.005 1"/>
@@ -276,8 +276,10 @@
     hence scale = 0.8 * 100 / 255
   -->
   <actuator>
-    <general class="2f85" name="fingers_actuator" tendon="split" forcerange="-5 5" ctrlrange="0 255"
-      gainprm="0.3137255 0 0" biasprm="0 -100 -10"/>
+    <!-- <general class="2f85" name="fingers_actuator" tendon="split" forcerange="-5 5" ctrlrange="0 0.8" -->
+    <general class="2f85" name="fingers_actuator" joint="robotiq_85_left_knuckle_joint" forcerange="-5 5" ctrlrange="0 0.8"
+      gainprm="100 0 0" biasprm="0 -100 -10"/>
+      <!-- gainprm="0.3137255 0 0" biasprm="0 -100 -10"/> -->
   </actuator>
 
 <!--  <sensor>-->
