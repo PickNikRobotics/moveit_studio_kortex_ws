@@ -14,12 +14,6 @@
         <joint axis="0 1 0" type="slide" range="0 0.04"/>
       </default>
 
-      <default class="panda/visual">
-        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
-      </default>
-      <default class="panda/collision">
-        <geom type="mesh" group="3"/>
-      </default>
       <site size="0.001" rgba="0.5 0.5 0.5 0.3" group="4"/>
     </default>
   </default>
