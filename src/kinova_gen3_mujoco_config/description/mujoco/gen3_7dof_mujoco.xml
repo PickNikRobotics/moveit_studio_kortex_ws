@@ -228,13 +228,13 @@
   </worldbody>
 
   <actuator>
-    <general class="kinova" name="joint_1_motor" joint="joint_1" gainprm="8000" biasprm="0 -8000 -850"/>
-    <general class="kinova" name="joint_2_motor" joint="joint_2" gainprm="8000" biasprm="0 -8000 -850" ctrlrange="-1.7628 1.7628"/>
-    <general class="kinova" name="joint_3_motor" joint="joint_3" gainprm="4000" biasprm="0 -4000 -550"/>
-    <general class="kinova" name="joint_4_motor" joint="joint_4" gainprm="4000" biasprm="0 -4000 -550"/>
-    <general class="kinova" name="joint_5_motor" joint="joint_5" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
-    <general class="kinova" name="joint_6_motor" joint="joint_6" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
-    <general class="kinova" name="joint_7_motor" joint="joint_7" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
+    <general class="kinova" name="joint_1" joint="joint_1" gainprm="8000" biasprm="0 -8000 -850"/>
+    <general class="kinova" name="joint_2" joint="joint_2" gainprm="8000" biasprm="0 -8000 -850" ctrlrange="-1.7628 1.7628"/>
+    <general class="kinova" name="joint_3" joint="joint_3" gainprm="4000" biasprm="0 -4000 -550"/>
+    <general class="kinova" name="joint_4" joint="joint_4" gainprm="4000" biasprm="0 -4000 -550"/>
+    <general class="kinova" name="joint_5" joint="joint_5" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
+    <general class="kinova" name="joint_6" joint="joint_6" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
+    <general class="kinova" name="joint_7" joint="joint_7" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
   </actuator>
   
   <!-- Robotiq gripper contact -->
@@ -263,7 +263,7 @@
   <equality>
     <connect anchor="0 0 0" body1="robotiq_85_right_finger_tip_link" body2="robotiq_85_right_finger_link" solimp="0.95 0.99 0.001" solref="0.005 1"/>
     <connect anchor="0 0 0" body1="robotiq_85_left_finger_tip_link" body2="robotiq_85_left_finger_link" solimp="0.95 0.99 0.001" solref="0.005 1"/>
-    <joint joint1="robotiq_85_right_knuckle_joint" joint2="robotiq_85_left_knuckle_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001"
+    <joint joint1="robotiq_85_left_knuckle_joint" joint2="robotiq_85_right_knuckle_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001"
       solref="0.005 1"/>
   </equality>
   
@@ -277,7 +277,7 @@
   -->
   <actuator>
     <!-- <general class="2f85" name="fingers_actuator" tendon="split" forcerange="-5 5" ctrlrange="0 0.8" -->
-    <general class="2f85" name="fingers_actuator" joint="robotiq_85_left_knuckle_joint" forcerange="-5 5" ctrlrange="0 0.8"
+    <general class="2f85" name="robotiq_85_left_knuckle_joint" joint="robotiq_85_left_knuckle_joint" forcerange="-5 5" ctrlrange="0 0.8"
       gainprm="100 0 0" biasprm="0 -100 -10"/>
       <!-- gainprm="0.3137255 0 0" biasprm="0 -100 -10"/> -->
   </actuator>
