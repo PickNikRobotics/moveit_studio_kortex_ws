@@ -273,7 +273,7 @@
     hence scale = 0.8 * 100 / 255
   -->
   <actuator>
-    <general class="2f85" name="fingers_actuator" tendon="split" forcerange="-5 5" ctrlrange="0 0.8"
+    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 0.8"
       gainprm="100" biasprm="0 -100 -10"/>
   </actuator>
 
