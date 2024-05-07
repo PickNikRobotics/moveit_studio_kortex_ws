@@ -4,15 +4,8 @@
     <xacro:arg name="arm" default="gen3" />
     <xacro:arg name="dof" default="7" />
     <xacro:arg name="vision" default="false" />
-    <xacro:arg name="robot_ip" default="yyy.yyy.yyy.yyy" />
     <xacro:arg name="gripper" default="" />
     <xacro:arg name="gripper_joint_name" default="robotiq_85_left_knuckle_joint" />
-    <xacro:arg name="username" default="admin" />
-    <xacro:arg name="password" default="admin" />
-    <xacro:arg name="port" default="10000" />
-    <xacro:arg name="port_realtime" default="10001" />
-    <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
-    <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
     <xacro:arg name="use_internal_bus_gripper_comm" default="true" />
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="use_fake_hardware" default="false" />
