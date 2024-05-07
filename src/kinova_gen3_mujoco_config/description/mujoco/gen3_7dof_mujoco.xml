@@ -225,13 +225,13 @@
   </worldbody>
 
   <actuator>
-    <general class="kinova" name="joint_1" joint="joint_1" gainprm="8000" biasprm="0 -8000 -850"/>
-    <general class="kinova" name="joint_2" joint="joint_2" gainprm="8000" biasprm="0 -8000 -850" ctrlrange="-1.7628 1.7628"/>
-    <general class="kinova" name="joint_3" joint="joint_3" gainprm="4000" biasprm="0 -4000 -550"/>
-    <general class="kinova" name="joint_4" joint="joint_4" gainprm="4000" biasprm="0 -4000 -550"/>
-    <general class="kinova" name="joint_5" joint="joint_5" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
-    <general class="kinova" name="joint_6" joint="joint_6" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
-    <general class="kinova" name="joint_7" joint="joint_7" gainprm="2000" biasprm="0 -2000 -200" forcerange="-12 12"/>
+    <general class="kinova" name="joint_1" joint="joint_1" gainprm="8000" biasprm="0 -12000 -4000"/>
+    <general class="kinova" name="joint_2" joint="joint_2" gainprm="8000" biasprm="0 -12000 -4000" ctrlrange="-1.7628 1.7628"/>
+    <general class="kinova" name="joint_3" joint="joint_3" gainprm="4000" biasprm="0 -8000 -3000"/>
+    <general class="kinova" name="joint_4" joint="joint_4" gainprm="4000" biasprm="0 -8000 -3000"/>
+    <general class="kinova" name="joint_5" joint="joint_5" gainprm="2000" biasprm="0 -4000 -1500" forcerange="-12 12"/>
+    <general class="kinova" name="joint_6" joint="joint_6" gainprm="2000" biasprm="0 -4000 -1500" forcerange="-12 12"/>
+    <general class="kinova" name="joint_7" joint="joint_7" gainprm="2000" biasprm="0 -4000 -1500" forcerange="-12 12"/>
   </actuator>
   
   <!-- Robotiq gripper contact -->
