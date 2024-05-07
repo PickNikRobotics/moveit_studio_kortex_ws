@@ -72,25 +72,6 @@ hardware:
       - external_camera: "true"
       - wrist_realsense: "true"
       - use_internal_bus_gripper_comm: "false"
-      # - headless_mode: "true"
-      # - joint_limits_parameters_file:
-      #     package: "kinova_gen3_mujoco_config"
-      #     path: "config/moveit/joint_limits.yaml"
-      # The following files are loaded based on the ur_description package layout.
-      # To use parameters from a different package, place them in a config/ROBOT_NAME/ directory,
-      # replace ROBOT_NAME with the value used for hardware.type in this file.
-      # - kinematics_parameters_file:
-      #     # Load default_kinematics.yaml from ur_description/config/<ur_type>
-      #     package: "ur_description"
-      #     path: "config/%>> hardware.type <<%/default_kinematics.yaml"
-      # - physical_parameters_file:
-      #     # Load physical_parameters.yaml from ur_description/config/<ur_type>
-      #     package: "ur_description"
-      #     path: "config/%>> hardware.type <<%/physical_parameters.yaml"
-      # - visual_parameters_file:
-      #     # Load visual_parameters.yaml from ur_description/config/<ur_type>
-      #     package: "ur_description"
-      #     path: "config/%>> hardware.type <<%/visual_parameters.yaml"
 
 # Sets ROS global params for launch.
 # [Optional]
