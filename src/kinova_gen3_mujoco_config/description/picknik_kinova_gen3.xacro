@@ -483,7 +483,7 @@
       <axis xyz="0 1 0"/>
       <origin rpy="0 0 0" xyz="-0.03060114 0.0 0.05490452"/>
       <limit effort="50" lower="-0.8" upper="0.0" velocity="0.5"/>
-      <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/>
+      <!-- <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/> -->
     </joint>
     <joint name="robotiq_85_left_finger_joint" type="fixed">
       <parent link="robotiq_85_left_knuckle_link"/>
@@ -500,28 +500,28 @@
       <child link="robotiq_85_left_inner_knuckle_link"/>
       <axis xyz="0 -1 0"/>
       <origin rpy="0 0 0" xyz="0.0127 0.0 0.06142"/>
-      <mimic joint="robotiq_85_left_knuckle_joint"/>
+      <!-- <mimic joint="robotiq_85_left_knuckle_joint"/> -->
     </joint>
     <joint name="robotiq_85_right_inner_knuckle_joint" type="continuous">
       <parent link="robotiq_85_base_link"/>
       <child link="robotiq_85_right_inner_knuckle_link"/>
       <axis xyz="0 1 0"/>
       <origin rpy="0 0 0" xyz="-0.0127 0.0 0.06142"/>
-      <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/>
+      <!-- <mimic joint="robotiq_85_left_knuckle_joint" multiplier="1"/> -->
     </joint>
     <joint name="robotiq_85_left_finger_tip_joint" type="continuous">
       <parent link="robotiq_85_left_finger_link"/>
       <child link="robotiq_85_left_finger_tip_link"/>
       <axis xyz="0 -1 0"/>
       <origin rpy="0 0 0" xyz="0.00563134 0.0 0.04718515"/>
-      <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/>
+      <!-- <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/> -->
     </joint>
     <joint name="robotiq_85_right_finger_tip_joint" type="continuous">
       <parent link="robotiq_85_right_finger_link"/>
       <child link="robotiq_85_right_finger_tip_link"/>
       <axis xyz="0 1 0"/>
       <origin rpy="0 0 0" xyz="-0.00563134 0.0 0.04718515"/>
-      <mimic joint="robotiq_85_left_knuckle_joint"/>
+      <!-- <mimic joint="robotiq_85_left_knuckle_joint" multiplier="-1"/> -->
     </joint>
 
     <!-- Environment -->
@@ -695,32 +695,22 @@
         <state_interface name="velocity"/>
       </joint>
       <joint name="robotiq_85_right_knuckle_joint">
-        <param name="mimic">robotiq_85_left_knuckle_joint</param>
-        <param name="multiplier">-1</param>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
       <joint name="robotiq_85_left_inner_knuckle_joint">
-        <param name="mimic">robotiq_85_left_knuckle_joint</param>
-        <param name="multiplier">1</param>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
       <joint name="robotiq_85_right_inner_knuckle_joint">
-        <param name="mimic">robotiq_85_left_knuckle_joint</param>
-        <param name="multiplier">-1</param>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
       <joint name="robotiq_85_left_finger_tip_joint">
-        <param name="mimic">robotiq_85_left_knuckle_joint</param>
-        <param name="multiplier">-1</param>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
       <joint name="robotiq_85_right_finger_tip_joint">
-        <param name="mimic">robotiq_85_left_knuckle_joint</param>
-        <param name="multiplier">1</param>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
