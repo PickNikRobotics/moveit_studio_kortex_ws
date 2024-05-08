@@ -247,7 +247,7 @@
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/bracelet_no_vision_link.dae"/>
+          <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/bracelet_with_vision_link.dae"/>
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1"/>
@@ -256,7 +256,7 @@
       <collision>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/bracelet_no_vision_link.dae"/>
+          <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/bracelet_with_vision_link.dae"/>
         </geometry>
       </collision>
     </link>
@@ -529,64 +529,23 @@
       <origin xyz="0 0 -0.145" rpy="0 0 0"/>
     </xacro:cube>
 
-    <!-- wrist realsense -->
-    <!-- <xacro:if value="$(arg wrist_realsense)"> -->
-    <!--   <link name="wrist_camera_link"/> -->
-    <!---->
-    <!--   <joint name="wrist_camera_joint" type="fixed"> -->
-    <!--     <parent link="$(arg prefix)bracelet_link"/> -->
-    <!--     <child link = "wrist_camera_link"/> -->
-    <!--     <origin xyz="0 -0.06841 -0.05044" rpy="0 ${3.14 / 180.0 * 100} -1.5708"/> -->
-    <!--   </joint> -->
-    <!---->
-    <!--   <xacro:realsense_d415 parent="wrist_camera_link" name="wrist_mounted_camera"> -->
-    <!--     <origin xyz="0 0 0" rpy="0 0 0"/> -->
-    <!--   </xacro:realsense_d415> -->
-
-      <!-- Bracket -->
-    <!--   <link name="wrist_camera_link_visual"> -->
-    <!--     <inertial> -->
-    <!--       <origin xyz="0.000281 0.011402 -0.029798" rpy="0 0 0" /> -->
-    <!--       <mass value="0.5" /> -->
-    <!--       <inertia ixx="0.000587" ixy="3E-06" ixz="3E-06" iyy="0.000369" iyz="-0.000118" izz="0.000609" /> -->
-    <!--     </inertial> -->
-    <!--     <visual> -->
-    <!--       <origin xyz="0 0 0" rpy="0 0 0" /> -->
-    <!--       <geometry> -->
-    <!--         <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" /> -->
-    <!--       </geometry> -->
-    <!--     </visual> -->
-    <!--     <collision> -->
-    <!--       <origin xyz="0 0 0" rpy="0 0 0" /> -->
-    <!--       <geometry> -->
-    <!--         <mesh filename="package://picknik_accessories/descriptions/brackets/kinova_realsense_camera_adapter/realsense_bracket_for_kinova.dae" /> -->
-    <!--       </geometry> -->
-    <!--     </collision> -->
-    <!--   </link> -->
-    <!--   <joint name="$(arg prefix)wrist_camera_link_visual_joint" type="fixed"> -->
-    <!--     <origin xyz="0 0 0.0" rpy="0 0 0" /> -->
-    <!--     <parent link="$(arg prefix)bracelet_link" /> -->
-    <!--     <child link="$(arg prefix)wrist_camera_link_visual" /> -->
-    <!--   </joint> -->
-    <!-- </xacro:if> -->
-
     <!-- Visual aids for grasping -->
-    <!-- <link name="finger_tip_closed_point"> -->
-    <!--   <visual> -->
-    <!--     <geometry> -->
-    <!--       <sphere radius="0.007"/> -->
-    <!--     </geometry> -->
-    <!--     <material name=""> -->
-    <!--           <color rgba="0 1.0 0 0.7"/> -->
-    <!--     </material> -->
-    <!--   </visual> -->
-    <!-- </link> -->
-    <!---->
-    <!-- <joint name="finger_tip_closed_point_joint" type="fixed"> -->
-    <!--   <parent link="robotiq_85_base_link"/> -->
-    <!--   <child link = "finger_tip_closed_point"/> -->
-    <!--   <origin xyz="0 0 0.16" rpy="0 0 0"/> -->
-    <!-- </joint> -->
+     <link name="finger_tip_closed_point">
+       <visual>
+         <geometry>
+           <sphere radius="0.007"/>
+         </geometry>
+         <material name="">
+               <color rgba="0 1.0 0 0.7"/>
+         </material>
+       </visual>
+     </link>
+
+     <joint name="finger_tip_closed_point_joint" type="fixed">
+       <parent link="robotiq_85_base_link"/>
+       <child link = "finger_tip_closed_point"/>
+       <origin xyz="0 0 0.16" rpy="0 0 0"/>
+     </joint>
     <!---->
     <!-- This link aligns the axes of the grasp frame to our required convention for motion planning tasks. -->
     <link name="grasp_link"/>

@@ -69,7 +69,7 @@
     <mesh name="forearm_link_c" file="kinova/forearm_link.STL"/>
     <mesh name="spherical_wrist_1_link_c" file="kinova/spherical_wrist_1_link.STL"/>
     <mesh name="spherical_wrist_2_link_c" file="kinova/spherical_wrist_2_link.STL"/>
-    <mesh name="bracelet_no_vision_link_c" file="kinova/bracelet_no_vision_link.STL"/>
+    <mesh name="bracelet_with_vision_link_c" file="kinova/bracelet_with_vision_link.STL"/>
     <!-- Kinova visual meshes -->
     <mesh name="base_link" file="kinova/base_link.obj"/>
     <mesh name="shoulder_link" file="kinova/shoulder_link.obj"/>
@@ -78,7 +78,7 @@
     <mesh name="forearm_link" file="kinova/forearm_link.obj"/>
     <mesh name="spherical_wrist_1_link" file="kinova/spherical_wrist_1_link.obj"/>
     <mesh name="spherical_wrist_2_link" file="kinova/spherical_wrist_2_link.obj"/>
-    <mesh name="bracelet_no_vision_link" file="kinova/bracelet_no_vision_link.obj"/>
+    <mesh name="bracelet_with_vision_link" file="kinova/bracelet_with_vision_link.obj"/>
     <!-- Robotiq 2f85 meshes -->
     <mesh name="robotiq_85_base" class="2f85" file="robotiq_2f85/base.stl"/>
     <mesh name="robotiq_85_knuckle_link" class="2f85" file="robotiq_2f85/knuckle_link.stl"/>
@@ -96,7 +96,7 @@
   <worldbody>
     <light name="top" pos="0 0 2" mode="trackcom"/>
 
-    <body name="base_link" gravcomp="1" pos="0 0 0" quat="1 0 0 0">
+    <body name="base_link" gravcomp="1" pos="0 0 0.02" quat="1 0 0 0">
       <geom class="visual" mesh="base_link" material="white"/>
       <geom class="collision" mesh="base_link_c"/>
       <body name="shoulder_link" gravcomp="1" pos="0 0 0.15643" quat="-3.67321e-06 1 0 0">
@@ -130,10 +130,12 @@
                   <geom class="visual" mesh="spherical_wrist_2_link" material="white"/>
                   <geom class="collision" mesh="spherical_wrist_2_link_c"/>
                   <body name="bracelet_link" gravcomp="1" pos="0 -0.10593 -0.00017505" quat="0.707105 -0.707108 0 0">
+                    <camera name="wrist_camera" pos="0.0 -0.056 -0.058" fovy="58" mode="fixed" resolution="640 480" quat="0.0 0.0 0.0 1.0"/>
+                    <site name="wrist_camera_optical_frame" pos="0.0 -0.056 -0.058" quat="0.0 0.0 1.0 0.0"/>
                     <inertial pos="-9.3e-05 0.000132 -0.022905" quat="-0.0368025 0.719402 -0.0444884 0.69219" mass="0.364" diaginertia="0.00024027 0.000222769 0.000213961"/>
                     <joint class="infiniteJoints" name="joint_7" armature="0.000001928"/>
-                    <geom class="visual" mesh="bracelet_no_vision_link" material="white"/>
-                    <geom class="collision" mesh="bracelet_no_vision_link_c"/>
+                    <geom class="visual" mesh="bracelet_with_vision_link" material="white"/>
+                    <geom class="collision" mesh="bracelet_with_vision_link_c"/>
                     <body childclass="2f85">
                       <!-- site for end effector's f/t sensor right at the base of the robotiq gripper -->
                       <site name="robotiq_ft_sensor" size="0.01" pos="0.0 0.0 -0.0615" />
