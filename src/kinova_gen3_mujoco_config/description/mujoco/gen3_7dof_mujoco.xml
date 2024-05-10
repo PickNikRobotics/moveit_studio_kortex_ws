@@ -13,7 +13,7 @@
         <joint limited="false"/>
       </default>
       <default class="limitedJoints">
-        <joint limited="false"/>
+        <joint limited="true"/>
       </default>
       <site size="0.001" rgba="0.5 0.5 0.5 0.3" group="4"/>
     </default>
