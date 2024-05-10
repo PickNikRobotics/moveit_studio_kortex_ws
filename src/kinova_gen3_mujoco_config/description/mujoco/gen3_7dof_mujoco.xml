@@ -97,9 +97,10 @@
     <light name="top" pos="0 0 2" mode="trackcom"/>
 
     <body name="base_link" gravcomp="1" pos="0 0 0.02" quat="1 0 0 0">
-      <geom class="visual" mesh="base_link" material="white"/>
-      <geom class="collision" mesh="base_link_c"/>
-      <body name="shoulder_link" gravcomp="1" pos="0 0 0.15643" quat="-3.67321e-06 1 0 0">
+        <inertial pos="-0.000648 -0.000166 0.084487" quat="1 0 0 0" mass="1.697" diaginertia="0.004622 0.004495 0.002079"/>
+        <geom class="visual" mesh="base_link" material="white"/>
+        <geom class="collision" mesh="base_link_c"/>
+        <body name="shoulder_link" gravcomp="1" pos="0 0 0.15643" quat="-3.67321e-06 1 0 0">
         <inertial pos="-2.3e-05 -0.010364 -0.07336" quat="0.707051 0.0451246 -0.0453544 0.704263" mass="1.3773" diaginertia="0.00488868 0.00457 0.00135132"/>
         <joint class="infiniteJoints" name="joint_1" armature="0.0000015"/>
         <geom class="visual" mesh="shoulder_link" material="white"/>
