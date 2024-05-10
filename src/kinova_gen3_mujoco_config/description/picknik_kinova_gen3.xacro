@@ -546,7 +546,7 @@
       <child link = "finger_tip_closed_point"/>
       <origin xyz="0 0 0.16" rpy="0 0 0"/>
     </joint>
-    <!---->
+
     <!-- This link aligns the axes of the grasp frame to our required convention for motion planning tasks. -->
     <link name="grasp_link"/>
 
