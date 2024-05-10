@@ -530,22 +530,22 @@
     </xacro:cube>
 
     <!-- Visual aids for grasping -->
-     <link name="finger_tip_closed_point">
-       <visual>
-         <geometry>
-           <sphere radius="0.007"/>
-         </geometry>
-         <material name="">
-               <color rgba="0 1.0 0 0.7"/>
-         </material>
-       </visual>
-     </link>
+    <link name="finger_tip_closed_point">
+      <visual>
+        <geometry>
+          <sphere radius="0.007"/>
+        </geometry>
+        <material name="">
+          <color rgba="0 1.0 0 0.7"/>
+        </material>
+      </visual>
+    </link>
 
-     <joint name="finger_tip_closed_point_joint" type="fixed">
-       <parent link="robotiq_85_base_link"/>
-       <child link = "finger_tip_closed_point"/>
-       <origin xyz="0 0 0.16" rpy="0 0 0"/>
-     </joint>
+    <joint name="finger_tip_closed_point_joint" type="fixed">
+      <parent link="robotiq_85_base_link"/>
+      <child link = "finger_tip_closed_point"/>
+      <origin xyz="0 0 0.16" rpy="0 0 0"/>
+    </joint>
     <!---->
     <!-- This link aligns the axes of the grasp frame to our required convention for motion planning tasks. -->
     <link name="grasp_link"/>
