@@ -16,6 +16,8 @@
     <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
     <texture type="2d" name="april_tag" file="assets/black_white.png" width="32" height="32"/>
     <material name="april_tag" texture="april_tag"/>
+    <texture type="2d" name="satellite" file="assets/satellite.png" width="32" height="32"/>
+    <material name="satellite" texture="satellite"/>
   </asset>
 
   <worldbody>
@@ -27,6 +29,7 @@
 
   <asset>
     <mesh name="april_tag" file="april_tag.obj"/>
+    <mesh name="satellite" file="satellite.obj"/>
   </asset>
 
   <worldbody>
@@ -34,6 +37,14 @@
       <freejoint/>
       <geom class="collision" mesh="april_tag" group="3" condim="6"/>
       <geom class="visual" mesh="april_tag" material="april_tag"/>
+    </body>
+  </worldbody>
+
+  <worldbody>
+    <body name="satellite" pos=".35 .2 .1">
+      <freejoint/>
+      <geom class="collision" mesh="satellite" group="3" condim="6"/>
+      <geom class="visual" mesh="satellite" material="satellite"/>
     </body>
   </worldbody>
 
