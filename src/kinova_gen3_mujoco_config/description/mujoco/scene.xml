@@ -71,16 +71,9 @@
   </asset>
 
   <worldbody>
-    <body name="object" pos=".35 0 .60">
+    <body name="satellite" pos=".43 -0.2 .1" quat="0.584012 0.0 0.0 0.811745">
       <freejoint/>
-      <geom class="collision" mesh="april_tag" group="3" condim="6"/>
-      <geom class="visual" mesh="april_tag" material="april_tag"/>
-    </body>
-  </worldbody>
-
-  <worldbody>
-    <body name="satellite" pos=".35 .2 .1">
-      <freejoint/>
+      <inertial pos="0.0 0.0 0.0" quat="1 0 0 0" mass="0.3" diaginertia="0.1 0.1 0.1"/>
       <geom class="visual" mesh="satellite" material="satellite"/>
       <geom class="collision" mesh="satellite_box" />
       <geom class="collision" mesh="rafti_collision_1" />
