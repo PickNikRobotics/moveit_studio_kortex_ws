@@ -1,5 +1,4 @@
 - name: Home
-  favorite: true
   joint_group_names:
     - manipulator
   joint_state:
@@ -13,7 +12,6 @@
     velocity: []
     effort: []
 - name: Place
-  favorite: true
   joint_group_names:
     - manipulator
   joint_state:
@@ -27,7 +25,6 @@
     velocity: []
     effort: []
 - name: Table
-  favorite: true
   joint_group_names:
     - manipulator
   joint_state:
@@ -41,7 +38,6 @@
     velocity: []
     effort: []
 - name: Retract
-  favorite: true
   joint_group_names:
     - manipulator
   joint_state:
@@ -55,7 +51,6 @@
     velocity: []
     effort: []
 - name: Pick
-  favorite: true
   joint_group_names:
     - manipulator
   joint_state:
@@ -66,5 +61,31 @@
         nanosec: 0
     name: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, joint_7]
     position: [-0.94002981840293653, 0.62283315124169514, -2.9856155696015962, -2.4398531684633311, -0.61596519168551644, -0.029422603723195273, 1.3260459636622164]
+    velocity: []
+    effort: []
+- name: View Satellite
+  joint_group_names:
+    - manipulator
+  joint_state:
+    header:
+      frame_id: world
+      stamp:
+        sec: 0
+        nanosec: 0
+    name: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, joint_7]
+    position: [-0.09307641483383389, -0.19300567578465877, -3.1300095007446025, -1.0300920675150191, 0.10809231574510887, -1.8633714704671105, 0.6960333295958311]
+    velocity: []
+    effort: []
+- name: Servo Start
+  joint_group_names:
+    - manipulator
+  joint_state:
+    header:
+      frame_id: world
+      stamp:
+        sec: 0
+        nanosec: 0
+    name: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, joint_7]
+    position: [-0.00720012232313838, 0.046292085559112114, -3.1164649297565687, -1.9802682633550486, 0.002955344711620508, 0.47456175742007445, 1.5661967812762208]
     velocity: []
     effort: []
