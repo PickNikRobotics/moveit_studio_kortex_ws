@@ -10,7 +10,7 @@
           <Control ID="Sequence">
             <Action ID="GetImage" topic_name="/wrist_camera/color" message_out="{image}"/>
             <Action ID="DetectAprilTags" image="{image}" camera_info="{camera_info}" parameters="{parameters}" detections="{detections}"/>
-            <Action ID="GetDetectionPose" detections="{detections}" target_id="{tag_id}" target_label="" detection_pose="{detection_pose}"/>
+            <Action ID="GetDetectionPose" detections="{detections}" target_label="" detection_pose="{detection_pose}" target_id="{tag_id}"/>
           </Control>
         </Decorator>
         <Action ID="AveragePoseStamped" pose_sample="{detection_pose}" avg_pose="{avg_pose}" max_distance="{max_distance}" max_rotation="{max_rotation}" num_samples="{num_samples}" run_continuously="false"/>
@@ -18,6 +18,8 @@
     </Decorator>
   </BehaviorTree>
   <TreeNodesModel>
-    <SubTree ID="Sample April Tag"/>
+    <SubTree ID="Sample April Tag">
+      <input_port name="tag_id" default="5"/>
+    </SubTree>
   </TreeNodesModel>
 </root>

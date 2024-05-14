@@ -276,10 +276,10 @@
     <joint joint1="robotiq_85_left_knuckle_joint" joint2="robotiq_85_right_knuckle_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001"
       solref="0.005 1"/>
   </equality>
-  
+
   <actuator>
-    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 0.8"
-      gainprm="100" biasprm="0 -100 -10"/>
+    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 255"
+             gainprm="0.3137255 0 0" biasprm="0 -100 -10"/>
   </actuator>
 
  <sensor>

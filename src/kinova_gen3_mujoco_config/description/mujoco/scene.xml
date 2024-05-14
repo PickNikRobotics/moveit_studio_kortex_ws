@@ -73,7 +73,7 @@
   <worldbody>
     <body name="satellite" pos=".43 -0.2 .1" quat="0.584012 0.0 0.0 0.811745">
       <freejoint/>
-      <inertial pos="0.0 0.0 0.0" quat="1 0 0 0" mass="0.3" diaginertia="0.1 0.1 0.1"/>
+      <inertial pos="0.0 0.0 0.0" quat="1 0 0 0" mass="0.3" diaginertia="0.001 0.001 0.001"/>
       <geom class="visual" mesh="satellite" material="satellite"/>
       <geom class="collision" mesh="satellite_box" />
       <geom class="collision" mesh="rafti_collision_1" />
