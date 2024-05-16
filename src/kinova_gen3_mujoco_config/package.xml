@@ -5,7 +5,8 @@
 
   <description>Configuration package for a UR arm that can be simulated with mock hardware</description>
 
-  <maintainer email="support@picknik.ai">MoveIt Pro Maintainer</maintainer>
+  <maintainer email="paul.gesel@picknik.ai">Paul Gesel</maintainer>
+  <maintainer email="david.yackzan@picknik.ai">David Yackzan</maintainer>
 
   <license>BSD-3-Clause</license>
 
