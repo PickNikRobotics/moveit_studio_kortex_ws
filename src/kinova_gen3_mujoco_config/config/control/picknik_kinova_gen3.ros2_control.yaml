@@ -8,6 +8,9 @@ controller_manager:
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
+    joint_trajectory_admittance_controller:
+      type: joint_trajectory_controller/JointTrajectoryAdmittanceController
+
     twist_controller:
       type: picknik_twist_controller/PicknikTwistController
 
@@ -56,6 +59,22 @@ joint_trajectory_controller:
         goal: 0.05
       joint_7:
         goal: 0.05
+
+joint_trajectory_admittance_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+    base_frame: base_link
+    sensor_frame: robotiq_ft_sensor
+    ee_frame: grasp_link
+    ft_sensor_name: robotiq_ft_sensor
+    stop_accelerations: [3.0, 3.0, 3.0, 3.0, 5.0, 5.0, 5.0]
 
 twist_controller:
   ros__parameters:
