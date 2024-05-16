@@ -17,15 +17,6 @@ services:
         - USER_GID=${STUDIO_USER_UID:-1000}
         - USERNAME=${STUDIO_USERNAME:-studio-user}
         - MOVEIT_STUDIO_BASE_IMAGE=picknikciuser/moveit-studio:${STUDIO_DOCKER_TAG:-main}
-    # Allow the user to use the host's network video4linux and usb_device devices.
-    # "c 81:* rmw": This rule specifies that the container has read, write, and mknod access (rmw) to all character devices (c) with a major number of 81 (video4linux).
-    # "c 189:* rmw": This rule gives the container read, write, and mknod access (rmw) to all character devices (c) with a major number of 189 (usb_device).
-    device_cgroup_rules:
-      - "c 81:* rmw"
-      - "c 189:* rmw"
-    volumes:
-      # Allow access to host hardware e.g. RealSense cameras, Force/torque sensors, gripper
-      - /dev:/dev
 
   # Starts the MoveIt Pro Agent and the Bridge between the Agent and the Web UI
   agent_bridge:
@@ -41,7 +32,7 @@ services:
       restart_policy:
         condition: any
         delay: 2s
-    command: agent_bridge.app
+    command: ros2 launch  ${STUDIO_CONFIG_PACKAGE} agent_bridge.launch.xml
 
   # Starts the REST API for the Web UI.
   rest_api:
