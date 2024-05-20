@@ -1,6 +1,6 @@
 <mujoco model="kinova scene">
   <include file="gen3_7dof_mujoco.xml"/>
-
+<!--  <option gravity="0 0 0"/>-->
   <statistic center="0.3 0 0.4" extent="1"/>
 
   <visual>
@@ -71,16 +71,16 @@
   </asset>
 
   <worldbody>
-    <body name="satellite" pos=".43 -0.2 .1" quat="0.584012 0.0 0.0 0.811745">
+    <body name="satellite" pos=".43 -0.2 .133" quat="0.584012 0.0 0.0 0.811745">
       <freejoint/>
-      <inertial pos="0.0 0.0 0.0" quat="1 0 0 0" mass="0.3" diaginertia="0.001 0.001 0.001"/>
+      <inertial pos="0.0 0.0 0.0" quat="1 0 0 0" mass="0.2" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
       <geom class="visual" mesh="satellite" material="satellite"/>
-      <geom class="collision" mesh="satellite_box" />
-      <geom class="collision" mesh="rafti_collision_1" />
-      <geom class="collision" mesh="rafti_collision_2" />
-      <geom class="collision" mesh="rafti_collision_3" />
-      <geom class="collision" mesh="rafti_collision_4" />
-      <geom class="collision" mesh="rafti_collision_5" />
+      <geom class="collision" mesh="satellite_box" condim="6"/>
+      <geom class="collision" mesh="rafti_collision_1" condim="6"/>
+      <geom class="collision" mesh="rafti_collision_2" condim="6"/>
+      <geom class="collision" mesh="rafti_collision_3" condim="6"/>
+      <geom class="collision" mesh="rafti_collision_4" condim="6"/>
+      <geom class="collision" mesh="rafti_collision_5" condim="6"/>
       <geom class="collision" mesh="ring_collision_1" />
       <geom class="collision" mesh="ring_collision_2" />
       <geom class="collision" mesh="ring_collision_3" />
