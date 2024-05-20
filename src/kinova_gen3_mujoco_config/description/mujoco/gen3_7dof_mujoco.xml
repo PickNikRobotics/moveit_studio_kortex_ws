@@ -1,6 +1,5 @@
 <mujoco model="gen3">
   <compiler angle="radian" meshdir="assets"/>
-
   <option integrator="implicitfast"/>
 
   <default>
@@ -87,6 +86,11 @@
     <mesh name="robotiq_85_finger_tip_link" class="2f85" file="robotiq_2f85/finger_tip_link.stl"/>
     <mesh name="robotiq_85_pad" class="2f85" file="robotiq_2f85/pad.stl"/>
     <mesh name="robotiq_85_silicone_pad" class="2f85" file="robotiq_2f85/silicone_pad.stl"/>
+    <mesh name="rafti_finger" file="rafti_finger.obj"/>
+    <mesh name="rafti_finger_collision_1" file="rafti_finger_collision_1.obj"/>
+    <mesh name="rafti_finger_collision_2" file="rafti_finger_collision_2.obj"/>
+    <mesh name="rafti_finger_collision_3" file="rafti_finger_collision_3.obj"/>
+    <mesh name="rafti_finger_collision_4" file="rafti_finger_collision_4.obj"/>
   </asset>
 
   <contact>
@@ -183,6 +187,14 @@
                               <body name="right_silicone_pad">
                                 <geom class="visual" mesh="robotiq_85_silicone_pad" material="black"/>
                               </body>
+                              <body name="right_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">
+                                <inertial mass="0.005" pos="0 0 0"/>
+                                <geom class="visual" mesh="rafti_finger" material="black"/>
+                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
+                              </body>
                             </body>
                           </body>
                         </body>
@@ -222,6 +234,14 @@
                               <body name="left_silicone_pad">
                                 <geom class="visual" mesh="robotiq_85_silicone_pad" material="black"/>
                               </body>
+                              <body name="left_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">
+                                <inertial mass="0.005" pos="0 0 0"/>
+                                <geom class="visual" mesh="rafti_finger" material="black"/>
+                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
+                              </body>
                             </body>
                           </body>
                         </body>
@@ -255,6 +275,12 @@
     <exclude body1="robotiq_85_base_link" body2="robotiq_85_right_inner_knuckle_link"/>
     <exclude body1="robotiq_85_right_finger_link" body2="robotiq_85_right_finger_tip_link"/>
     <exclude body1="robotiq_85_left_finger_link" body2="robotiq_85_left_finger_tip_link"/>
+    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_finger_tip_link"/>
+    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_inner_knuckle_link"/>
+    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_knuckle_link"/>
+    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_finger_tip_link"/>
+    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_inner_knuckle_link"/>
+    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_knuckle_link"/>
   </contact>
   
   <!--
@@ -278,8 +304,8 @@
   </equality>
 
   <actuator>
-    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 255"
-             gainprm="0.3137255 0 0" biasprm="0 -100 -10"/>
+    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 .7"
+             gainprm="100 0 0" biasprm="0 -100 -10"/>
   </actuator>
 
  <sensor>
