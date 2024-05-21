@@ -24,6 +24,12 @@ controller_manager:
     servo_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
+    force_torque_sensor_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+
+    joint_trajectory_admittance_controller:
+      type: joint_trajectory_admittance_controller/JointTrajectoryAdmittanceController
+
 joint_trajectory_controller:
   ros__parameters:
     joints:
@@ -136,3 +142,32 @@ servo_controller:
         goal: 0.05
       joint_7:
         goal: 0.05
+
+force_torque_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: robotiq_ft_sensor
+    state_interface_names:
+      - force.x
+      - force.y
+      - force.z
+      - torque.x
+      - torque.y
+      - torque.z
+    frame_id: fts_link
+
+
+joint_trajectory_admittance_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+    base_frame: base_link
+    sensor_frame: fts_link
+    ee_frame: grasp_link
+    ft_sensor_name: robotiq_ft_sensor
+    stop_accelerations: [3.0, 3.0, 3.0, 3.0, 5.0, 5.0, 5.0]

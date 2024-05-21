@@ -155,6 +155,7 @@ ros2_control:
   # for running the application.
   # [Optional, default=[]]
   controllers_active_at_startup:
+    - "force_torque_sensor_broadcaster"
     - "robotiq_gripper_controller"
     - "joint_state_broadcaster"
     - "servo_controller"
@@ -162,6 +163,7 @@ ros2_control:
   controllers_inactive_at_startup:
     - "joint_trajectory_admittance_controller"
     - "joint_trajectory_controller"
+    - "joint_trajectory_admittance_controller"
   # Any controllers here will not be spawned by MoveIt Pro.
   # [Optional, default=[]]
   controllers_not_managed: []
