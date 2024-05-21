@@ -2,6 +2,9 @@
   <include file="gen3_7dof_mujoco.xml"/>
 <!--  <option gravity="0 0 0"/>-->
   <statistic center="0.3 0 0.4" extent="1"/>
+  <default>
+    <geom solref=".004 1"/>
+  </default>
 
   <visual>
     <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>

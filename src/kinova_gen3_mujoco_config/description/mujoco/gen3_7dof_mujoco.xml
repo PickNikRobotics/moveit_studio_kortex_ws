@@ -91,6 +91,10 @@
     <mesh name="rafti_finger_collision_2" file="rafti_finger_collision_2.obj"/>
     <mesh name="rafti_finger_collision_3" file="rafti_finger_collision_3.obj"/>
     <mesh name="rafti_finger_collision_4" file="rafti_finger_collision_4.obj"/>
+    <mesh name="rafti_finger_collision_5" file="rafti_finger_collision_5.obj"/>
+    <mesh name="rafti_finger_collision_6" file="rafti_finger_collision_6.obj"/>
+    <mesh name="rafti_finger_collision_7" file="rafti_finger_collision_7.obj"/>
+    <mesh name="rafti_finger_collision_8" file="rafti_finger_collision_8.obj"/>
   </asset>
 
   <contact>
@@ -188,12 +192,16 @@
                                 <geom class="visual" mesh="robotiq_85_silicone_pad" material="black"/>
                               </body>
                               <body name="right_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">
-                                <inertial mass="0.005" pos="0 0 0"/>
+                                <inertial mass="0.005" pos="0 0 0" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
                                 <geom class="visual" mesh="rafti_finger" material="black"/>
                                 <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_5" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_6" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_7" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_8" condim="6"/>
                               </body>
                             </body>
                           </body>
@@ -241,6 +249,10 @@
                                 <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_5" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_6" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_7" condim="6"/>
+                                <geom class="collision" mesh="rafti_finger_collision_8" condim="6"/>
                               </body>
                             </body>
                           </body>
@@ -258,13 +270,13 @@
   </worldbody>
 
   <actuator>
-    <general class="kinova" name="joint_1" joint="joint_1" gainprm="12000" biasprm="0 -12000 -4000"/>
-    <general class="kinova" name="joint_2" joint="joint_2" gainprm="12000" biasprm="0 -12000 -4000"/>
-    <general class="kinova" name="joint_3" joint="joint_3" gainprm="8000" biasprm="0 -8000 -3000"/>
-    <general class="kinova" name="joint_4" joint="joint_4" gainprm="8000" biasprm="0 -8000 -3000"/>
-    <general class="kinova" name="joint_5" joint="joint_5" gainprm="4000" biasprm="0 -4000 -1500"/>
-    <general class="kinova" name="joint_6" joint="joint_6" gainprm="4000" biasprm="0 -4000 -1500"/>
-    <general class="kinova" name="joint_7" joint="joint_7" gainprm="4000" biasprm="0 -4000 -1500"/>
+    <general class="kinova" name="joint_1" joint="joint_1" gainprm="800" biasprm="0 -800 -260"/>
+    <general class="kinova" name="joint_2" joint="joint_2" gainprm="800" biasprm="0 -800 -260"/>
+    <general class="kinova" name="joint_3" joint="joint_3" gainprm="260" biasprm="0 -260 -86"/>
+    <general class="kinova" name="joint_4" joint="joint_4" gainprm="260" biasprm="0 -260 -86"/>
+    <general class="kinova" name="joint_5" joint="joint_5" gainprm="130" biasprm="0 -130 -45"/>
+    <general class="kinova" name="joint_6" joint="joint_6" gainprm="130" biasprm="0 -130 -45"/>
+    <general class="kinova" name="joint_7" joint="joint_7" gainprm="130" biasprm="0 -130 -45"/>
   </actuator>
   
   <!-- Robotiq gripper contact -->
