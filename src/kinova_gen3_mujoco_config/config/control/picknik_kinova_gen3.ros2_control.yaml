@@ -9,7 +9,7 @@ controller_manager:
       type: joint_trajectory_controller/JointTrajectoryController
 
     joint_trajectory_admittance_controller:
-      type: joint_trajectory_controller/JointTrajectoryAdmittanceController
+      type: joint_trajectory_admittance_controller/JointTrajectoryAdmittanceController
 
     twist_controller:
       type: picknik_twist_controller/PicknikTwistController
