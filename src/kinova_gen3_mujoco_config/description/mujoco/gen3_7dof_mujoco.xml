@@ -143,7 +143,7 @@
                     <geom class="collision" mesh="bracelet_with_vision_link_c"/>
                     <body childclass="2f85">
                       <!-- site for end effector's f/t sensor right at the base of the robotiq gripper -->
-                      <site name="robotiq_ft_sensor" size="0.01" pos="0.0 0.0 -0.0615" />
+                      <site name="robotiq_ft_sensor" size="0.01" pos="0.0 0.0 -0.0615"/>
                       <!-- Right-hand side 4-bar linkage -->
                       <body name="robotiq_85_base_link" gravcomp="1" pos="0 0 -0.0615" quat="0 -0.707 0.707 0">
                         <inertial mass="0.777441" pos="0 -2.70394e-05 0.0354675" quat="1 -0.00152849 0 0"
@@ -305,7 +305,7 @@
 
   <actuator>
     <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 .7"
-             gainprm="100 0 0" biasprm="0 -100 -10"/>
+             gainprm="100 0 0" biasprm="0 -100 -150"/>
   </actuator>
 
  <sensor>
