@@ -91,10 +91,6 @@
     <mesh name="rafti_finger_collision_2" file="rafti_finger_collision_2.obj"/>
     <mesh name="rafti_finger_collision_3" file="rafti_finger_collision_3.obj"/>
     <mesh name="rafti_finger_collision_4" file="rafti_finger_collision_4.obj"/>
-    <mesh name="rafti_finger_collision_5" file="rafti_finger_collision_5.obj"/>
-    <mesh name="rafti_finger_collision_6" file="rafti_finger_collision_6.obj"/>
-    <mesh name="rafti_finger_collision_7" file="rafti_finger_collision_7.obj"/>
-    <mesh name="rafti_finger_collision_8" file="rafti_finger_collision_8.obj"/>
   </asset>
 
   <contact>
@@ -198,10 +194,6 @@
                                 <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_5" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_6" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_7" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_8" condim="6"/>
                               </body>
                             </body>
                           </body>
@@ -249,10 +241,6 @@
                                 <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
                                 <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_5" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_6" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_7" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_8" condim="6"/>
                               </body>
                             </body>
                           </body>
