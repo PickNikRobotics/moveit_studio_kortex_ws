@@ -10,4 +10,7 @@
       <Action ID="ExecuteMTCTask" solution="{move_to_waypoint_solution}"/>
     </Control>
   </BehaviorTree>
+  <TreeNodesModel>
+    <SubTree ID="Move to Waypoint"/>
+  </TreeNodesModel>
 </root>
