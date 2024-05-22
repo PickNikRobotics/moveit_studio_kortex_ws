@@ -187,14 +187,15 @@
                               <body name="right_silicone_pad">
                                 <geom class="visual" mesh="robotiq_85_silicone_pad" material="black"/>
                               </body>
-                              <body name="right_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">
-                                <inertial mass="0.005" pos="0 0 0" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
-                                <geom class="visual" mesh="rafti_finger" material="black"/>
-                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
-                              </body>
+<!--                              TODO uncomment to enable RAFTI fingers -->
+<!--                              <body name="right_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">-->
+<!--                                <inertial mass="0.005" pos="0 0 0" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>-->
+<!--                                <geom class="visual" mesh="rafti_finger" material="black"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>-->
+<!--                              </body>-->
                             </body>
                           </body>
                         </body>
@@ -234,14 +235,15 @@
                               <body name="left_silicone_pad">
                                 <geom class="visual" mesh="robotiq_85_silicone_pad" material="black"/>
                               </body>
-                              <body name="left_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">
-                                <inertial mass="0.005" pos="0 0 0"/>
-                                <geom class="visual" mesh="rafti_finger" material="black"/>
-                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>
-                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>
-                              </body>
+<!--                              TODO uncomment to enable RAFTI fingers -->
+<!--                              <body name="left_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">-->
+<!--                                <inertial mass="0.005" pos="0 0 0"/>-->
+<!--                                <geom class="visual" mesh="rafti_finger" material="black"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>-->
+<!--                              </body>-->
                             </body>
                           </body>
                         </body>
@@ -275,12 +277,13 @@
     <exclude body1="robotiq_85_base_link" body2="robotiq_85_right_inner_knuckle_link"/>
     <exclude body1="robotiq_85_right_finger_link" body2="robotiq_85_right_finger_tip_link"/>
     <exclude body1="robotiq_85_left_finger_link" body2="robotiq_85_left_finger_tip_link"/>
-    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_finger_tip_link"/>
-    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_inner_knuckle_link"/>
-    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_knuckle_link"/>
-    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_finger_tip_link"/>
-    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_inner_knuckle_link"/>
-    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_knuckle_link"/>
+<!--                              TODO uncomment to enable RAFTI fingers -->
+<!--    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_finger_tip_link"/>-->
+<!--    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_inner_knuckle_link"/>-->
+<!--    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_knuckle_link"/>-->
+<!--    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_finger_tip_link"/>-->
+<!--    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_inner_knuckle_link"/>-->
+<!--    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_knuckle_link"/>-->
   </contact>
   
   <!--
