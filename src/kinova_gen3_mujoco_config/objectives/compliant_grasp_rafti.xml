@@ -47,7 +47,7 @@
             <Action ID="AlwaysSuccess"/>
           </Control>
           <Action ID="TransformPoseFrame" input_pose="{model_world}" target_frame_id="object_frame_new" output_pose="{model_object}"/>
-          <Action ID="TransformPose" input_pose="{model_object}" translation_xyz="0.0;0.01;0.3" quaternion_xyzw="-0.707107;0.707107;0.0;0.0" output_pose="{hole_object}"/>
+          <Action ID="TransformPose" input_pose="{model_object}" translation_xyz="0.0;0.025;0.3" quaternion_xyzw="-0.707107;0.707107;0.0;0.0" output_pose="{hole_object}"/>
           <Action ID="TransformPoseFrame" input_pose="{hole_object}" target_frame_id="world" output_pose="{hole_object}"/>
           <Control ID="Fallback">
             <Decorator ID="Timeout" msec="1000">
@@ -66,7 +66,7 @@
       <Action ID="InitializeMTCTask" task_id="" controller_names="/joint_trajectory_controller_chained_open_door /robotiq_gripper_controller" task="{mtc_task}"/>
       <Action ID="SetupMTCCurrentState" task="{mtc_task}"/>
       <Action ID="SetupMTCUpdateGroupCollisionRule" group_name="gripper" object_name="&lt;octomap&gt;" allow_collision="true" task="{mtc_task}"/>
-      <Action ID="SetupMTCMoveAlongFrameAxis" task="{mtc_task}" hand_frame="grasp_link" axis_frame="grasp_link" axis_x="0.0" axis_y="0.0" axis_z="1.0" max_distance="0.12" min_distance="0" planning_group_name="manipulator" velocity_scale=".2" acceleration_scale="1.0"/>
+      <Action ID="SetupMTCMoveAlongFrameAxis" task="{mtc_task}" hand_frame="grasp_link" axis_frame="grasp_link" axis_x="0.0" axis_y="0.0" axis_z="1.0" max_distance="0.1" min_distance="0" planning_group_name="manipulator" velocity_scale=".2" acceleration_scale="1.0"/>
       <Action ID="PlanMTCTask" task="{mtc_task}" solution="{mtc_solution}"/>
       <SubTree ID="Re-Zero Force-Torque Sensors" _collapsed="true"/>
       <Action ID="ActivateControllers" controller_names="admittance_controller_open_door"/>
