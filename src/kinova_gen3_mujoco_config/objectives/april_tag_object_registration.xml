@@ -20,7 +20,7 @@
           </Control>
         </Decorator>
         <Control ID="Sequence">
-          <Action ID="LoadPointCloudFromFile" file_path="~/user_ws/install/picknik_accessories/share/picknik_accessories/descriptions/miscellaneous/satellite.stl" frame_id="object_frame" num_sampled_points="3000" random_seed="1234" point_cloud="{model_point_cloud}" scale="1.0" color="255;150;0"/>
+          <Action ID="LoadPointCloudFromFile" file_path="~/user_ws/install/picknik_accessories/share/picknik_accessories/descriptions/miscellaneous/mock_satellite.stl" frame_id="object_frame" num_sampled_points="3000" random_seed="1234" point_cloud="{model_point_cloud}" scale="1.0" color="255;150;0"/>
           <Control ID="Fallback">
             <Decorator ID="Timeout" msec="1000">
               <Action ID="PublishStaticFrame" pose="{object_stamped_pose_estimate}" child_frame_id="object_frame" publish_rate="5"/>
