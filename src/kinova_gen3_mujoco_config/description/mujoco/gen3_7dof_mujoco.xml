@@ -1,6 +1,5 @@
 <mujoco model="gen3">
   <compiler angle="radian" meshdir="assets"/>
-
   <option integrator="implicitfast"/>
 
   <default>
@@ -87,6 +86,11 @@
     <mesh name="robotiq_85_finger_tip_link" class="2f85" file="robotiq_2f85/finger_tip_link.stl"/>
     <mesh name="robotiq_85_pad" class="2f85" file="robotiq_2f85/pad.stl"/>
     <mesh name="robotiq_85_silicone_pad" class="2f85" file="robotiq_2f85/silicone_pad.stl"/>
+    <mesh name="rafti_finger" file="rafti_finger.obj"/>
+    <mesh name="rafti_finger_collision_1" file="rafti_finger_collision_1.obj"/>
+    <mesh name="rafti_finger_collision_2" file="rafti_finger_collision_2.obj"/>
+    <mesh name="rafti_finger_collision_3" file="rafti_finger_collision_3.obj"/>
+    <mesh name="rafti_finger_collision_4" file="rafti_finger_collision_4.obj"/>
   </asset>
 
   <contact>
@@ -139,7 +143,7 @@
                     <geom class="collision" mesh="bracelet_with_vision_link_c"/>
                     <body childclass="2f85">
                       <!-- site for end effector's f/t sensor right at the base of the robotiq gripper -->
-                      <site name="robotiq_ft_sensor" size="0.01" pos="0.0 0.0 -0.0615" />
+                      <site name="robotiq_ft_sensor" size="0.01" pos="0.0 0.0 -0.0615"/>
                       <!-- Right-hand side 4-bar linkage -->
                       <body name="robotiq_85_base_link" gravcomp="1" pos="0 0 -0.0615" quat="0 -0.707 0.707 0">
                         <inertial mass="0.777441" pos="0 -2.70394e-05 0.0354675" quat="1 -0.00152849 0 0"
@@ -183,6 +187,15 @@
                               <body name="right_silicone_pad">
                                 <geom class="visual" mesh="robotiq_85_silicone_pad" material="black"/>
                               </body>
+<!--                              TODO uncomment to enable RAFTI fingers -->
+<!--                              <body name="right_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">-->
+<!--                                <inertial mass="0.005" pos="0 0 0" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>-->
+<!--                                <geom class="visual" mesh="rafti_finger" material="black"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>-->
+<!--                              </body>-->
                             </body>
                           </body>
                         </body>
@@ -222,6 +235,15 @@
                               <body name="left_silicone_pad">
                                 <geom class="visual" mesh="robotiq_85_silicone_pad" material="black"/>
                               </body>
+<!--                              TODO uncomment to enable RAFTI fingers -->
+<!--                              <body name="left_rafti_finger_link" pos="0 0 0.01" quat="0 0 0 1">-->
+<!--                                <inertial mass="0.005" pos="0 0 0"/>-->
+<!--                                <geom class="visual" mesh="rafti_finger" material="black"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_1" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_2" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_3" condim="6"/>-->
+<!--                                <geom class="collision" mesh="rafti_finger_collision_4" condim="6"/>-->
+<!--                              </body>-->
                             </body>
                           </body>
                         </body>
@@ -238,13 +260,13 @@
   </worldbody>
 
   <actuator>
-    <general class="kinova" name="joint_1" joint="joint_1" gainprm="12000" biasprm="0 -12000 -4000"/>
-    <general class="kinova" name="joint_2" joint="joint_2" gainprm="12000" biasprm="0 -12000 -4000"/>
-    <general class="kinova" name="joint_3" joint="joint_3" gainprm="8000" biasprm="0 -8000 -3000"/>
-    <general class="kinova" name="joint_4" joint="joint_4" gainprm="8000" biasprm="0 -8000 -3000"/>
-    <general class="kinova" name="joint_5" joint="joint_5" gainprm="4000" biasprm="0 -4000 -1500"/>
-    <general class="kinova" name="joint_6" joint="joint_6" gainprm="4000" biasprm="0 -4000 -1500"/>
-    <general class="kinova" name="joint_7" joint="joint_7" gainprm="4000" biasprm="0 -4000 -1500"/>
+    <general class="kinova" name="joint_1" joint="joint_1" gainprm="800" biasprm="0 -800 -260"/>
+    <general class="kinova" name="joint_2" joint="joint_2" gainprm="800" biasprm="0 -800 -260"/>
+    <general class="kinova" name="joint_3" joint="joint_3" gainprm="260" biasprm="0 -260 -86"/>
+    <general class="kinova" name="joint_4" joint="joint_4" gainprm="260" biasprm="0 -260 -86"/>
+    <general class="kinova" name="joint_5" joint="joint_5" gainprm="130" biasprm="0 -130 -45"/>
+    <general class="kinova" name="joint_6" joint="joint_6" gainprm="130" biasprm="0 -130 -45"/>
+    <general class="kinova" name="joint_7" joint="joint_7" gainprm="130" biasprm="0 -130 -45"/>
   </actuator>
   
   <!-- Robotiq gripper contact -->
@@ -255,6 +277,13 @@
     <exclude body1="robotiq_85_base_link" body2="robotiq_85_right_inner_knuckle_link"/>
     <exclude body1="robotiq_85_right_finger_link" body2="robotiq_85_right_finger_tip_link"/>
     <exclude body1="robotiq_85_left_finger_link" body2="robotiq_85_left_finger_tip_link"/>
+<!--                              TODO uncomment to enable RAFTI fingers -->
+<!--    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_finger_tip_link"/>-->
+<!--    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_inner_knuckle_link"/>-->
+<!--    <exclude body1="right_rafti_finger_link" body2="robotiq_85_right_knuckle_link"/>-->
+<!--    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_finger_tip_link"/>-->
+<!--    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_inner_knuckle_link"/>-->
+<!--    <exclude body1="left_rafti_finger_link" body2="robotiq_85_left_knuckle_link"/>-->
   </contact>
   
   <!--
@@ -276,10 +305,10 @@
     <joint joint1="robotiq_85_left_knuckle_joint" joint2="robotiq_85_right_knuckle_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001"
       solref="0.005 1"/>
   </equality>
-  
+
   <actuator>
-    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 0.8"
-      gainprm="100" biasprm="0 -100 -10"/>
+    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 .7"
+             gainprm="100 0 0" biasprm="0 -100 -150"/>
   </actuator>
 
  <sensor>
