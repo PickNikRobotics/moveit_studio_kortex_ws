@@ -2,6 +2,8 @@
   <compiler angle="radian" meshdir="assets"/>
   <option integrator="implicitfast"/>
 
+  <size nuser_sensor="6"/>
+
   <default>
     <!-- kinova defaults -->
     <default class="kinova">
@@ -146,6 +148,9 @@
                       <site name="robotiq_ft_sensor" size="0.01" pos="0.0 0.0 -0.0615"/>
                       <!-- Right-hand side 4-bar linkage -->
                       <body name="robotiq_85_base_link" gravcomp="1" pos="0 0 -0.0615" quat="0 -0.707 0.707 0">
+                        <replicate count="360" sep="-" offset="0 0 0" euler="0.0174533 0 0">
+                          <site name="lidar" size="0.01" pos="-0.075 0.0 0.0" quat="0.0 0.0 0.0 1.0"/>
+                        </replicate>
                         <inertial mass="0.777441" pos="0 -2.70394e-05 0.0354675" quat="1 -0.00152849 0 0"
                           diaginertia="0.000260285 0.000225381 0.000152708"/>
                         <geom class="visual" mesh="robotiq_85_base" material="black"/>
@@ -311,9 +316,10 @@
              gainprm="100 0 0" biasprm="0 -100 -150"/>
   </actuator>
 
- <sensor>
-   <force name="ee_force_sensor" site="robotiq_ft_sensor"/>
-   <torque name="ee_torque_sensor" site="robotiq_ft_sensor" />
- </sensor>
+  <sensor>
+    <force name="ee_force_sensor" site="robotiq_ft_sensor"/>
+    <torque name="ee_torque_sensor" site="robotiq_ft_sensor" />
+    <rangefinder site="lidar" user="0.1 -3.14159 3.14159 0.0174533 0.1 6.0"/>
+  </sensor>
 
 </mujoco>
