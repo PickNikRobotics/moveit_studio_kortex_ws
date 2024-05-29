@@ -307,7 +307,7 @@
   </equality>
 
   <actuator>
-    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 .7"
+    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 .8"
              gainprm="100 0 0" biasprm="0 -100 -150"/>
   </actuator>
 
