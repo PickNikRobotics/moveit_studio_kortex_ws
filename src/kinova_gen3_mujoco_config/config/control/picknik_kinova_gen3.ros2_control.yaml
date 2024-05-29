@@ -1,37 +1,29 @@
 controller_manager:
   ros__parameters:
     update_rate: 1000  # Hz
-
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
-
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-
     joint_trajectory_admittance_controller:
       type: joint_trajectory_admittance_controller/JointTrajectoryAdmittanceController
-
     twist_controller:
       type: picknik_twist_controller/PicknikTwistController
-
     # The gripper controller just relays position commands
     robotiq_gripper_controller:
       type: position_controllers/GripperActionController
-
     fault_controller:
       type: picknik_reset_fault_controller/PicknikResetFaultController
-
     servo_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-
     force_torque_sensor_broadcaster:
       type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
-
     admittance_controller_open_door:
       type: admittance_controller/AdmittanceController
-
     joint_trajectory_controller_chained_open_door:
       type: joint_trajectory_controller/JointTrajectoryController
+    velocity_force_controller:
+      type: velocity_force_controller/VelocityForceController
 
 joint_trajectory_controller:
   ros__parameters:
@@ -296,3 +288,48 @@ admittance_controller_open_door:
 
     # general settings
     enable_parameter_update_without_reactivation: true
+
+velocity_force_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+    base_frame: base_link
+    sensor_frame: bracelet_link
+    ee_frame: grasp_link
+    ft_sensor_name: robotiq_ft_sensor
+    max_joint_velocity:
+      - 0.524
+      - 0.524
+      - 0.524
+      - 0.524
+      - 1.047
+      - 1.047
+      - 1.047
+    max_joint_acceleration:
+      - 0.524
+      - 0.524
+      - 0.524
+      - 0.524
+      - 0.524
+      - 0.524
+      - 0.524
+    max_cartesian_velocity:
+      - 0.25
+      - 0.25
+      - 0.25
+      - 1.5707
+      - 1.5707
+      - 1.5707
+    max_cartesian_acceleration:
+      - 2.0
+      - 2.0
+      - 2.0
+      - 4.0
+      - 4.0
+      - 4.0
