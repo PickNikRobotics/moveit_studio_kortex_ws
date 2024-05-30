@@ -76,7 +76,7 @@
   <worldbody>
     <body name="satellite" pos=".43 -0.2 .133" quat="0.584012 0.0 0.0 0.811745">
       <freejoint/>
-      <inertial pos="0.0 0.0 0.0" quat="1 0 0 0" mass="1.5" diaginertia="0.00001 0.00001 0.00001"/>
+      <inertial pos="0.0 0.0 0.0" quat="1 0 0 0" mass="0.1" diaginertia="0.00001 0.00001 0.00001"/>
       <geom class="visual" mesh="satellite" material="satellite"/>
       <geom class="collision" mesh="satellite_box" condim="6"/>
       <geom class="collision" mesh="rafti_collision_1" condim="6"/>
@@ -118,5 +118,7 @@
       <geom class="collision" mesh="ring_collision_32" />
     </body>
   </worldbody>
-
+  <equality>
+      <weld name="weld" body1="robotiq_85_base_link" body2="satellite" active="false"></weld>
+  </equality>
 </mujoco>
