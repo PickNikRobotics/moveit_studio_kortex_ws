@@ -83,7 +83,7 @@ twist_controller:
 robotiq_gripper_controller:
   ros__parameters:
     default: true
-    joint: touch_sensor
+    joint: suction_cup_gripper
     allow_stalling: true
 
 servo_controller:

@@ -119,6 +119,6 @@
     </body>
   </worldbody>
   <equality>
-      <weld name="weld" body1="robotiq_85_base_link" body2="satellite" active="false"></weld>
+      <weld name="suction_cup_gripper_satellite" body1="robotiq_85_base_link" body2="satellite" active="false"></weld>
   </equality>
 </mujoco>
