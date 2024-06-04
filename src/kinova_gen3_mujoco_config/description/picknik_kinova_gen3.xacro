@@ -680,6 +680,7 @@
         <param name="mujoco_model">description/mujoco/scene.xml</param>
         <param name="mujoco_model_package">kinova_gen3_mujoco_config</param>
         <param name="render_publish_rate">10</param>
+        <param name="lidar_publish_rate">10</param>
         <param name="tf_publish_rate">60</param>
       </hardware>
     </ros2_control>
