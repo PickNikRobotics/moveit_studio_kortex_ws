@@ -124,7 +124,7 @@ servo_controller:
 
 force_torque_sensor_broadcaster:
   ros__parameters:
-    sensor_name: robotiq_ft_sensor
+    sensor_name: fts
     state_interface_names:
       - force.x
       - force.y
@@ -132,7 +132,7 @@ force_torque_sensor_broadcaster:
       - torque.x
       - torque.y
       - torque.z
-    frame_id: fts_link
+    frame_id: fts
 
 
 joint_trajectory_admittance_controller:
@@ -146,9 +146,9 @@ joint_trajectory_admittance_controller:
       - joint_6
       - joint_7
     base_frame: base_link
-    sensor_frame: bracelet_link
+    sensor_frame: fts
     ee_frame: grasp_link
-    ft_sensor_name: robotiq_ft_sensor
+    ft_sensor_name: fts
     stop_accelerations: [3.0, 3.0, 3.0, 3.0, 5.0, 5.0, 5.0]
 
 
@@ -227,9 +227,9 @@ admittance_controller_open_door:
       alpha: 0.05
 
     ft_sensor:
-      name: robotiq_ft_sensor
+      name: fts
       frame:
-        id: bracelet_link  # Wrench measurements are in this frame
+        id: fts  # Wrench measurements are in this frame
       filter_coefficient: 0.1
 
     control:
@@ -302,7 +302,7 @@ velocity_force_controller:
     base_frame: base_link
     sensor_frame: bracelet_link
     ee_frame: grasp_link
-    ft_sensor_name: robotiq_ft_sensor
+    ft_sensor_name: fts
     max_joint_velocity:
       - 0.524
       - 0.524
