@@ -43,7 +43,12 @@
     </asset>
 
     <worldbody>
-        <body name="landsat" pos="-1.5 1.75 1" quat="0.707106781 -0.707106781 0 0">
+        <camera name="scene_camera" pos="-0.5 0.75 1.5" fovy="75" mode="fixed" resolution="640 480" quat="0.365715 0.232986 -0.484157 -0.759975"/>
+        <site name="scene_camera_optical_frame" pos="0.0 0.3 0.55" quat="0.365715 0.232986 -0.484157 -0.759975" size="0.03"/>
+    </worldbody>
+
+    <worldbody>
+        <body name="landsat" pos="1.5 1.75 1" quat="0 0 -0.707106781 -0.707106781">
             <freejoint/>
             <geom class="visual" type="mesh" material="landsat_gold" mesh="landsat" density="200"/>
             <geom class="visual" type="mesh" rgba="1.0 1.0 1.0 1" mesh="landsat_white" density="200"/>
@@ -52,7 +57,7 @@
             <geom class="collision" type="mesh" mesh="landsat_collision_2" density="1"/>
             <geom class="collision" type="mesh" mesh="landsat_collision_3" density="1"/>
             <geom class="collision" type="mesh" mesh="landsat_collision_4" density="1"/>
-            <body name="rafti" pos="0.565306 0.2 -1.6" quat="0.5 0.5 0.5 0.5">
+            <body name="rafti" pos="0.565306 -0.3 -1.6" quat="0.5 0.5 0.5 0.5">
                 <geom class="visual" mesh="rafti" material="metal_rafti"/>
                 <geom class="collision" mesh="rafti_collision_1" condim="6"/>
                 <geom class="collision" mesh="rafti_collision_1" condim="6"/>
