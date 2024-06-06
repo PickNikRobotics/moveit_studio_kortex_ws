@@ -19,7 +19,7 @@
   </BehaviorTree>
   <TreeNodesModel>
     <SubTree ID="Sample April Tag">
-      <input_port name="tag_id" default="0"/>
+      <input_port name="tag_id" default="-1"/>
     </SubTree>
   </TreeNodesModel>
 </root>
