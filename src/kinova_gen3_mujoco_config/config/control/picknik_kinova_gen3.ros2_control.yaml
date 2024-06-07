@@ -132,7 +132,7 @@ force_torque_sensor_broadcaster:
       - torque.x
       - torque.y
       - torque.z
-    frame_id: fts
+    frame_id: fts_link
 
 
 joint_trajectory_admittance_controller:
@@ -146,7 +146,7 @@ joint_trajectory_admittance_controller:
       - joint_6
       - joint_7
     base_frame: base_link
-    sensor_frame: fts
+    sensor_frame: fts_link
     ee_frame: grasp_link
     ft_sensor_name: fts
     stop_accelerations: [3.0, 3.0, 3.0, 3.0, 5.0, 5.0, 5.0]
@@ -229,7 +229,7 @@ admittance_controller_open_door:
     ft_sensor:
       name: fts
       frame:
-        id: fts  # Wrench measurements are in this frame
+        id: fts_link  # Wrench measurements are in this frame
       filter_coefficient: 0.1
 
     control:
@@ -242,7 +242,7 @@ admittance_controller_open_door:
 
     gravity_compensation:
       frame:
-        id: bracelet_link
+        id: fts_link
 
       CoG:  # specifies the center of gravity of the end effector
         pos:
@@ -300,7 +300,7 @@ velocity_force_controller:
       - joint_6
       - joint_7
     base_frame: base_link
-    sensor_frame: bracelet_link
+    sensor_frame: fts_link
     ee_frame: grasp_link
     ft_sensor_name: fts
     max_joint_velocity:
