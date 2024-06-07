@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<root BTCPP_format="4" main_tree_to_execute="Compliant Grasp RAFTI">
+<root BTCPP_format="4" main_tree_to_execute="Compliant Grasp Landsat">
   <!--//////////-->
-  <BehaviorTree ID="Compliant Grasp RAFTI" _description="Grasp RAFTI with admittance." _favorite="true" _hardcoded="false">
+  <BehaviorTree ID="Compliant Grasp Landsat" _description="Grasp RAFTI on the Landsat with the JTAC." _favorite="true" _hardcoded="false">
     <Control ID="Sequence" name="TopLevelSequence">
       <Action ID="ClearSnapshot"/>
       <SubTree ID="Open Gripper" _collapsed="true"/>

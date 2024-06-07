@@ -4,7 +4,4 @@
   <BehaviorTree ID="Reset Planning Scene" _description="" _favorite="false" _hardcoded="false">
     <Action ID="ResetPlanningSceneObjects" apply_planning_scene_service="/apply_planning_scene"/>
   </BehaviorTree>
-  <TreeNodesModel>
-    <SubTree ID="Reset Planning Scene"/>
-  </TreeNodesModel>
 </root>
