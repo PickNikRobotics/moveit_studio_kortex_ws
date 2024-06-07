@@ -72,7 +72,7 @@ hardware:
       - external_camera: "true"
       - wrist_realsense: "true"
       - use_internal_bus_gripper_comm: "false"
-      - mujoco_model: "description/mujoco/landsat_scene.xml"
+      - mujoco_model: "description/mujoco/scene.xml"
 
 # Sets ROS global params for launch.
 # [Optional]
