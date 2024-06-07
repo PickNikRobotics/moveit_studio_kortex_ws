@@ -20,6 +20,7 @@
     <xacro:arg name="gripper_max_force" default="100.0" />
     <xacro:arg name="gripper_com_port" default="/dev/ttyUSB0" />
     <xacro:arg name="wrist_realsense" default="true" />
+    <xacro:arg name="mujoco_model" default="description/mujoco/scene.xml" />
 
     <!-- Import macros for main hardware components -->
     <xacro:include filename="$(find kortex_description)/arms/$(arg arm)/$(arg dof)dof/urdf/$(arg arm)_macro.xacro" />
@@ -677,7 +678,7 @@
       </joint>
       <hardware>
         <plugin>picknik_mujoco_ros/MujocoSystem</plugin>
-        <param name="mujoco_model">description/mujoco/scene.xml</param>
+        <param name="mujoco_model">$(arg mujoco_model)</param>
         <param name="mujoco_model_package">kinova_gen3_mujoco_config</param>
         <param name="render_publish_rate">10</param>
         <param name="tf_publish_rate">60</param>
