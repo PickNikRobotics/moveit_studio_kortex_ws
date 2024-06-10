@@ -306,13 +306,13 @@ velocity_force_controller:
     ft_force_deadband: 0.2
     ft_torque_deadband: 0.01
     max_joint_velocity:
-      - 52.4
-      - 52.4
-      - 52.4
-      - 52.4
-      - 40.7
-      - 40.7
-      - 40.7
+      - 0.524
+      - 0.524
+      - 0.524
+      - 0.524
+      - 1.407
+      - 1.407
+      - 1.407
     max_joint_acceleration:
       - 52.4
       - 52.4
@@ -322,16 +322,16 @@ velocity_force_controller:
       - 52.4
       - 52.4
     max_cartesian_velocity:
-      - 25.0
-      - 25.0
-      - 25.0
-      - 157.07
-      - 157.07
-      - 157.07
+      - 0.25
+      - 0.25
+      - 0.25
+      - 1.5707
+      - 1.5707
+      - 1.5707
     max_cartesian_acceleration:
-      - 200.0
-      - 200.0
-      - 200.0
-      - 400.0
-      - 400.0
-      - 400.0
+      - 20.0
+      - 20.0
+      - 20.0
+      - 40.0
+      - 40.0
+      - 40.0
