@@ -1,37 +1,29 @@
 controller_manager:
   ros__parameters:
     update_rate: 1000  # Hz
-
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
-
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-
     joint_trajectory_admittance_controller:
       type: joint_trajectory_admittance_controller/JointTrajectoryAdmittanceController
-
     twist_controller:
       type: picknik_twist_controller/PicknikTwistController
-
     # The gripper controller just relays position commands
     robotiq_gripper_controller:
       type: position_controllers/GripperActionController
-
     fault_controller:
       type: picknik_reset_fault_controller/PicknikResetFaultController
-
     servo_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-
     force_torque_sensor_broadcaster:
       type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
-
     admittance_controller_open_door:
       type: admittance_controller/AdmittanceController
-
     joint_trajectory_controller_chained_open_door:
       type: joint_trajectory_controller/JointTrajectoryController
+    velocity_force_controller:
+      type: velocity_force_controller/VelocityForceController
 
 joint_trajectory_controller:
   ros__parameters:
@@ -132,7 +124,7 @@ servo_controller:
 
 force_torque_sensor_broadcaster:
   ros__parameters:
-    sensor_name: robotiq_ft_sensor
+    sensor_name: fts
     state_interface_names:
       - force.x
       - force.y
@@ -154,9 +146,9 @@ joint_trajectory_admittance_controller:
       - joint_6
       - joint_7
     base_frame: base_link
-    sensor_frame: bracelet_link
+    sensor_frame: fts_link
     ee_frame: grasp_link
-    ft_sensor_name: robotiq_ft_sensor
+    ft_sensor_name: fts
     stop_accelerations: [3.0, 3.0, 3.0, 3.0, 5.0, 5.0, 5.0]
 
 
@@ -235,9 +227,9 @@ admittance_controller_open_door:
       alpha: 0.05
 
     ft_sensor:
-      name: robotiq_ft_sensor
+      name: fts
       frame:
-        id: bracelet_link  # Wrench measurements are in this frame
+        id: fts_link  # Wrench measurements are in this frame
       filter_coefficient: 0.1
 
     control:
@@ -250,7 +242,7 @@ admittance_controller_open_door:
 
     gravity_compensation:
       frame:
-        id: bracelet_link
+        id: fts_link
 
       CoG:  # specifies the center of gravity of the end effector
         pos:
@@ -296,3 +288,50 @@ admittance_controller_open_door:
 
     # general settings
     enable_parameter_update_without_reactivation: true
+
+velocity_force_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+    base_frame: base_link
+    sensor_frame: fts_link
+    ee_frame: grasp_link
+    ft_sensor_name: fts
+    ft_force_deadband: 2.0
+    ft_torque_deadband: 1.0
+    max_joint_velocity:
+      - 0.524
+      - 0.524
+      - 0.524
+      - 0.524
+      - 1.407
+      - 1.407
+      - 1.407
+    max_joint_acceleration:
+      - 52.4
+      - 52.4
+      - 52.4
+      - 52.4
+      - 52.4
+      - 52.4
+      - 52.4
+    max_cartesian_velocity:
+      - 0.25
+      - 0.25
+      - 0.25
+      - 1.5707
+      - 1.5707
+      - 1.5707
+    max_cartesian_acceleration:
+      - 20.0
+      - 20.0
+      - 20.0
+      - 40.0
+      - 40.0
+      - 40.0
