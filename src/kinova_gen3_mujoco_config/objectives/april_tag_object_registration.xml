@@ -38,7 +38,7 @@
             </Decorator>
             <Action ID="AlwaysSuccess"/>
           </Control>
-          <Action ID="SendPointCloudToUI" point_cloud="{aligned_model_cloud}" sensor_name="scene_scan_camera" pcd_topic="/pcd_pointcloud_captures"/>
+          <Action ID="SendPointCloudToUI" point_cloud="{aligned_model_cloud}" pcd_topic="/pcd_pointcloud_captures"/>
           <Action ID="TransformPoseWithPose" input_pose="{object_stamped_pose_estimate}" transform_pose="{model_to_real_pose}" output_pose="{model_world}"/>
           <Control ID="Fallback">
             <Decorator ID="Timeout" msec="1000">
