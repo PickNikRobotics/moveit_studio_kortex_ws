@@ -1,5 +1,5 @@
 <mujoco model="kinova scene">
-  <include file="gen3_7dof.xml"/>
+  <include file="gen3_7dof_rafti_fingers.xml"/>
   <statistic center="0.3 0 0.4" extent="1"/>
   <default>
     <geom solref=".004 1"/>
