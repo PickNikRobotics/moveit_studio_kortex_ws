@@ -29,7 +29,8 @@
       <Action ID="WaitForUserTrajectoryApproval" solution="{debug_solution}"/>
       <SubTree ID="Re-Zero Force-Torque Sensors" _collapsed="true"/>
       <Action ID="ActivateControllers" controller_names="joint_trajectory_admittance_controller"/>
-      <Action ID="ExecuteTrajectoryWithAdmittance" path_position_tolerance="100" goal_position_tolerance="100"/>
+      <Action ID="SetAdmittanceParameters" config_file_name="jtac_parameters.yaml"/>
+      <Action ID="ExecuteTrajectoryWithAdmittance" path_position_tolerance="2.0" goal_position_tolerance="0.1000" controller_action_name="/joint_trajectory_admittance_controller/follow_joint_trajectory"/>
       <SubTree ID="Close Gripper" _collapsed="true"/>
     </Control>
   </BehaviorTree>

@@ -21,7 +21,8 @@
           <Action ID="GetCurrentPlanningScene" planning_scene_msg="{planning_scene_msg}"/>
           <Action ID="ValidateTrajectory" planning_scene_msg="{planning_scene_msg}" planning_group_name="manipulator" joint_trajectory_msg="{joint_trajectory_msg}" joint_space_step="0.05" cartesian_space_step="0.02" debug_solution="{debug_solution}"/>
           <Action ID="WaitForUserTrajectoryApproval" solution="{debug_solution}"/>
-          <Action ID="ExecuteTrajectoryWithAdmittance" selected_axes="1;1;1;1;1;1" stiffness="80;80;80;80;80;80" damping="40;40;40;40;40;40" path_position_tolerance="2.0000" goal_position_tolerance="0.1000" joint_trajectory_msg="{joint_trajectory_msg}" controller_action_name="/joint_trajectory_admittance_controller/follow_joint_trajectory" mass="15;15;15;15;15;15"/>
+          <Action ID="SetAdmittanceParameters" config_file_name="jtac_parameters.yaml"/>
+          <Action ID="ExecuteTrajectoryWithAdmittance" path_position_tolerance="2.0" goal_position_tolerance="0.1000" controller_action_name="/joint_trajectory_admittance_controller/follow_joint_trajectory"/>
         </Control>
       </Decorator>
     </Control>
