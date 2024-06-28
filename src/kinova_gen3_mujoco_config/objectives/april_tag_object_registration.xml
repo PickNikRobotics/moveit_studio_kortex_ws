@@ -3,7 +3,7 @@
   <!--//////////-->
   <BehaviorTree ID="April Tag Object Registration" _description="Estimate the pose of an object using ICP." _favorite="true" _hardcoded="false">
     <Control ID="Sequence" name="TopLevelSequence">
-      <SubTree ID="Move to Waypoint" waypoint_name="View Satellite" joint_group_name="manipulator" controller_names="/joint_trajectory_controller /robotiq_gripper_controller" use_all_planners="false"/>
+      <SubTree ID="Move to Waypoint" waypoint_name="View Satellite" joint_group_name="manipulator" controller_names="/joint_trajectory_controller /robotiq_gripper_controller" />
       <Action ID="ClearSnapshot"/>
       <SubTree ID="Open Gripper" _collapsed="true"/>
       <SubTree ID="Take Snapshot" _collapsed="true"/>
