@@ -242,13 +242,13 @@
   </worldbody>
 
   <actuator>
-    <general class="kinova" name="joint_1" joint="joint_1" gainprm="800" biasprm="0 -800 -260"/>
-    <general class="kinova" name="joint_2" joint="joint_2" gainprm="800" biasprm="0 -800 -260"/>
-    <general class="kinova" name="joint_3" joint="joint_3" gainprm="260" biasprm="0 -260 -86"/>
-    <general class="kinova" name="joint_4" joint="joint_4" gainprm="260" biasprm="0 -260 -86"/>
-    <general class="kinova" name="joint_5" joint="joint_5" gainprm="130" biasprm="0 -130 -45"/>
-    <general class="kinova" name="joint_6" joint="joint_6" gainprm="130" biasprm="0 -130 -45"/>
-    <general class="kinova" name="joint_7" joint="joint_7" gainprm="130" biasprm="0 -130 -45"/>
+    <position class="kinova" name="joint_1" joint="joint_1" kp="800" kv="260"/>
+    <position class="kinova" name="joint_2" joint="joint_2" kp="800" kv="260"/>
+    <position class="kinova" name="joint_3" joint="joint_3" kp="260" kv="86"/>
+    <position class="kinova" name="joint_4" joint="joint_4" kp="260" kv="86"/>
+    <position class="kinova" name="joint_5" joint="joint_5" kp="130" kv="45"/>
+    <position class="kinova" name="joint_6" joint="joint_6" kp="130" kv="45"/>
+    <position class="kinova" name="joint_7" joint="joint_7" kp="130" kv="45"/>
   </actuator>
   
   <!-- Robotiq gripper contact -->
@@ -282,8 +282,7 @@
   </equality>
 
   <actuator>
-    <general class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 .8"
-             gainprm="100 0 0" biasprm="0 -100 -150"/>
+    <position class="2f85" name="robotiq_85_left_knuckle_joint" tendon="split" forcerange="-5 5" ctrlrange="0 .8" kp="100" kv="100"/>
   </actuator>
 
  <sensor>
