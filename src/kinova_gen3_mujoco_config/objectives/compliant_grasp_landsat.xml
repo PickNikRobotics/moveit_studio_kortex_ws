@@ -5,7 +5,7 @@
     <Control ID="Sequence" name="TopLevelSequence">
       <Action ID="ClearSnapshot"/>
       <SubTree ID="Open Gripper" _collapsed="true"/>
-      <SubTree ID="Move to Waypoint" waypoint_name="Servo Start" joint_group_name="manipulator" controller_names="/joint_trajectory_controller /robotiq_gripper_controller" use_all_planners="false"/>
+      <SubTree ID="Move to Waypoint" waypoint_name="Servo Start" joint_group_name="manipulator" controller_names="/joint_trajectory_controller /robotiq_gripper_controller" />
       <SubTree ID="Take Snapshot" _collapsed="false"/>
       <SubTree ID="Sample April Tag" _collapsed="false" num_samples="1" apriltag_config="51mm_apriltag_detection_config.yaml" max_distance="0.02" max_rotation="0.2" avg_pose="{tag_pose}" tag_id="0"/>
       <Control ID="Fallback">
