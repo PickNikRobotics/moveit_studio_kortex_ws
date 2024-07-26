@@ -5,8 +5,6 @@
 ###############################################################
 
 hardware:
-  type: "kortex2_gen3"
-
   # Set simulated to false if you are using this as a configuration for real hardware.
   # Override-able by setting the $MOCK_HARDWARE environment variable to 'True'.
   # This allows users to switch between mock and real hardware using the same configuration.
@@ -22,23 +20,11 @@ hardware:
   # [Optional, default=True]
   launch_robot_state_publisher: True
 
-  # If the MoveIt Pro Agent should launch cameras when simulated.
-  # This must be False when using mock hardware, since there are no cameras simulated.
-  # [Optional, default=True]
-  launch_cameras_when_simulated: False
-
-  # The robot's IP address.
-  # [Required]
-  ip: "0.0.0.0"
-
   # Specify additional launch files for running the robot with real hardware.
   # [Optional, defaults to a blank launch file if not specified]
   robot_driver_persist_launch_file:
     package: "kinova_gen3_base_config"
     path: "launch/robot_drivers_to_persist.launch.py"
-  hardware_launch_file:
-    package: "moveit_studio_agent"
-    path: "launch/blank.launch.py"
 
   # Specify any additional launch files for running the robot in simulation mode.
   # Used when hardware.simulated is True.
@@ -49,12 +35,6 @@ hardware:
   simulated_hardware_launch_file:
     package: "moveit_studio_agent"
     path: "launch/blank.launch.py"
-
-  # Configuration details for cameras and scene planning.
-  # [Required]
-  camera_config_file:
-    package: "kinova_gen3_base_config"
-    path: "config/cameras.yaml"
 
   # These Params are pasted to the XACRO to create the URDF
   robot_description:
@@ -68,7 +48,7 @@ hardware:
       - arm: "gen3"
       - dof: "7"
       - vision: "false"
-      - robot_ip: "%>> hardware.ip"
+      - robot_ip: ""
       - gripper: "robotiq_2f_85"
       - username: "admin"
       - password: "admin"
@@ -76,16 +56,11 @@ hardware:
       - port_realtime: "10001"
       - session_inactivity_timeout_ms: "60000"
       - connection_inactivity_timeout_ms: "2000"
-      - use_fake_hardware: "%>> hardware.simulated"
+      - use_fake_hardware: "true"
       - fake_sensor_commands: "false"
       - external_camera: "true"
       - wrist_realsense: "true"
       - use_internal_bus_gripper_comm: "false"
-
-optional_feature_params:
-  use_joystick: False
-  use_external_webcam: False
-  use_formant_bridge: False
 
 # This Configures moveit params that are in moveit_config.py
 moveit_params:
@@ -131,13 +106,6 @@ moveit_params:
     allowed_goal_duration_margin: 5.0
     allowed_start_tolerance: 0.01
 
-# Additional configurable parameters for the MoveIt Studio user interface.
-# [Required]
-ui_params:
-  # By default, we use a frame named "grasp_link" for tool grasp pose rendering and planning.
-  # [Required]
-  servo_endpoint_frame_id: "grasp_link"
-
 # This configures what controllers gets run at startup
 ros2_control:
   config:
@@ -151,12 +119,6 @@ ros2_control:
     - "fault_controller"
   controllers_inactive_at_startup:
     - "joint_trajectory_controller"
-
-# Octomap manager configuration parameters
-octomap_manager:
-  # Input point cloud topic name. The *output* point cloud topic published by
-  # the Octomap manager node is defined in sensors_3d.yaml.
-  input_point_cloud_topic: "/wrist_mounted_camera/depth/color/points"
 
 objectives:
   behavior_loader_plugins:
