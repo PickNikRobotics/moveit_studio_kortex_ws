@@ -4,16 +4,15 @@
 
 #include <moveit_studio_behavior_interface/service_client_behavior_base.hpp>
 #include <moveit_studio_behavior_interface/shared_resources_node.hpp>
-// Just try to do a trigger node first
-#include <std_srvs/srv/trigger.hpp>
+#include <dynamixel_control_msgs/srv/set_position.hpp>
 
 namespace set_dynamixel_position
 {
-using Trigger = std_srvs::srv::Trigger;
+using SetPosition = dynamixel_control_msgs::srv::SetPosition;
 /**
  * @brief TODO(...)
  */
-class SetDynamixelPosition : public moveit_studio::behaviors::ServiceClientBehaviorBase<Trigger>
+class SetDynamixelPosition : public moveit_studio::behaviors::ServiceClientBehaviorBase<SetPosition>
 {
 public:
   /**
@@ -32,7 +31,7 @@ public:
                        const std::shared_ptr<moveit_studio::behaviors::BehaviorContext>& shared_resources);
   SetDynamixelPosition(const std::string& name, const BT::NodeConfiguration& config,
                        const std::shared_ptr<moveit_studio::behaviors::BehaviorContext>& shared_resources,
-                       std::unique_ptr<moveit_studio::behaviors::ClientInterfaceBase<Trigger>> client_interface);
+                       std::unique_ptr<moveit_studio::behaviors::ClientInterfaceBase<SetPosition>> client_interface);
 
   /**
    * @brief Implementation of the required providedPorts() function for the set_dynamixel_position Behavior.
@@ -58,16 +57,16 @@ private:
 
   /**
    * @brief Creates a service request message.
-   * @return Returns an instance of Trigger::Request. Since the request message is empty, this always succeeds.
+   * @return Returns an instance of SetPosition::Request. Since the request message is empty, this always succeeds.
    */
-  tl::expected<Trigger::Request, std::string> createRequest() override;
+  tl::expected<SetPosition::Request, std::string> createRequest() override;
 
   /**
    * @brief Determines if the service request succeeded or failed based on the contents of the response message's success field.
    * @param response Response message received from the service server.
    * @return The return value matches the value of response.success.
    */
-  tl::expected<bool, std::string> processResponse(const Trigger::Response& response) override;
+  tl::expected<bool, std::string> processResponse(const SetPosition::Response& response) override;
 
   /** @brief Classes derived from AsyncBehaviorBase must implement getFuture() so that it returns a shared_future class member */
   std::shared_future<tl::expected<bool, std::string>>& getFuture() override
