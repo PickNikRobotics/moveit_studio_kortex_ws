@@ -1,0 +1,11 @@
+# Request
+#
+# Currently supports 'XL430-W250-T' or 'MX-12W'.
+string motor_type
+
+int32 position
+
+---
+# Response
+string error_msg
+bool success

@@ -1,0 +1,29 @@
+# Goal
+# Currently supports 'XL430-W250-T' or 'MX-12W'.
+string motor_type
+
+# Normalized velocity value in the range [-1.0, 1.0].
+float32 normalized_velocity
+
+# Normalized load threshold value in the range [-1.0, 1.0].
+float32 normalized_load_threshold
+
+# Will monitor the load and shutdown when the load threshold is exceeded if true.
+bool monitor_load
+
+---
+# Result
+bool success
+---
+
+# Feedback
+uint8 present_temperature
+uint16 present_load
+
+# XL motor series
+uint32 xl_present_position
+uint32 xl_present_velocity
+
+# MX motor series
+uint16 mx_present_position
+uint16 mx_present_velocity

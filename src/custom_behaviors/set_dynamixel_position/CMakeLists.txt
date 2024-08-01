@@ -4,10 +4,11 @@ project(set_dynamixel_position CXX)
 find_package(moveit_studio_common REQUIRED)
 moveit_studio_package()
 
+find_package(dynamixel_control_msgs REQUIRED)
 find_package(moveit_studio_behavior_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 
-set(THIS_PACKAGE_INCLUDE_DEPENDS moveit_studio_behavior_interface pluginlib)
+set(THIS_PACKAGE_INCLUDE_DEPENDS dynamixel_control_msgs moveit_studio_behavior_interface pluginlib)
 
 add_library(
   set_dynamixel_position
