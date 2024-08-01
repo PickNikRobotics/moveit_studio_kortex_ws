@@ -2,15 +2,18 @@
 
 #include <behaviortree_cpp/action_node.h>
 
-// This header includes the SharedResourcesNode type
+#include <moveit_studio_behavior_interface/service_client_behavior_base.hpp>
 #include <moveit_studio_behavior_interface/shared_resources_node.hpp>
+// Just try to do a trigger node first
+#include <std_srvs/srv/trigger.hpp>
 
 namespace set_dynamixel_position
 {
+using Trigger = std_srvs::srv::Trigger;
 /**
  * @brief TODO(...)
  */
-class SetDynamixelPosition : public moveit_studio::behaviors::SharedResourcesNode<BT::SyncActionNode>
+class SetDynamixelPosition : public moveit_studio::behaviors::ServiceClientBehaviorBase<Trigger>
 {
 public:
   /**
@@ -27,6 +30,9 @@ public:
    */
   SetDynamixelPosition(const std::string& name, const BT::NodeConfiguration& config,
                        const std::shared_ptr<moveit_studio::behaviors::BehaviorContext>& shared_resources);
+  SetDynamixelPosition(const std::string& name, const BT::NodeConfiguration& config,
+                       const std::shared_ptr<moveit_studio::behaviors::BehaviorContext>& shared_resources,
+                       std::unique_ptr<moveit_studio::behaviors::ClientInterfaceBase<Trigger>> client_interface);
 
   /**
    * @brief Implementation of the required providedPorts() function for the set_dynamixel_position Behavior.
@@ -45,13 +51,33 @@ public:
    */
   static BT::KeyValueVector metadata();
 
+private:
+  tl::expected<std::string, std::string> getServiceName() override;
+
+  tl::expected<std::chrono::duration<double>, std::string> getResponseTimeout() override;
+
   /**
-   * @brief Implementation of BT::SyncActionNode::tick() for SetDynamixelPosition.
-   * @details This function is where the Behavior performs its work when the behavior tree is being run. Since
-   * SetDynamixelPosition is derived from BT::SyncActionNode, it is very important that its tick() function always
-   * finishes very quickly. If tick() blocks before returning, it will block execution of the entire behavior tree,
-   * which may have undesirable consequences for other Behaviors that require a fast update rate to work correctly.
+   * @brief Creates a service request message.
+   * @return Returns an instance of Trigger::Request. Since the request message is empty, this always succeeds.
    */
-  BT::NodeStatus tick() override;
+  tl::expected<Trigger::Request, std::string> createRequest() override;
+
+  /**
+   * @brief Determines if the service request succeeded or failed based on the contents of the response message's success field.
+   * @param response Response message received from the service server.
+   * @return The return value matches the value of response.success.
+   */
+  tl::expected<bool, std::string> processResponse(const Trigger::Response& response) override;
+
+  /** @brief Classes derived from AsyncBehaviorBase must implement getFuture() so that it returns a shared_future class member */
+  std::shared_future<tl::expected<bool, std::string>>& getFuture() override
+  {
+    return future_;
+  }
+
+  /**
+   * @brief Holds the result of calling the service asynchronously.
+   */
+  std::shared_future<tl::expected<bool, std::string>> future_;
 };
 }  // namespace set_dynamixel_position
