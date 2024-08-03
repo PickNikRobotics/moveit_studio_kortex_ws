@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root BTCPP_format="4" main_tree_to_execute="Set Dynamixel Velocity">
+  <!--//////////-->
+  <BehaviorTree ID="Set Dynamixel Velocity" _description="" _favorite="false">
+    <Control ID="Sequence" name="TopLevelSequence">
+      <Action ID="SetDynamixelVelocity" monitor_load="true" absolute_normalized_load_threshold="0.3" normalized_velocity="-0.2" motor_type="MX-12W"/>
+    </Control>
+  </BehaviorTree>
+</root>

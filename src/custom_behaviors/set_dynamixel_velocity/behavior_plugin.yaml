@@ -1,0 +1,4 @@
+objectives:
+  behavior_loader_plugins:
+    set_dynamixel_velocity:
+      - "set_dynamixel_velocity::SetDynamixelVelocityBehaviorsLoader"
