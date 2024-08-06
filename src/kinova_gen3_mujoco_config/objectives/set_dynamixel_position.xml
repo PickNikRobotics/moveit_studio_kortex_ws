@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root BTCPP_format="4" main_tree_to_execute="Set Dynamixel Position">
+  <!--//////////-->
+  <BehaviorTree ID="Set Dynamixel Position" _description="" _favorite="false">
+    <Control ID="Sequence" name="TopLevelSequence">
+      <Action ID="SetDynamixelPosition" motor_type="XL430-W250-T" position="1000"/>
+    </Control>
+  </BehaviorTree>
+</root>

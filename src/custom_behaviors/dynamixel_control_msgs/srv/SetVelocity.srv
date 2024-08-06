@@ -1,0 +1,7 @@
+# Request
+uint8 id
+int32 velocity
+---
+# Response
+string error_msg
+bool success

@@ -1,0 +1,4 @@
+objectives:
+  behavior_loader_plugins:
+    set_dynamixel_position:
+      - "set_dynamixel_position::SetDynamixelPositionBehaviorsLoader"
