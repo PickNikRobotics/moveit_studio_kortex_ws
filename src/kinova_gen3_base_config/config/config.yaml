@@ -128,6 +128,7 @@ objectives:
       - "moveit_studio::behaviors::MTCCoreBehaviorsLoader"
       - "moveit_studio::behaviors::ServoBehaviorsLoader"
       - "moveit_studio::behaviors::VisionBehaviorsLoader"
+      - "moveit_studio::behaviors::ConverterBehaviorsLoader"
   objective_library_paths:
     core:
       package_name: "kinova_gen3_base_config"
