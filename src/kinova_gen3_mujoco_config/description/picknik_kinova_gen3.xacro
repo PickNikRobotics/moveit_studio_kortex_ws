@@ -600,7 +600,7 @@
     </visual>
   </link>
   <joint name="cube_joint" type="fixed">
-    <origin xyz="0 -0.75 0" rpy="0 0 0" />
+    <origin xyz="0.75 0 1" rpy="0 0 0" />
     <child link="cube_link" />
     <parent link="world" />
   </joint>
